@@ -1,0 +1,11 @@
+C:\Hcmus\LTWin\ChatServer\ChatClient\bin\Debug\netcoreapp2.0\ChatClient.deps.json
+C:\Hcmus\LTWin\ChatServer\ChatClient\bin\Debug\netcoreapp2.0\ChatClient.runtimeconfig.json
+C:\Hcmus\LTWin\ChatServer\ChatClient\bin\Debug\netcoreapp2.0\ChatClient.runtimeconfig.dev.json
+C:\Hcmus\LTWin\ChatServer\ChatClient\bin\Debug\netcoreapp2.0\ChatClient.dll
+C:\Hcmus\LTWin\ChatServer\ChatClient\bin\Debug\netcoreapp2.0\ChatClient.pdb
+C:\Hcmus\LTWin\ChatServer\ChatClient\obj\Debug\netcoreapp2.0\ChatClient.csproj.CoreCompileInputs.cache
+C:\Hcmus\LTWin\ChatServer\ChatClient\obj\Debug\netcoreapp2.0\ChatClient.AssemblyInfoInputs.cache
+C:\Hcmus\LTWin\ChatServer\ChatClient\obj\Debug\netcoreapp2.0\ChatClient.AssemblyInfo.cs
+C:\Hcmus\LTWin\ChatServer\ChatClient\obj\Debug\netcoreapp2.0\ChatClient.dll
+C:\Hcmus\LTWin\ChatServer\ChatClient\obj\Debug\netcoreapp2.0\ChatClient.pdb
+C:\Hcmus\LTWin\ChatServer\ChatClient\obj\Debug\netcoreapp2.0\ChatClient.csprojAssemblyReference.cache

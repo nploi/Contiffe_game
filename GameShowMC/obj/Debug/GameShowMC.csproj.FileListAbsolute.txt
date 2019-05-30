@@ -1,0 +1,10 @@
+C:\Hcmus\LTWin\ChatServer\GameShowMC\bin\Debug\GameShowMC.exe.config
+C:\Hcmus\LTWin\ChatServer\GameShowMC\bin\Debug\GameShowMC.exe
+C:\Hcmus\LTWin\ChatServer\GameShowMC\bin\Debug\GameShowMC.pdb
+C:\Hcmus\LTWin\ChatServer\GameShowMC\obj\Debug\GameShowMC.Form1.resources
+C:\Hcmus\LTWin\ChatServer\GameShowMC\obj\Debug\GameShowMC.Properties.Resources.resources
+C:\Hcmus\LTWin\ChatServer\GameShowMC\obj\Debug\GameShowMC.csproj.GenerateResource.cache
+C:\Hcmus\LTWin\ChatServer\GameShowMC\obj\Debug\GameShowMC.csproj.CoreCompileInputs.cache
+C:\Hcmus\LTWin\ChatServer\GameShowMC\obj\Debug\GameShowMC.exe
+C:\Hcmus\LTWin\ChatServer\GameShowMC\obj\Debug\GameShowMC.pdb
+C:\Hcmus\LTWin\ChatServer\GameShowMC\obj\Debug\GameShowMC.csprojAssemblyReference.cache

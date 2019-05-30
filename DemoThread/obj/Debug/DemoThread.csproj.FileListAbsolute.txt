@@ -1,0 +1,10 @@
+C:\Hcmus\LTWin\ChatServer\DemoThread\bin\Debug\DemoThread.exe.config
+C:\Hcmus\LTWin\ChatServer\DemoThread\bin\Debug\DemoThread.exe
+C:\Hcmus\LTWin\ChatServer\DemoThread\bin\Debug\DemoThread.pdb
+C:\Hcmus\LTWin\ChatServer\DemoThread\obj\Debug\DemoThread.csprojAssemblyReference.cache
+C:\Hcmus\LTWin\ChatServer\DemoThread\obj\Debug\DemoThread.Form1.resources
+C:\Hcmus\LTWin\ChatServer\DemoThread\obj\Debug\DemoThread.Properties.Resources.resources
+C:\Hcmus\LTWin\ChatServer\DemoThread\obj\Debug\DemoThread.csproj.GenerateResource.cache
+C:\Hcmus\LTWin\ChatServer\DemoThread\obj\Debug\DemoThread.csproj.CoreCompileInputs.cache
+C:\Hcmus\LTWin\ChatServer\DemoThread\obj\Debug\DemoThread.exe
+C:\Hcmus\LTWin\ChatServer\DemoThread\obj\Debug\DemoThread.pdb
