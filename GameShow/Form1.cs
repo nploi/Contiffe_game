@@ -53,7 +53,7 @@ namespace GameShow
             //    ns.Write(buffer, 0, buffer.Length);
             //}
 
-            
+
         }
 
         void ReceiveData(TcpClient client)
@@ -71,8 +71,11 @@ namespace GameShow
 
                 if (M.Length > 0)
                 {
-                    timer1.Enabled = true;
-                    lblQuestion.Invoke((MethodInvoker)(() 
+                    //timer1.Enabled = true;
+
+                    //MessageBox.Show(timer1.Enabled.ToString());
+
+                    lblQuestion.Invoke((MethodInvoker)(()
                         => lblQuestion.Text = M[0]));
 
                     btnA.Invoke((MethodInvoker)(()
@@ -83,6 +86,7 @@ namespace GameShow
                        => btnC.Text = M[1]));
                     btnD.Invoke((MethodInvoker)(()
                        => btnD.Text = M[1]));
+                    lap();
                 }
             }
         }
@@ -103,15 +107,44 @@ namespace GameShow
         private void button1_Click(object sender, EventArgs e)
         {
             var reader = new SpeechSynthesizer();
-            reader.SpeakAsync("Hello");
+
+            reader.SpeakAsync(lblQuestion.Text);
         }
 
         int seconds = 10;
-        private void timer1_Tick(object sender, EventArgs e)
+        bool kt = true;
+        void lap()
         {
-            if (seconds <= 0) timer1.Enabled = false;
-            lbCountDown.Text = seconds.ToString();
-            seconds--;
+            for (int i = 0; i < 11; i++)
+            {
+                lbCountDown.Invoke((MethodInvoker)(()
+                    => lbCountDown.Text = seconds.ToString()));
+                seconds--;
+                Thread.Sleep(1000);
+            }
+            seconds = 10;
+
         }
+
+        /*private void timer1_Tick(object sender, EventArgs e)
+        {
+
+
+            //lbCountDown.Text = seconds.ToString();
+            //Invoke(new Action(() => { lbCountDown.Text = seconds.ToString(); }));
+
+            lbCountDown.Invoke((MethodInvoker)(()
+            => lbCountDown.Text = seconds.ToString()));
+           
+            seconds--;
+            if (seconds < 0)
+            {
+                seconds = 10;
+                timer1.Enabled = false;
+                
+            }
+            //MessageBox.Show(timer1.Enabled.ToString()+seconds);
+        }*/
+
     }
 }
