@@ -41,6 +41,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.lbCountDown = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblNumber = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,7 +65,7 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(586, 43);
+            this.label1.Size = new System.Drawing.Size(865, 43);
             this.label1.TabIndex = 1;
             this.label1.Text = "Player";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -72,7 +75,7 @@
             this.lblQuestion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.lblQuestion.Location = new System.Drawing.Point(13, 104);
             this.lblQuestion.Name = "lblQuestion";
-            this.lblQuestion.Size = new System.Drawing.Size(363, 106);
+            this.lblQuestion.Size = new System.Drawing.Size(374, 106);
             this.lblQuestion.TabIndex = 2;
             this.lblQuestion.Text = "Question here";
             // 
@@ -84,6 +87,7 @@
             this.btnA.TabIndex = 3;
             this.btnA.Text = "A";
             this.btnA.UseVisualStyleBackColor = true;
+            this.btnA.Click += new System.EventHandler(this.btnA_Click);
             // 
             // btnB
             // 
@@ -93,6 +97,7 @@
             this.btnB.TabIndex = 4;
             this.btnB.Text = "B";
             this.btnB.UseVisualStyleBackColor = true;
+            this.btnB.Click += new System.EventHandler(this.btnB_Click);
             // 
             // btnC
             // 
@@ -102,6 +107,7 @@
             this.btnC.TabIndex = 5;
             this.btnC.Text = "C";
             this.btnC.UseVisualStyleBackColor = true;
+            this.btnC.Click += new System.EventHandler(this.btnC_Click);
             // 
             // btnD
             // 
@@ -111,6 +117,7 @@
             this.btnD.TabIndex = 6;
             this.btnD.Text = "D";
             this.btnD.UseVisualStyleBackColor = true;
+            this.btnD.Click += new System.EventHandler(this.btnD_Click);
             // 
             // btnDisconnect
             // 
@@ -156,13 +163,42 @@
             // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
-            //this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(644, 104);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(209, 186);
+            this.listBox1.TabIndex = 11;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(793, 88);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(60, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Notification";
+            // 
+            // lblNumber
+            // 
+            this.lblNumber.AutoSize = true;
+            this.lblNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNumber.Location = new System.Drawing.Point(692, 51);
+            this.lblNumber.Name = "lblNumber";
+            this.lblNumber.Size = new System.Drawing.Size(100, 26);
+            this.lblNumber.TabIndex = 13;
+            this.lblNumber.Text = "0 players";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(586, 297);
+            this.ClientSize = new System.Drawing.Size(865, 297);
+            this.Controls.Add(this.lblNumber);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.lbCountDown);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
@@ -197,6 +233,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lbCountDown;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblNumber;
     }
 }
 

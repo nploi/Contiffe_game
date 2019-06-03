@@ -11,6 +11,8 @@ namespace Models
     {
         public String Name { set; get; }
         public String Type { set; get; }
+        public int NumberCorrect { set; get; }
+
         public User() { }
 
         public String ToJson()
@@ -18,12 +20,11 @@ namespace Models
             return JsonConvert.SerializeObject(this);
         }
 
-        static public Question FromJson(String json)
+        static public User FromJson(String json)
         {
             if (json != null && json.Trim().Count() >= 0)
             {
-                Question deserializedQuestion = JsonConvert.DeserializeObject<Question>(json);
-                return deserializedQuestion;
+                return JsonConvert.DeserializeObject<User>(json);
             }
             return null;
         }

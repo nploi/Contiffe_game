@@ -26,8 +26,7 @@ namespace Models
         {
             if (json != null && json.Trim().Count() >= 0)
             {
-                Question deserializedQuestion = JsonConvert.DeserializeObject<Question>(json);
-                return deserializedQuestion;
+                return JsonConvert.DeserializeObject<Question>(json);
             }
             return null;
         }
