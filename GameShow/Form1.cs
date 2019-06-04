@@ -63,7 +63,6 @@ namespace GameShow
             {
                 var map = Utils.GetMapFromData(data);
                 lblNumber.Text = Convert.ToInt32(map["numUsers"]).ToString() + " players";
-                MessageBox.Show(map["numUsers"].ToString());
             });
 
             socket.On("next question", (data) =>
@@ -144,6 +143,7 @@ namespace GameShow
         private void btnConnect_Click(object sender, EventArgs e)
         {
             socket = IO.Socket("http://localhost:3000");
+            //socket = IO.Socket("http://ahihigameshow.herokuapp.com");
             listenEvents();
         }
 

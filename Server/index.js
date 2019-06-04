@@ -68,7 +68,7 @@ io.on('connection', (socket) => {
         clients.push({
           socket: socket
         });
-        console.log(clients[numUsers -1].socket);
+        console.log(clients[numUsers - 1].socket);
 
       }
 
@@ -110,11 +110,13 @@ io.on('connection', (socket) => {
     // Timer
     var myVar = setInterval(() => {
       countDown--;
-      if (countDown <= 0 && clientMc != null) {
+      if (countDown <= 0) {
         clearInterval(myVar);
-        socket.broadcast.emit("correct answer", {
-          answer: questions[currentIdex].CorrectAnswerId
-        })
+        if ( clientMc != null) {
+          socket.broadcast.emit("correct answer", {
+            answer: questions[currentIdex].CorrectAnswerId
+          })
+        }
       }
       console.log("timer: " + countDown);
     }, 1000);
@@ -123,6 +125,7 @@ io.on('connection', (socket) => {
       question: question,
       index: currentIdex,
     });
+
 
     // when the client mc send 'question' to all clients
     socket.broadcast.emit('next question', {

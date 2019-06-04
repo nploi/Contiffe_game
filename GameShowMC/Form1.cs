@@ -26,6 +26,7 @@ namespace GameShowMC
         public Form1()
         {
             InitializeComponent();
+            //socket = IO.Socket("http://ahihigameshow.herokuapp.com");
             socket = IO.Socket("http://localhost:3000");
             init();
             listenEvents();
