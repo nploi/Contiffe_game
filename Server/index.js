@@ -16,11 +16,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Chatroom
 
 var numUsers = 0;
-var clients = [];
 var clientMc = null;
 var questions = [];
 var currentIdex = -1;
 var countDown = 10;
+var clients = {};
 
 
 io.on('connection', (socket) => {
@@ -37,65 +37,69 @@ io.on('connection', (socket) => {
     });
   });
 
+  // add mc
+  socket.on('add mc', (user) => {
+    var message = "success";
+    if (clientMc == null) {
+      var userTemp = JSON.parse(user)
+      console.log("add mc:" + userTemp.Name);
+      clientMc = socket;
+    } else {
+      message = "MC is exists";
+    }
+    socket.emit('login', {
+      user: user,
+      message: message,
+      numUsers: numUsers
+    });
+  });
+
+
   // when the client emits 'add user', this listens and executes
   socket.on('add user', (user) => {
     if (addedUser) return;
-    user = JSON.parse(user)
-    console.log(user)
+    var userTemp = JSON.parse(user)
     // we store the user in the socket session for this client
-    socket.user = user;
+    socket.user = userTemp;
     var message = "success";
-    if (user.Type != "mc") {
-      var checked = true;
-      if (clients > 0) {
-        for (var i = 0; i < clients.length; i++) {
-          var item = JSON.parse(clients[i].socket.user)
-          console.log(item);
-          if (item.UserName === clients[i].user.UserName) {
-            console.log("is exists");
-            checked = false;
-            break;
-          }
-        }
-      }
-      if (!checked) {
-        message = `${user.UserName} is exists`;
-        console.log(`Error: ${message}`);
+    var checked = true;
+    console.log(userTemp.Type);
+    console.log(userTemp);
 
-      } else {
-        console.log(`add user: ${user.UserName}`);
-        ++numUsers;
-        clients.push({
-          socket: socket
-        });
-        console.log(clients[numUsers - 1].socket);
-
-      }
-
+    if (clients[userTemp.Name] != undefined) {
+      console.log("is exists");
+      message = `${userTemp.Name} is exists`;
+      checked = false;
     } else {
-      console.log("add mc:" + user);
-      clientMc = socket;
+      ++numUsers;
+      clients[userTemp.Name] = socket;
+      console.log(`add user: ${userTemp.Name}`);
+      console.log(numUsers + " connections");
     }
 
     addedUser = true;
+    // Notify for client
     socket.emit('login', {
       user: user,
       message: message,
       numUsers: numUsers
     });
 
-    if (currentIdex >= 0) {
-      socket.emit('next question', {
-        question: questions[currentIdex],
-        index: currentIdex,
-        countDown: countDown
+    if (checked) {
+      if (currentIdex >= 0) {
+        socket.emit('next question', {
+          question: questions[currentIdex],
+          index: currentIdex,
+          countDown: countDown
+        });
+      }
+
+      // echo globally (all clients) that a person has connected
+      socket.broadcast.emit('user joined', {
+        user: socket.user,
+        numUsers: numUsers
       });
     }
-    // echo globally (all clients) that a person has connected
-    socket.broadcast.emit('user joined', {
-      user: socket.user,
-      numUsers: numUsers
-    });
   });
 
   // when the client emits 'new question', we broadcast it to others
@@ -112,10 +116,22 @@ io.on('connection', (socket) => {
       countDown--;
       if (countDown <= 0) {
         clearInterval(myVar);
-        if ( clientMc != null) {
+        if (clientMc != null) {
           socket.broadcast.emit("correct answer", {
             answer: questions[currentIdex].CorrectAnswerId
-          })
+          });
+          //var listTops = [];
+          var tops = [];
+          if (clients != null) {
+            for (var key in clients) {
+              tops.push(clients[key].user)
+            }
+  
+            tops.sort(function (x, y) {
+              return y.NumberCorrect - x.NumberCorrect;
+            });
+          }
+          console.log(tops);
         }
       }
       console.log("timer: " + countDown);
@@ -125,7 +141,6 @@ io.on('connection', (socket) => {
       question: question,
       index: currentIdex,
     });
-
 
     // when the client mc send 'question' to all clients
     socket.broadcast.emit('next question', {
@@ -139,9 +154,17 @@ io.on('connection', (socket) => {
   // when the client emits 'answer', we emit it to mc
   socket.on('answer', (answer) => {
     answer = JSON.parse(answer)
-    console.log(answer);
+    // console.log(answer);
+
+    if (answer.Id === questions[currentIdex].CorrectAnswerId) {
+      socket.user.NumberCorrect++;
+      clients[socket.user.Name] = socket;
+      // console.log(clients[socket.user.Name].user);
+    }
+
     clientMc.emit('user answer', {
-      UserName: socket.user.UserName
+      user: socket.user,
+      answer: answer
     });
   });
 
@@ -180,6 +203,8 @@ io.on('connection', (socket) => {
     if (addedUser) {
       if (socket.user.Type != "mc") {
         --numUsers;
+        // Remove client
+        delete clients[socket.user.Name]
       } else {
         currentIdex = -1;
         questions = [];
@@ -187,7 +212,7 @@ io.on('connection', (socket) => {
       }
       // echo globally that this client has left
       socket.broadcast.emit('user left', {
-        username: socket.user,
+        user: socket.user,
         numUsers: numUsers
       });
     }

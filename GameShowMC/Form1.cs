@@ -27,9 +27,7 @@ namespace GameShowMC
         {
             InitializeComponent();
             //socket = IO.Socket("http://ahihigameshow.herokuapp.com");
-            socket = IO.Socket("http://localhost:3000");
             init();
-            listenEvents();
         }
 
         private void init()
@@ -51,18 +49,25 @@ namespace GameShowMC
             socket.On(Socket.EVENT_CONNECT, () =>
             {
                 var user = new User();
-                user.Name = "Loi Hai";
+                user.Name = "Loi Haiii";
                 user.Type = "mc";
-                socket.Emit("add user", user.ToJson());
-                readFile();
-                loadQuestions();
+                socket.Emit("add mc", user.ToJson());
+     
             });
 
             socket.On("login", (data) =>
             {
                 var map = Utils.GetMapFromData(data);
                 lblNumber.Text = Convert.ToInt32(map["numUsers"]).ToString() + " players";
-                // MessageBox.Show("Start question: " + map["user"].ToString());
+                var message = map["message"].ToString();
+                if (message == "success")
+                {
+                    readFile();
+                    loadQuestions();
+                } else
+                {
+                    MessageBox.Show(message);
+                }
             });
 
             socket.On("added question", (data) =>
@@ -84,8 +89,16 @@ namespace GameShowMC
             {
                 var map = Utils.GetMapFromData(data);
                 lblNumber.Text = Convert.ToInt32(map["numUsers"]).ToString() + " players";
-                var user = User.FromJson(map["username"].ToString());
+                var user = User.FromJson(map["user"].ToString());
                 listBox1.Items.Add(user.Name + " left");
+            });
+
+            socket.On("user answer", (data) =>
+            {
+                var map = Utils.GetMapFromData(data);
+                var user = User.FromJson(map["user"].ToString());
+                var answer = Answer.FromJson(map["answer"].ToString());
+                listBox1.Items.Add(user.Name + ": choiced " + answer.Id);
             });
         }
 
@@ -111,14 +124,7 @@ namespace GameShowMC
             string data = File.ReadAllText(path);
             // Parse data
             questions = JsonConvert.DeserializeObject<List<Question>>(data.ToString());
-            //if (questions.Count <= 0)
-            ////{
-            //    MessageBox.Show("Failed");
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Success");
-            //}
+
         }
 
         private void loadQuestions()
@@ -162,5 +168,10 @@ namespace GameShowMC
             }
         }
 
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            socket = IO.Socket("http://localhost:3000");
+            listenEvents();
+        }
     }
 }

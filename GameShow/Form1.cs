@@ -54,7 +54,7 @@ namespace GameShow
             socket.On(Socket.EVENT_CONNECT, () =>
             {
                 var user = new User();
-                user.Name = "Loi Hai 1";
+                user.Name = RandomString(50);
                 user.Type = "user";
                 socket.Emit("add user", user.ToJson());
             });
@@ -63,6 +63,11 @@ namespace GameShow
             {
                 var map = Utils.GetMapFromData(data);
                 lblNumber.Text = Convert.ToInt32(map["numUsers"]).ToString() + " players";
+                var message = map["message"].ToString();
+                if (message != "success")
+                {
+                    MessageBox.Show(message);
+                }
             });
 
             socket.On("next question", (data) =>
@@ -88,7 +93,7 @@ namespace GameShow
             {
                 var map = Utils.GetMapFromData(data);
                 lblNumber.Text = Convert.ToInt32(map["numUsers"]).ToString() + " players";
-                var user = User.FromJson(map["username"].ToString());
+                var user = User.FromJson(map["user"].ToString());
                 listBox1.Items.Add(user.Name + " left");
             });
 
@@ -125,6 +130,16 @@ namespace GameShow
                 //    waveOut.Play();
                 //}
             });
+        }
+
+
+
+        private static Random random = new Random();
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
         private void loadQuestions(Question question)

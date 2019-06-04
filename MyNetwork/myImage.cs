@@ -284,6 +284,29 @@ namespace MyNetwork
             return bmpBytes;
         }
 
+        public static void SaveJpeg(string path, Image img, int quality)
+        {
+            if (quality < 0 || quality > 100)
+                throw new ArgumentOutOfRangeException("quality must be between 0 and 100.");
+
+
+            // Encoder parameter for image quality 
+            EncoderParameter qualityParam =
+                new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality);
+            // Jpeg image codec 
+            ImageCodecInfo jpegCodec = GetEncoderInfo("image/jpeg");
+
+            EncoderParameters encoderParams = new EncoderParameters(1);
+            encoderParams.Param[0] = qualityParam;
+
+            img.Save(path, jpegCodec, encoderParams);
+        }
+
+        private static ImageCodecInfo GetEncoderInfo(string v)
+        {
+            throw new NotImplementedException();
+        }
+
         public Image Bitmap
         {
             get { return m_2DToBmp(); }
