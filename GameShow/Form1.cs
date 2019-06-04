@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using Models;
 using MyNetwork;
 using NAudio.Wave;
+using Newtonsoft.Json;
 using Quobject.SocketIoClientDotNet.Client;
 
 namespace GameShow
@@ -54,7 +55,7 @@ namespace GameShow
             socket.On(Socket.EVENT_CONNECT, () =>
             {
                 var user = new User();
-                user.Name = RandomString(50);
+                user.Name = RandomString(10);
                 user.Type = "user";
                 socket.Emit("add user", user.ToJson());
             });
@@ -129,6 +130,18 @@ namespace GameShow
                 //    waveOut.Init(provider);
                 //    waveOut.Play();
                 //}
+            });
+
+            socket.On("tops", (data) =>
+            {
+                var map = Utils.GetMapFromData(data);
+                var tops = JsonConvert.DeserializeObject<List<User>>(map["tops"].ToString());
+                var question = Question.FromJson(map["question"].ToString());
+                int i = 1;
+                tops.ForEach((value) => {
+                    var str = String.Format("Top {0}: {1} Correct {2}", i, value.Name, value.NumberCorrect);
+                    listBox1.Items.Add(str);
+                });
             });
         }
 

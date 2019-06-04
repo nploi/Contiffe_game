@@ -100,6 +100,18 @@ namespace GameShowMC
                 var answer = Answer.FromJson(map["answer"].ToString());
                 listBox1.Items.Add(user.Name + ": choiced " + answer.Id);
             });
+
+            socket.On("tops", (data) =>
+            {
+                var map = Utils.GetMapFromData(data);
+                var tops = JsonConvert.DeserializeObject<List<User>>(map["tops"].ToString());
+                var question = Question.FromJson(map["question"].ToString());
+                int i = 1;
+                tops.ForEach((value) => {
+                    var str = String.Format("Top {0}: {1} Correct {2}", i, value.Name, value.NumberCorrect);
+                    listBox1.Items.Add(str);
+                });
+            });
         }
 
 

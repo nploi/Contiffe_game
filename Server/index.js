@@ -120,18 +120,29 @@ io.on('connection', (socket) => {
           socket.broadcast.emit("correct answer", {
             answer: questions[currentIdex].CorrectAnswerId
           });
+
+
           //var listTops = [];
           var tops = [];
           if (clients != null) {
             for (var key in clients) {
               tops.push(clients[key].user)
             }
-  
+
             tops.sort(function (x, y) {
               return y.NumberCorrect - x.NumberCorrect;
             });
           }
           console.log(tops);
+          socket.emit("tops", {
+            question: questions[currentIdex],
+            tops: tops
+          });
+
+          socket.broadcast.emit("tops", {
+            question: questions[currentIdex],
+            tops: tops
+          });
         }
       }
       console.log("timer: " + countDown);
