@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Speech.Synthesis;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Models;
+using MyNetwork;
+using NAudio.Wave;
 using Quobject.SocketIoClientDotNet.Client;
 
 namespace GameShow
@@ -18,14 +22,35 @@ namespace GameShow
     public partial class Form1 : Form
     {
         Socket socket;
+        ImageLive imageLive = new ImageLive();
+        WaveOut waveOut = new WaveOut();
+        AudioLive audioLive;
+        Thread timerCountDown;
 
         public Form1()
         {
             InitializeComponent();
-            socket = IO.Socket("http://localhost:3000");
+            init();
+        }
+
+        private void init()
+        {
             Label.CheckForIllegalCrossThreadCalls = false;
-            Label.CheckForIllegalCrossThreadCalls = false;
+            //var pos = this.PointToScreen(lbCountDown.Location);
+            //pos = pictureBox1.PointToClient(pos);
             lblNumber.Text = "0 players";
+            //lbCountDown.Parent = pictureBox1;
+            //lbCountDown.Location = pos;
+            //lbCountDown.BackColor = Color.Transparent;
+            //var pos1 = this.PointToScreen(lblQuestion.Location);
+            //pos1 = pictureBox1.PointToClient(pos1);
+            //lblQuestion.Parent = pictureBox1;
+            //lblQuestion.Location = pos1;
+            // lblQuestion.BackColor = Color.Transparent;
+        }
+
+        private void listenEvents()
+        {
             socket.On(Socket.EVENT_CONNECT, () =>
             {
                 var user = new User();
@@ -38,6 +63,7 @@ namespace GameShow
             {
                 var map = Utils.GetMapFromData(data);
                 lblNumber.Text = Convert.ToInt32(map["numUsers"]).ToString() + " players";
+                MessageBox.Show(map["numUsers"].ToString());
             });
 
             socket.On("next question", (data) =>
@@ -47,7 +73,8 @@ namespace GameShow
                 speakQuestion(question);
                 loadQuestions(question);
                 int.TryParse(map["countDown"].ToString(), out seconds);
-                lap();
+                timerCountDown = new Thread(lap);
+                timerCountDown.Start();
             });
 
             socket.On("user joined", (data) =>
@@ -70,13 +97,34 @@ namespace GameShow
             {
                 var map = Utils.GetMapFromData(data);
                 var correctAnswer = map["answer"].ToString();
-                if (answer.Id == correctAnswer)
+                listBox1.Items.Add(correctAnswer + " is correct !!");
+            });
+
+            socket.On("live video", (data) =>
+            {
+                var map = Utils.GetMapFromData(data);
+                imageLive = ImageLive.FromJson(map["image"].ToString());
+
+                if (imageLive != null && imageLive.Img1D != null)
                 {
-                    MessageBox.Show("Correct");
-                } else
-                {
-                    MessageBox.Show("Wrong");
+                    pictureBox3.Refresh();
+                    pictureBox3.Image = IImage.ImageFromStream(imageLive.Img1D);
                 }
+            });
+
+            socket.On("live audio", (data) =>
+            {
+                //var map = Utils.GetMapFromData(data);
+                //audioLive = AudioLive.FromJson(map["audio"].ToString());
+
+                //if (audioLive != null && audioLive.Buffer != null)
+                //{
+                //    IWaveProvider provider = new RawSourceWaveStream(
+                //                             new MemoryStream(audioLive.Buffer), new WaveFormat(44100, 2));
+
+                //    waveOut.Init(provider);
+                //    waveOut.Play();
+                //}
             });
         }
 
@@ -95,9 +143,10 @@ namespace GameShow
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-
+            socket = IO.Socket("http://localhost:3000");
+            listenEvents();
         }
-      
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -114,7 +163,7 @@ namespace GameShow
             var reader = new SpeechSynthesizer();
 
             reader.SpeakAsync(lblQuestion.Text);
-            
+
         }
 
         void speakQuestion(Question question)
@@ -131,6 +180,7 @@ namespace GameShow
                 + "C. " + question.ListAnswers[2].Content
                 + "D. " + question.ListAnswers[3].Content);
         }
+        private int counter = 10;
 
         int seconds = 10;
         void lap()
@@ -141,6 +191,7 @@ namespace GameShow
                     => lbCountDown.Text = i.ToString()));
                 Thread.Sleep(1000);
             }
+            timerCountDown.Join();
             seconds = 10;
         }
 
@@ -168,26 +219,6 @@ namespace GameShow
             answer.Id = "d";
             socket.Emit("answer", answer.ToJson());
         }
-
-        /*private void timer1_Tick(object sender, EventArgs e)
-        {
-
-
-            //lbCountDown.Text = seconds.ToString();
-            //Invoke(new Action(() => { lbCountDown.Text = seconds.ToString(); }));
-
-            lbCountDown.Invoke((MethodInvoker)(()
-            => lbCountDown.Text = seconds.ToString()));
-           
-            seconds--;
-            if (seconds < 0)
-            {
-                seconds = 10;
-                timer1.Enabled = false;
-                
-            }
-            //MessageBox.Show(timer1.Enabled.ToString()+seconds);
-        }*/
 
     }
 }

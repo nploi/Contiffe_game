@@ -41,27 +41,37 @@ io.on('connection', (socket) => {
   socket.on('add user', (user) => {
     if (addedUser) return;
     user = JSON.parse(user)
+    console.log(user)
     // we store the user in the socket session for this client
     socket.user = user;
-
+    var message = "success";
     if (user.Type != "mc") {
       var checked = true;
       if (clients > 0) {
         for (var i = 0; i < clients.length; i++) {
-          if (user.UserName === clients[i].user.UserName) {
+          var item = JSON.parse(clients[i].socket.user)
+          console.log(item);
+          if (item.UserName === clients[i].user.UserName) {
+            console.log("is exists");
             checked = false;
             break;
           }
         }
       }
       if (!checked) {
-        return;
+        message = `${user.UserName} is exists`;
+        console.log(`Error: ${message}`);
+
+      } else {
+        console.log(`add user: ${user.UserName}`);
+        ++numUsers;
+        clients.push({
+          socket: socket
+        });
+        console.log(clients[numUsers -1].socket);
+
       }
-      console.log(`add user: ${user}`);
-      ++numUsers;
-      clients.push({
-        socket: socket
-      });
+
     } else {
       console.log("add mc:" + user);
       clientMc = socket;
@@ -70,6 +80,7 @@ io.on('connection', (socket) => {
     addedUser = true;
     socket.emit('login', {
       user: user,
+      message: message,
       numUsers: numUsers
     });
 
@@ -99,7 +110,7 @@ io.on('connection', (socket) => {
     // Timer
     var myVar = setInterval(() => {
       countDown--;
-      if (countDown <= 0) {
+      if (countDown <= 0 && clientMc != null) {
         clearInterval(myVar);
         socket.broadcast.emit("correct answer", {
           answer: questions[currentIdex].CorrectAnswerId
@@ -135,6 +146,21 @@ io.on('connection', (socket) => {
   socket.on('typing', () => {
     socket.broadcast.emit('typing', {
       username: socket.username
+    });
+  });
+
+  // when the client emits 'typing', we broadcast it to others
+  socket.on('live video', (image) => {
+    socket.broadcast.emit('live video', {
+      image: image
+    });
+  });
+
+  // when the client emits 'typing', we broadcast it to others
+  socket.on('live audio', (audio) => {
+    console.log(audio);
+    socket.broadcast.emit('live audio', {
+      audio: audio
     });
   });
 

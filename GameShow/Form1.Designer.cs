@@ -31,20 +31,23 @@
             this.components = new System.ComponentModel.Container();
             this.btnConnect = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblQuestion = new System.Windows.Forms.Label();
             this.btnA = new System.Windows.Forms.Button();
             this.btnB = new System.Windows.Forms.Button();
             this.btnC = new System.Windows.Forms.Button();
             this.btnD = new System.Windows.Forms.Button();
             this.btnDisconnect = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.lbCountDown = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblNumber = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.lblQuestion = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // btnConnect
@@ -65,23 +68,14 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(865, 43);
+            this.label1.Size = new System.Drawing.Size(873, 43);
             this.label1.TabIndex = 1;
             this.label1.Text = "Player";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblQuestion
-            // 
-            this.lblQuestion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.lblQuestion.Location = new System.Drawing.Point(13, 104);
-            this.lblQuestion.Name = "lblQuestion";
-            this.lblQuestion.Size = new System.Drawing.Size(374, 106);
-            this.lblQuestion.TabIndex = 2;
-            this.lblQuestion.Text = "Question here";
-            // 
             // btnA
             // 
-            this.btnA.Location = new System.Drawing.Point(12, 235);
+            this.btnA.Location = new System.Drawing.Point(33, 333);
             this.btnA.Name = "btnA";
             this.btnA.Size = new System.Drawing.Size(271, 23);
             this.btnA.TabIndex = 3;
@@ -91,7 +85,7 @@
             // 
             // btnB
             // 
-            this.btnB.Location = new System.Drawing.Point(306, 235);
+            this.btnB.Location = new System.Drawing.Point(328, 333);
             this.btnB.Name = "btnB";
             this.btnB.Size = new System.Drawing.Size(271, 23);
             this.btnB.TabIndex = 4;
@@ -101,7 +95,7 @@
             // 
             // btnC
             // 
-            this.btnC.Location = new System.Drawing.Point(11, 264);
+            this.btnC.Location = new System.Drawing.Point(33, 362);
             this.btnC.Name = "btnC";
             this.btnC.Size = new System.Drawing.Size(271, 23);
             this.btnC.TabIndex = 5;
@@ -111,7 +105,7 @@
             // 
             // btnD
             // 
-            this.btnD.Location = new System.Drawing.Point(306, 264);
+            this.btnD.Location = new System.Drawing.Point(328, 362);
             this.btnD.Name = "btnD";
             this.btnD.Size = new System.Drawing.Size(271, 23);
             this.btnD.TabIndex = 6;
@@ -131,26 +125,16 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(406, 104);
+            this.pictureBox1.Location = new System.Drawing.Point(428, 46);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(171, 106);
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(499, 54);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Speak";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // lbCountDown
             // 
             this.lbCountDown.AutoSize = true;
-            this.lbCountDown.BackColor = System.Drawing.Color.Blue;
+            this.lbCountDown.BackColor = System.Drawing.SystemColors.Control;
             this.lbCountDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCountDown.ForeColor = System.Drawing.Color.White;
             this.lbCountDown.Location = new System.Drawing.Point(265, 54);
@@ -159,17 +143,12 @@
             this.lbCountDown.TabIndex = 10;
             this.lbCountDown.Text = "10";
             // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(644, 104);
+            this.listBox1.Location = new System.Drawing.Point(656, 104);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(209, 186);
+            this.listBox1.Size = new System.Drawing.Size(209, 212);
             this.listBox1.TabIndex = 11;
             // 
             // label2
@@ -191,29 +170,65 @@
             this.lblNumber.TabIndex = 13;
             this.lblNumber.Text = "0 players";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(-23, -46);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox2.TabIndex = 14;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.pictureBox3.Location = new System.Drawing.Point(6, 46);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(606, 346);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 15;
+            this.pictureBox3.TabStop = false;
+            // 
+            // lblQuestion
+            // 
+            this.lblQuestion.AutoSize = true;
+            this.lblQuestion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQuestion.ForeColor = System.Drawing.Color.White;
+            this.lblQuestion.Location = new System.Drawing.Point(29, 296);
+            this.lblQuestion.Name = "lblQuestion";
+            this.lblQuestion.Size = new System.Drawing.Size(51, 20);
+            this.lblQuestion.TabIndex = 16;
+            this.lblQuestion.Text = "label3";
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(865, 297);
+            this.ClientSize = new System.Drawing.Size(873, 404);
+            this.Controls.Add(this.lblQuestion);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.lblNumber);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.lbCountDown);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnDisconnect);
             this.Controls.Add(this.btnD);
             this.Controls.Add(this.btnC);
             this.Controls.Add(this.btnB);
             this.Controls.Add(this.btnA);
-            this.Controls.Add(this.lblQuestion);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnConnect);
+            this.Controls.Add(this.pictureBox3);
             this.Name = "Form1";
             this.Text = "Game Show";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -223,19 +238,20 @@
 
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblQuestion;
         private System.Windows.Forms.Button btnA;
         private System.Windows.Forms.Button btnB;
         private System.Windows.Forms.Button btnC;
         private System.Windows.Forms.Button btnD;
         private System.Windows.Forms.Button btnDisconnect;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lbCountDown;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblNumber;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Label lblQuestion;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

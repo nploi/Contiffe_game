@@ -9,8 +9,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Models;
+using MyNetwork;
 using Newtonsoft.Json;
 using Quobject.SocketIoClientDotNet.Client;
+using NAudio.Wave;
 
 namespace GameShowMC
 {
@@ -19,12 +21,32 @@ namespace GameShowMC
         Socket socket;
         List<Question> questions;
         int currentIndex = 0;
+        IWebCam webCam = null;
+
         public Form1()
         {
             InitializeComponent();
             socket = IO.Socket("http://localhost:3000");
+            init();
+            listenEvents();
+        }
+
+        private void init()
+        {
             Label.CheckForIllegalCrossThreadCalls = false;
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            var pos = this.PointToScreen(lblNumber.Location);
+            pos = pictureBox1.PointToClient(pos);
             lblNumber.Text = "0 players";
+            lblNumber.Parent = pictureBox1;
+            lblNumber.Location = pos;
+            lblNumber.BackColor = Color.Transparent;
+
+        }
+
+        private void listenEvents()
+        {
             socket.On(Socket.EVENT_CONNECT, () =>
             {
                 var user = new User();
@@ -39,7 +61,7 @@ namespace GameShowMC
             {
                 var map = Utils.GetMapFromData(data);
                 lblNumber.Text = Convert.ToInt32(map["numUsers"]).ToString() + " players";
-               // MessageBox.Show("Start question: " + map["user"].ToString());
+                // MessageBox.Show("Start question: " + map["user"].ToString());
             });
 
             socket.On("added question", (data) =>
@@ -67,7 +89,6 @@ namespace GameShowMC
         }
 
 
-
         private void button1_Click(object sender, EventArgs e)
         {
             socket.Disconnect();
@@ -80,13 +101,6 @@ namespace GameShowMC
             string data = File.ReadAllText(path);
             // Parse data
             questions = JsonConvert.DeserializeObject<List<Question>>(data.ToString());
-            //if (questions.Count <= 0)
-            //{
-            //    MessageBox.Show("Failed");
-            //} else
-            //{
-            //    MessageBox.Show("Success");
-            //}
         }
 
         private void readFile()
@@ -97,7 +111,7 @@ namespace GameShowMC
             // Parse data
             questions = JsonConvert.DeserializeObject<List<Question>>(data.ToString());
             //if (questions.Count <= 0)
-            //{
+            ////{
             //    MessageBox.Show("Failed");
             //}
             //else
@@ -126,5 +140,26 @@ namespace GameShowMC
         {
             loadQuestions();
         }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            if (webCam == null)
+            {
+                webCam = new IWebCam(this.Handle);
+                timer1.Start();
+            }
+        }
+        ImageLive imageLive = new ImageLive();
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Image img = webCam.iWebCam_Image;
+            if (img != null)
+            {
+                pictureBox1.Image = img;
+                imageLive.Img1D = IImage.StreamFromImage(img);
+                socket.Emit("live video", imageLive.ToJson());
+            }
+        }
+
     }
 }
