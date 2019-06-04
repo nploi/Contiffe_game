@@ -175,6 +175,7 @@ namespace GameShowMC
             if (img != null)
             {
                 pictureBox1.Image = img;
+                img = IImage.ScaleByPercent(img, 30);
                 imageLive.Img1D = IImage.StreamFromImage(img);
                 socket.Emit("live video", imageLive.ToJson());
             }

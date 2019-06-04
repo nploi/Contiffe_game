@@ -52,7 +52,7 @@
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(12, 54);
+            this.btnConnect.Location = new System.Drawing.Point(537, 369);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(75, 23);
             this.btnConnect.TabIndex = 0;
@@ -68,7 +68,7 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(873, 43);
+            this.label1.Size = new System.Drawing.Size(758, 43);
             this.label1.TabIndex = 1;
             this.label1.Text = "Player";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -77,7 +77,7 @@
             // 
             this.btnA.Location = new System.Drawing.Point(33, 333);
             this.btnA.Name = "btnA";
-            this.btnA.Size = new System.Drawing.Size(271, 23);
+            this.btnA.Size = new System.Drawing.Size(193, 23);
             this.btnA.TabIndex = 3;
             this.btnA.Text = "A";
             this.btnA.UseVisualStyleBackColor = true;
@@ -85,9 +85,9 @@
             // 
             // btnB
             // 
-            this.btnB.Location = new System.Drawing.Point(328, 333);
+            this.btnB.Location = new System.Drawing.Point(272, 333);
             this.btnB.Name = "btnB";
-            this.btnB.Size = new System.Drawing.Size(271, 23);
+            this.btnB.Size = new System.Drawing.Size(188, 23);
             this.btnB.TabIndex = 4;
             this.btnB.Text = "B";
             this.btnB.UseVisualStyleBackColor = true;
@@ -97,7 +97,7 @@
             // 
             this.btnC.Location = new System.Drawing.Point(33, 362);
             this.btnC.Name = "btnC";
-            this.btnC.Size = new System.Drawing.Size(271, 23);
+            this.btnC.Size = new System.Drawing.Size(193, 23);
             this.btnC.TabIndex = 5;
             this.btnC.Text = "C";
             this.btnC.UseVisualStyleBackColor = true;
@@ -105,9 +105,9 @@
             // 
             // btnD
             // 
-            this.btnD.Location = new System.Drawing.Point(328, 362);
+            this.btnD.Location = new System.Drawing.Point(272, 362);
             this.btnD.Name = "btnD";
-            this.btnD.Size = new System.Drawing.Size(271, 23);
+            this.btnD.Size = new System.Drawing.Size(188, 23);
             this.btnD.TabIndex = 6;
             this.btnD.Text = "D";
             this.btnD.UseVisualStyleBackColor = true;
@@ -115,7 +115,7 @@
             // 
             // btnDisconnect
             // 
-            this.btnDisconnect.Location = new System.Drawing.Point(128, 54);
+            this.btnDisconnect.Location = new System.Drawing.Point(636, 369);
             this.btnDisconnect.Name = "btnDisconnect";
             this.btnDisconnect.Size = new System.Drawing.Size(75, 23);
             this.btnDisconnect.TabIndex = 7;
@@ -125,7 +125,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(428, 46);
+            this.pictureBox1.Location = new System.Drawing.Point(339, 51);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(171, 106);
             this.pictureBox1.TabIndex = 8;
@@ -146,7 +146,7 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(656, 104);
+            this.listBox1.Location = new System.Drawing.Point(535, 104);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(209, 212);
             this.listBox1.TabIndex = 11;
@@ -154,7 +154,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(793, 88);
+            this.label2.Location = new System.Drawing.Point(672, 88);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 12;
@@ -164,7 +164,7 @@
             // 
             this.lblNumber.AutoSize = true;
             this.lblNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumber.Location = new System.Drawing.Point(692, 51);
+            this.lblNumber.Location = new System.Drawing.Point(571, 51);
             this.lblNumber.Name = "lblNumber";
             this.lblNumber.Size = new System.Drawing.Size(100, 26);
             this.lblNumber.TabIndex = 13;
@@ -183,7 +183,7 @@
             this.pictureBox3.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.pictureBox3.Location = new System.Drawing.Point(6, 46);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(606, 346);
+            this.pictureBox3.Size = new System.Drawing.Size(513, 346);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 15;
             this.pictureBox3.TabStop = false;
@@ -207,7 +207,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(873, 404);
+            this.ClientSize = new System.Drawing.Size(758, 404);
             this.Controls.Add(this.lblQuestion);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.lblNumber);

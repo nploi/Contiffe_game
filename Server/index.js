@@ -42,6 +42,7 @@ io.on('connection', (socket) => {
     var message = "success";
     if (clientMc == null) {
       var userTemp = JSON.parse(user)
+      socket.user = userTemp;
       console.log("add mc:" + userTemp.Name);
       clientMc = socket;
     } else {
@@ -210,22 +211,30 @@ io.on('connection', (socket) => {
 
   // when the user disconnects.. perform this
   socket.on('disconnect', () => {
-    console.log("Some one disconnected");
     if (addedUser) {
+      console.log("user" + socket.user.Name + ": disconnected");
       if (socket.user.Type != "mc") {
         --numUsers;
         // Remove client
         delete clients[socket.user.Name]
-      } else {
-        currentIdex = -1;
-        questions = [];
-        clientMc = null;
       }
+
       // echo globally that this client has left
       socket.broadcast.emit('user left', {
         user: socket.user,
         numUsers: numUsers
       });
+    } else if (socket.user.Type == "mc") {
+      console.log("mc" + socket.user.Name + ": disconnected");
+      currentIdex = -1;
+      questions = [];
+      clientMc = null;
+
+      socket.broadcast.emit('mc left', {
+        user: socket.user,
+        numUsers: numUsers
+      });
     }
+
   });
 });

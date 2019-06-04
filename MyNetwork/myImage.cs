@@ -284,22 +284,35 @@ namespace MyNetwork
             return bmpBytes;
         }
 
-        public static void SaveJpeg(string path, Image img, int quality)
+        public static Image ScaleByPercent(Image imgPhoto, int Percent)
         {
-            if (quality < 0 || quality > 100)
-                throw new ArgumentOutOfRangeException("quality must be between 0 and 100.");
+            float nPercent = ((float)Percent / 100);
 
+            int sourceWidth = imgPhoto.Width;
+            int sourceHeight = imgPhoto.Height;
+            int sourceX = 0;
+            int sourceY = 0;
 
-            // Encoder parameter for image quality 
-            EncoderParameter qualityParam =
-                new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality);
-            // Jpeg image codec 
-            ImageCodecInfo jpegCodec = GetEncoderInfo("image/jpeg");
+            int destX = 0;
+            int destY = 0;
+            int destWidth = (int)(sourceWidth * nPercent);
+            int destHeight = (int)(sourceHeight * nPercent);
 
-            EncoderParameters encoderParams = new EncoderParameters(1);
-            encoderParams.Param[0] = qualityParam;
+            Bitmap bmPhoto = new Bitmap(destWidth, destHeight,
+                                     PixelFormat.Format24bppRgb);
+            bmPhoto.SetResolution(imgPhoto.HorizontalResolution,
+                                    imgPhoto.VerticalResolution);
 
-            img.Save(path, jpegCodec, encoderParams);
+            Graphics grPhoto = Graphics.FromImage(bmPhoto);
+            grPhoto.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+            grPhoto.DrawImage(imgPhoto,
+                new Rectangle(destX, destY, destWidth, destHeight),
+                new Rectangle(sourceX, sourceY, sourceWidth, sourceHeight),
+                GraphicsUnit.Pixel);
+
+            grPhoto.Dispose();
+            return bmPhoto;
         }
 
         private static ImageCodecInfo GetEncoderInfo(string v)
