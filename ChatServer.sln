@@ -9,7 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameShowMC", "GameShowMC\Ga
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{4C95ACAE-E6B3-46C7-9A13-B7648623E1B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNetwork", "MyNetwork\MyNetwork.csproj", "{D090FABA-1937-4C9B-AF02-FBEBDCC7FD85}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyImage", "MyNetwork\MyImage.csproj", "{D090FABA-1937-4C9B-AF02-FBEBDCC7FD85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audio", "Auido\Audio.csproj", "{726B5570-BC4A-41B8-B379-0D8F8891997B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D090FABA-1937-4C9B-AF02-FBEBDCC7FD85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D090FABA-1937-4C9B-AF02-FBEBDCC7FD85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D090FABA-1937-4C9B-AF02-FBEBDCC7FD85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{726B5570-BC4A-41B8-B379-0D8F8891997B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{726B5570-BC4A-41B8-B379-0D8F8891997B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{726B5570-BC4A-41B8-B379-0D8F8891997B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{726B5570-BC4A-41B8-B379-0D8F8891997B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -102,13 +102,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Auido\Audio.csproj">
+      <Project>{726b5570-bc4a-41b8-b379-0d8f8891997b}</Project>
+      <Name>Audio</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{4c95acae-e6b3-46c7-9a13-b7648623e1b6}</Project>
       <Name>Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MyNetwork\MyNetwork.csproj">
-      <Project>{D090FABA-1937-4C9B-AF02-FBEBDCC7FD85}</Project>
-      <Name>MyNetwork</Name>
+    <ProjectReference Include="..\MyNetwork\MyImage.csproj">
+      <Project>{d090faba-1937-4c9b-af02-fbebdcc7fd85}</Project>
+      <Name>MyImage</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

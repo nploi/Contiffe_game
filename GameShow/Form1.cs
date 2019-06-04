@@ -1,22 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Speech.Synthesis;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Models;
-using MyNetwork;
-using NAudio.Wave;
+using Audio.MyAudio;
 using Newtonsoft.Json;
 using Quobject.SocketIoClientDotNet.Client;
+using MyNetwork;
 
 namespace GameShow
 {
@@ -24,10 +17,10 @@ namespace GameShow
     {
         Socket socket;
         ImageLive imageLive = new ImageLive();
-        WaveOut waveOut = new WaveOut();
-        AudioLive audioLive;
-        Thread timerCountDown;
-
+        private Thread timerCountDown;
+        private NetworkAudioPlayer player;
+        bool connected = false;
+        MicrosoftAdpcmChatCodec codec = new MicrosoftAdpcmChatCodec();
         public Form1()
         {
             InitializeComponent();
@@ -58,6 +51,7 @@ namespace GameShow
                 user.Name = RandomString(10);
                 user.Type = "user";
                 socket.Emit("add user", user.ToJson());
+                connected = true;
             });
 
             socket.On("login", (data) =>
@@ -75,7 +69,7 @@ namespace GameShow
             {
                 var map = Utils.GetMapFromData(data);
                 Question question = Question.FromJson(map["question"].ToString());
-                speakQuestion(question);
+               // speakQuestion(question);
                 loadQuestions(question);
                 int.TryParse(map["countDown"].ToString(), out seconds);
                 timerCountDown = new Thread(lap);
@@ -117,21 +111,6 @@ namespace GameShow
                 }
             });
 
-            socket.On("live audio", (data) =>
-            {
-                //var map = Utils.GetMapFromData(data);
-                //audioLive = AudioLive.FromJson(map["audio"].ToString());
-
-                //if (audioLive != null && audioLive.Buffer != null)
-                //{
-                //    IWaveProvider provider = new RawSourceWaveStream(
-                //                             new MemoryStream(audioLive.Buffer), new WaveFormat(44100, 2));
-
-                //    waveOut.Init(provider);
-                //    waveOut.Play();
-                //}
-            });
-
             socket.On("tops", (data) =>
             {
                 var map = Utils.GetMapFromData(data);
@@ -170,9 +149,23 @@ namespace GameShow
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            socket = IO.Socket("http://localhost:3000");
-            //socket = IO.Socket("http://ahihigameshow.herokuapp.com");
-            listenEvents();
+            if (connected == false)
+            {
+                socket = IO.Socket("http://localhost:3000");
+                //socket = IO.Socket("http://ahihigameshow.herokuapp.com");
+                listenEvents();
+                var reciever = new SocketIoAudioReceiver(socket);
+                player = new NetworkAudioPlayer(codec, reciever);
+                btnConnect.Text = "Disconnect";
+            }
+            else
+            {
+                btnConnect.Text = "Connect";
+                player.Dispose();
+                codec.Dispose();
+                socket.Disconnect();
+                connected = false;
+            }
         }
 
 

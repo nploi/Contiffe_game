@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Models;
+using Audio.MyAudio;
 using MyNetwork;
 using Newtonsoft.Json;
 using Quobject.SocketIoClientDotNet.Client;
-using NAudio.Wave;
 
 namespace GameShowMC
 {
@@ -22,11 +17,14 @@ namespace GameShowMC
         List<Question> questions;
         int currentIndex = 0;
         IWebCam webCam = null;
+        private volatile bool connected;
+        private volatile bool live;
+        MicrosoftAdpcmChatCodec codec = new MicrosoftAdpcmChatCodec();
+        private NetworkAudioSender audioSender;
 
         public Form1()
         {
             InitializeComponent();
-            //socket = IO.Socket("http://ahihigameshow.herokuapp.com");
             init();
         }
 
@@ -52,7 +50,7 @@ namespace GameShowMC
                 user.Name = "Loi Haiii";
                 user.Type = "mc";
                 socket.Emit("add mc", user.ToJson());
-     
+                connected = true;
             });
 
             socket.On("login", (data) =>
@@ -162,10 +160,20 @@ namespace GameShowMC
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            if (webCam == null)
+            if (webCam == null || live == false)
             {
                 webCam = new IWebCam(this.Handle);
                 timer1.Start();
+                button2.Text = "Stop";
+                live = true;
+                ConnectLiveAudio(0, codec);
+            }
+            else
+            {
+                DisconnectLiveAudio();
+                button2.Text = "Live";
+                timer1.Stop();
+                live = false;
             }
         }
         ImageLive imageLive = new ImageLive();
@@ -175,7 +183,7 @@ namespace GameShowMC
             if (img != null)
             {
                 pictureBox1.Image = img;
-                img = IImage.ScaleByPercent(img, 30);
+                img = IImage.ScaleByPercent(img, 50);
                 imageLive.Img1D = IImage.StreamFromImage(img);
                 socket.Emit("live video", imageLive.ToJson());
             }
@@ -183,8 +191,35 @@ namespace GameShowMC
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            socket = IO.Socket("http://localhost:3000");
-            listenEvents();
+            if (!connected)
+            {
+                //socket = IO.Socket("http://ahihigameshow.herokuapp.com");
+                socket = IO.Socket("http://localhost:3000");
+                btnConnect.Text = "Disconnect";
+                listenEvents();
+            } else
+            {
+                connected = false;
+                btnConnect.Text = "Connect";
+                socket.Disconnect();
+            }
+        }
+
+        private void ConnectLiveAudio(int inputDeviceNumber, INetworkChatCodec codec)
+        {
+            var sender = new SocketIoAudioSender(socket);
+            audioSender = new NetworkAudioSender(codec, inputDeviceNumber, sender);
+            connected = true;
+        }
+
+        private void DisconnectLiveAudio()
+        {
+            if (connected)
+            {
+                connected = false;
+                audioSender.Dispose();
+                codec.Dispose();
+            }
         }
     }
 }
