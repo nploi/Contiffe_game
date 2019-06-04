@@ -4,140 +4,187 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Models;
+using MyNetwork;
+using Newtonsoft.Json;
+using Quobject.SocketIoClientDotNet.Client;
+using NAudio.Wave;
 
 namespace GameShowMC
 {
     public partial class Form1 : Form
     {
+        Socket socket;
+        List<Question> questions;
+        int currentIndex = 0;
+        IWebCam webCam = null;
+
         public Form1()
         {
             InitializeComponent();
+            //socket = IO.Socket("http://ahihigameshow.herokuapp.com");
+            init();
         }
 
-        private void btnConnect_Click(object sender, EventArgs e)
+        private void init()
         {
-            Thread thread = new Thread(ConnectServer);
-            thread.Start();
+            Label.CheckForIllegalCrossThreadCalls = false;
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            var pos = this.PointToScreen(lblNumber.Location);
+            pos = pictureBox1.PointToClient(pos);
+            lblNumber.Text = "0 players";
+            lblNumber.Parent = pictureBox1;
+            lblNumber.Location = pos;
+            lblNumber.BackColor = Color.Transparent;
+
         }
 
-        TcpClient _client = null;
-        Thread _thread = null;
-        NetworkStream _ns = null;
-        void ConnectServer()
+        private void listenEvents()
         {
-            IPAddress ip = IPAddress.Parse("127.0.0.1");
-            int port = 5000;
-            _client = new TcpClient();
-            _client.Connect(ip, port);
-
-            Console.WriteLine("client connected!!");
-            _ns = _client.GetStream();
-            _thread = new Thread(o => ReceiveData((TcpClient)o));
-            _thread.Start(_client);
-
-            //string s;
-            //while (!string.IsNullOrEmpty((s = Console.ReadLine())))
+            socket.On(Socket.EVENT_CONNECT, () =>
             {
-                //byte[] buffer = Encoding.ASCII.GetBytes(s);
-                //ns.Write(buffer, 0, buffer.Length);
-            }
+                var user = new User();
+                user.Name = "Loi Haiii";
+                user.Type = "mc";
+                socket.Emit("add mc", user.ToJson());
+     
+            });
 
-            //client.Client.Shutdown(SocketShutdown.Send);
-            //thread.Join();
-            //ns.Close();
-            //client.Close();
-        }
-        static void ReceiveData(TcpClient client)
-        {
-            NetworkStream ns = client.GetStream();
-            byte[] receivedBytes = new byte[1024];
-            int byte_count;
-
-            while ((byte_count = ns.Read(receivedBytes, 0, receivedBytes.Length)) > 0)
+            socket.On("login", (data) =>
             {
-                Console.Write(Encoding.ASCII.GetString(receivedBytes, 0, byte_count));
-            }
+                var map = Utils.GetMapFromData(data);
+                lblNumber.Text = Convert.ToInt32(map["numUsers"]).ToString() + " players";
+                var message = map["message"].ToString();
+                if (message == "success")
+                {
+                    readFile();
+                    loadQuestions();
+                } else
+                {
+                    MessageBox.Show(message);
+                }
+            });
+
+            socket.On("added question", (data) =>
+            {
+                var map = Utils.GetMapFromData(data);
+                //MessageBox.Show("Start question: " + map["question"].ToString());
+                Question question = Question.FromJson(map["question"].ToString());
+            });
+
+            socket.On("user joined", (data) =>
+            {
+                var map = Utils.GetMapFromData(data);
+                lblNumber.Text = Convert.ToInt32(map["numUsers"]).ToString() + " players";
+                var user = User.FromJson(map["user"].ToString());
+                listBox1.Items.Add(user.Name + " Joined");
+            });
+
+            socket.On("user left", (data) =>
+            {
+                var map = Utils.GetMapFromData(data);
+                lblNumber.Text = Convert.ToInt32(map["numUsers"]).ToString() + " players";
+                var user = User.FromJson(map["user"].ToString());
+                listBox1.Items.Add(user.Name + " left");
+            });
+
+            socket.On("user answer", (data) =>
+            {
+                var map = Utils.GetMapFromData(data);
+                var user = User.FromJson(map["user"].ToString());
+                var answer = Answer.FromJson(map["answer"].ToString());
+                listBox1.Items.Add(user.Name + ": choiced " + answer.Id);
+            });
+
+            socket.On("tops", (data) =>
+            {
+                var map = Utils.GetMapFromData(data);
+                var tops = JsonConvert.DeserializeObject<List<User>>(map["tops"].ToString());
+                var question = Question.FromJson(map["question"].ToString());
+                int i = 1;
+                tops.ForEach((value) => {
+                    var str = String.Format("Top {0}: {1} Correct {2}", i, value.Name, value.NumberCorrect);
+                    listBox1.Items.Add(str);
+                });
+            });
         }
 
-        private void btnSend_Click(object sender, EventArgs e)
-        {
-            string question = rtbQuestion.Text;
-            string a = txtA.Text;
-            string b = txtB.Text;
-            string c = txtC.Text;
-            string d = txtD.Text;
-
-            string data = string.Format("{0}@@{1}@@{2}@@{3}@@{4}"
-                , question, a, b,c,d);
-            byte[] buffer = Encoding.ASCII.GetBytes(data);
-            _ns.Write(buffer, 0, buffer.Length);
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            _client.Client.Shutdown(SocketShutdown.Send);
-            _thread.Join();
-            _ns.Close();
-            _client.Close();
+            socket.Disconnect();
         }
 
-        List<Question> _lstQuestions;
         private void button2_Click(object sender, EventArgs e)
         {
             // Read a text file line by line.  
-            string path = "C:\\hcmus/questions.txt";
-            string[] lines = File.ReadAllLines(path);
-
-            _lstQuestions = new List<Question>();
-            Question question = null;
-            foreach (string line in lines)
-            {
-                if(line.StartsWith("@@"))//Question
-                {
-                    question = new Question();
-                    question.Content = line.Substring(2);
-                }
-                if(line.StartsWith("--"))//Image
-                {
-                    question.ImageLink = line.Substring(2);
-                }
-                if (line.StartsWith("$$"))//Answer
-                {
-                    Answer answer = new Answer();
-                    string []M = line.Substring(2).Split(new char[] { '.' });
-                    answer.Id = M[0];
-                    answer.Content = M[1];
-
-                    question.ListAnswers.Add(answer);
-                }
-
-                if (line.StartsWith("%%"))
-                    _lstQuestions.Add(question);
-            }
-
-            int a = 1;
+            string path = "D:\\DA_LTW\\GameShowMC\\data.json";
+            string data = File.ReadAllText(path);
+            // Parse data
+            questions = JsonConvert.DeserializeObject<List<Question>>(data.ToString());
         }
 
-        int index = 0;
-        private void button3_Click(object sender, EventArgs e)
+        private void readFile()
         {
-            Question question = _lstQuestions[index];
+            // Read a text file line by line.  
+            string path = "D:\\DA_LTW\\GameShowMC\\data.json";
+            string data = File.ReadAllText(path);
+            // Parse data
+            questions = JsonConvert.DeserializeObject<List<Question>>(data.ToString());
 
+        }
+
+        private void loadQuestions()
+        {
+            if (questions == null || questions.Count <= 0 || currentIndex >= questions.Count)
+            {
+                return;
+            }
+            Question question = questions[currentIndex];
             rtbQuestion.Text = question.Content;
             txtA.Text = question.ListAnswers[0].Content;
             txtB.Text = question.ListAnswers[1].Content;
             txtC.Text = question.ListAnswers[2].Content;
             txtD.Text = question.ListAnswers[3].Content;
+            socket.Emit("new question", questions[currentIndex].ToJson());
+            currentIndex++;
+        }
 
-            index++;
+        private void button3_Click(object sender, EventArgs e)
+        {
+            loadQuestions();
+        }
 
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            if (webCam == null)
+            {
+                webCam = new IWebCam(this.Handle);
+                timer1.Start();
+            }
+        }
+        ImageLive imageLive = new ImageLive();
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Image img = webCam.iWebCam_Image;
+            if (img != null)
+            {
+                pictureBox1.Image = img;
+                img = IImage.ScaleByPercent(img, 30);
+                imageLive.Img1D = IImage.StreamFromImage(img);
+                socket.Emit("live video", imageLive.ToJson());
+            }
+        }
+
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            socket = IO.Socket("http://localhost:3000");
+            listenEvents();
         }
     }
 }

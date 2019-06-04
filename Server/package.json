@@ -1,0 +1,19 @@
+{
+  "name": "socket.io-game-show",
+  "version": "0.0.0",
+  "description": "game show",
+  "main": "index.js",
+  "author": "Nguyen Phuc Loi",
+  "private": true,
+  "license": "BSD",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.2.0"
+  },
+  "engines": {
+    "node": "10.3.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
