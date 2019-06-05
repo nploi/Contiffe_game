@@ -26,7 +26,7 @@ namespace GameShowMC
             var yourName = txtName.Text;
             int amount;
 
-            if (yourName.Count() <= 0 || !int.TryParse(txtAmount.Text, out amount))
+            if (yourName.Count() <= 0 || !int.TryParse(txtReward.Text, out amount))
             {
                 MessageBox.Show("Invalid input");
                 return;

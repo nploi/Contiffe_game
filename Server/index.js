@@ -27,16 +27,15 @@ io.on('connection', (socket) => {
   var addedUser = false;
   var amount = -1;
   // when the client emits 'new message', this listens and executes
-  socket.on('new message', (data) => {
+  socket.on('new message', (message) => {
     // we tell the client to execute 'new message'
     socket.broadcast.emit('new message', {
-      user: socket.user,
-      message: data
+      message: message
     });
   });
 
   // add mc
-  socket.on('add mc', (user) => {
+  socket.on('add mc', (game) => {
     var message = "success";
     console.log("Some one connected");
 
@@ -44,21 +43,23 @@ io.on('connection', (socket) => {
 
     if (clientMc == null) {
       addedUser = true;
-      var userTemp = JSON.parse(user)
-      socket.user = userTemp;
-      console.log("add mc: " + userTemp.Name);
+      var gameTemp = JSON.parse(game)
+      socket.user = gameTemp.User;
+      socket.award = gameTemp.Award;
+      console.log(socket.award);
+      console.log("add mc: " + gameTemp.User.Name);
       clientMc = socket;
     } else {
       message = "MC is exists";
     }
     socket.emit('login', {
-      user: user,
+      game: gameTemp,
       message: message,
       numUsers: numUsers
     });
     if (addedUser) {
       socket.broadcast.emit("mc connected", {
-        user: user
+        game: gameTemp
       });
     }
   });
@@ -73,8 +74,8 @@ io.on('connection', (socket) => {
     socket.user = userTemp;
     var message = "success";
     var checked = true;
-    console.log(userTemp.Type);
-    console.log(userTemp);
+    // console.log(userTemp.Type);
+    // console.log(userTemp);
 
     if (clients[userTemp.Name] != undefined) {
       console.log("is exists");
@@ -104,6 +105,19 @@ io.on('connection', (socket) => {
         });
       }
 
+      if (clientMc != undefined) {
+        // console.log({
+        //   User: clientMc.user,
+        //   Award: clientMc.award
+        // });
+        clientMc.broadcast.emit("mc connected", {
+          game: {
+            User: clientMc.user,
+            Award: clientMc.award
+          }
+        });
+      }
+
       // echo globally (all clients) that a person has connected
       socket.broadcast.emit('user joined', {
         user: socket.user,
@@ -118,7 +132,7 @@ io.on('connection', (socket) => {
     currentIdex++;
     countDown = 10;
     question = JSON.parse(question)
-    console.log(question)
+    // console.log(question)
     questions.push(question);
 
     // Timer
@@ -131,7 +145,6 @@ io.on('connection', (socket) => {
             answer: questions[currentIdex].CorrectAnswerId
           });
 
-
           //var listTops = [];
           var tops = [];
           if (clients != null) {
@@ -143,7 +156,7 @@ io.on('connection', (socket) => {
               return y.NumberCorrect - x.NumberCorrect;
             });
           }
-          console.log(tops);
+          // console.log(tops);
           socket.emit("tops", {
             question: questions[currentIdex],
             tops: tops

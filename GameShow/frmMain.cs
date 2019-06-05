@@ -25,7 +25,9 @@ namespace GameShow
         bool connected = false;
         MicrosoftAdpcmChatCodec codec = new MicrosoftAdpcmChatCodec();
         User user;
-
+        private frmEnterName enterName;
+        Answer answer = new Answer();
+        Game game;
         public frmMain()
         {
             InitializeComponent();
@@ -48,6 +50,24 @@ namespace GameShow
             lblQuestion.Location = pos;
             lblQuestion.BackColor = Color.Transparent;
 
+            pos = this.PointToScreen(lblCorrect.Location);
+            pos = pLive.PointToClient(pos);
+            lblCorrect.Parent = pLive;
+            lblCorrect.Location = pos;
+            lblCorrect.BackColor = Color.Transparent;
+            lblCorrect.Text = "Correct: 0";
+
+            pos = this.PointToScreen(lblAward.Location);
+            pos = pLive.PointToClient(pos);
+            lblAward.Parent = pLive;
+            lblAward.Location = pos;
+            lblAward.BackColor = Color.Transparent;
+            lblAward.Text = "";
+
+            lblQuestion.MaximumSize = new Size(400, 0);
+            lblQuestion.AutoSize = true;
+            btnChat.Enabled = false;
+
             hideQuestion();
         }
 
@@ -69,30 +89,33 @@ namespace GameShow
                 var message = map["message"].ToString();
                 if (message == "success")
                 {
-                    lbNofitications.Items.Add("You joined <3");
+                    lbNotifications.Items.Add("You joined <3");
                     var reciever = new SocketIoAudioReceiver(socket);
                     player = new NetworkAudioPlayer(codec, reciever);
                     btnConnect.Text = "Disconnect";
                     enterName.Close();
+                    btnChat.Enabled = true;
+                    lblName.Text = "Player: " + user.Name;
                 }
                 else
                 {
-                    lbNofitications.Items.Add(message);
+                    lbNotifications.Items.Add(message);
                 }
             });
 
             socket.On("mc connected", (data) =>
             {
                 var map = Utils.GetMapFromData(data);
-                var mc = User.FromJson(map["user"].ToString());
-                lbNofitications.Items.Add(String.Format("MC {0} joined", mc.Name));
+                game = Game.FromJson(map["game"].ToString());
+                lbNotifications.Items.Add(String.Format("MC {0} joined", game.User.Name));
+                lblAward.Text = String.Format("{0} $", game.Award);
             });
 
             socket.On("mc disconnected", (data) =>
             {
                 var map = Utils.GetMapFromData(data);
                 var mc = User.FromJson(map["user"].ToString());
-                lbNofitications.Items.Add(String.Format("MC {0} left", mc.Name));
+                lbNotifications.Items.Add(String.Format("MC {0} left", mc.Name));
             });
 
             socket.On("next question", (data) =>
@@ -105,6 +128,8 @@ namespace GameShow
                 timerCountDown = new Thread(countDowner);
                 timerCountDown.Start();
                 showQuestion();
+                resetColorButtons();
+                enableButtons();
             });
 
             socket.On("user joined", (data) =>
@@ -112,7 +137,7 @@ namespace GameShow
                 var map = Utils.GetMapFromData(data);
                 lblNumber.Text = Convert.ToInt32(map["numUsers"]).ToString() + " players";
                 var user = User.FromJson(map["user"].ToString());
-                lbNofitications.Items.Add(user.Name + " Joined");
+                lbNotifications.Items.Add(user.Name + " Joined");
             });
 
             socket.On("user left", (data) =>
@@ -120,14 +145,24 @@ namespace GameShow
                 var map = Utils.GetMapFromData(data);
                 lblNumber.Text = Convert.ToInt32(map["numUsers"]).ToString() + " players";
                 var user = User.FromJson(map["user"].ToString());
-                lbNofitications.Items.Add(user.Name + " left");
+                lbNotifications.Items.Add(user.Name + " left");
             });
 
             socket.On("correct answer", (data) =>
             {
                 var map = Utils.GetMapFromData(data);
                 var correctAnswer = map["answer"].ToString();
-                lbNofitications.Items.Add(correctAnswer + " is correct !!");
+                lbNotifications.Items.Add(correctAnswer + " is correct !!");
+                disableButtons();
+                showCorrectAnswer(correctAnswer);
+            });
+
+
+            socket.On("new message", (data) =>
+            {
+                var map = Utils.GetMapFromData(data);
+                var message = MyMessage.FromJson(map["message"].ToString());
+                lbNotifications.Items.Add(message.UserName + ": " + message.Content);
             });
 
             socket.On("live video", (data) =>
@@ -150,10 +185,13 @@ namespace GameShow
                 int i = 1;
                 tops.ForEach((value) => {
                     var str = String.Format("Top {0}: {1} Correct {2}", i, value.Name, value.NumberCorrect);
-                    lbNofitications.Items.Add(str);
+                    lbNotifications.Items.Add(str);
+                    if (value.Name == user.Name)
+                    {
+                        user = value;
+                        lblCorrect.Text = String.Format("Correct: {0}", user.NumberCorrect);
+                    }
                 });
-
-                hideQuestion();
             });
         }
 
@@ -184,7 +222,7 @@ namespace GameShow
         {
             if (connected == false)
             {
-                socket = IO.Socket("http://10.248.62.133:3000");
+                socket = IO.Socket("http://localhost:3000");
                 //socket = IO.Socket("http://ahihigameshow.herokuapp.com");
                 listenEvents();
                 if (user == null)
@@ -220,33 +258,87 @@ namespace GameShow
 
         private void hideQuestion()
         {
-            pLive.BringToFront();
-            //lbCountDown.Visible = false;
-            //lblQuestion.Visible = false;
             btnA.SendToBack();
             btnB.SendToBack();
             btnC.SendToBack();
             btnD.SendToBack();
         }
 
+        private void disableButtons()
+        {
+            btnA.Enabled = false;
+            btnB.Enabled = false;
+            btnC.Enabled = false;
+            btnD.Enabled = false;
+        }
+
+        private void showYourAnswer(string YourAnswerId)
+        {
+            switch (YourAnswerId)
+            {
+                case "a":
+                    btnA.BackColor = Color.Red;
+                    break;
+                case "b":
+                    btnB.BackColor = Color.Red;
+                    break;
+                case "c":
+                    btnC.BackColor = Color.Red;
+                    break;
+                case "d":
+                    btnD.BackColor = Color.Red;
+                    break;
+            }
+        }
+
+        private void showCorrectAnswer(string CorrectAnswer)
+        {
+            switch (CorrectAnswer)
+            {
+                case "a":
+                    btnA.BackColor = Color.Green;
+                    break;
+                case "b":
+                    btnB.BackColor = Color.Green;
+                    break;
+                case "c":
+                    btnC.BackColor = Color.Green;
+                    break;
+                case "d":
+                    btnD.BackColor = Color.Green;
+                    break;
+            }
+        }
+
+        private void resetColorButtons()
+        {
+            btnA.BackColor = Color.White;
+            btnB.BackColor = Color.White;
+            btnC.BackColor = Color.White;
+            btnD.BackColor = Color.White;
+        }
+
+        private void enableButtons()
+        {
+            btnA.Enabled = true;
+            btnB.Enabled = true;
+            btnC.Enabled = true;
+            btnD.Enabled = true;
+        }
+
         private void showQuestion()
         {
-            pLive.SendToBack();
-            //lbCountDown.Visible = true;
-            //lblQuestion.Visible = true;
             btnA.BringToFront();
             btnB.BringToFront();
             btnC.BringToFront();
             btnD.BringToFront();
         }
 
-
         private void button1_Click(object sender, EventArgs e)
         {
             var reader = new SpeechSynthesizer();
 
             reader.SpeakAsync(lblQuestion.Text);
-
         }
 
         void speakQuestion(Question question)
@@ -263,7 +355,6 @@ namespace GameShow
                 + "C. " + question.ListAnswers[2].Content
                 + "D. " + question.ListAnswers[3].Content);
         }
-        private int counter = 10;
 
         int seconds = 10;
         void countDowner()
@@ -278,31 +369,37 @@ namespace GameShow
             seconds = 10;
         }
 
-        Answer answer = new Answer();
-        private frmEnterName enterName;
 
         private void btnA_Click(object sender, EventArgs e)
         {
             answer.Id = "a";
             socket.Emit("answer", answer.ToJson());
+            showYourAnswer(answer.Id);
+            disableButtons();
         }
 
         private void btnB_Click(object sender, EventArgs e)
         {
             answer.Id = "b";
             socket.Emit("answer", answer.ToJson());
+            showYourAnswer(answer.Id);
+            disableButtons();
         }
 
         private void btnC_Click(object sender, EventArgs e)
         {
             answer.Id = "c";
             socket.Emit("answer", answer.ToJson());
+            showYourAnswer(answer.Id);
+            disableButtons();
         }
 
         private void btnD_Click(object sender, EventArgs e)
         {
             answer.Id = "d";
             socket.Emit("answer", answer.ToJson());
+            showYourAnswer(answer.Id);
+            disableButtons();
         }
 
         public static byte[] ObjectToByteArray(Object obj)
@@ -315,5 +412,18 @@ namespace GameShow
             }
         }
 
+        private void btnChat_Click(object sender, EventArgs e)
+        {
+            if (txtChat.Text.Trim().Length <= 0 || user == null)
+            {
+                return;
+            }
+            MyMessage message = new MyMessage();
+            message.Content = txtChat.Text.Trim();
+            message.UserName = user.Name;
+            socket.Emit("new message", message.ToJson());
+            txtChat.Text = "";
+            lbNotifications.Items.Add(message.UserName + ": " + message.Content);
+        }
     }
 }

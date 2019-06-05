@@ -20,10 +20,9 @@ namespace GameShowMC
         IWebCam webCam = null;
         private volatile bool connected;
         private volatile bool live;
-        private volatile bool sent = false;
         MicrosoftAdpcmChatCodec codec = new MicrosoftAdpcmChatCodec();
         private NetworkAudioSender audioSender;
-        User user;
+        Game game;
 
         frmEnterName enterName;
 
@@ -31,7 +30,6 @@ namespace GameShowMC
         {
             InitializeComponent();
             init();
-            btnNext.Enabled = false;
         }
 
         private void init()
@@ -45,6 +43,9 @@ namespace GameShowMC
             lblNumber.Parent = pictureBox1;
             lblNumber.Location = pos;
             lblNumber.BackColor = Color.Transparent;
+
+            btnChat.Enabled = false;
+            btnNext.Enabled = false;
         }
 
         private void listenEvents()
@@ -66,6 +67,8 @@ namespace GameShowMC
                     btnLoadFile.Enabled = true;
                     enterName.Close();
                     lbNotifications.Items.Add("You are MC, =))");
+                    btnChat.Enabled = true;
+                    lblName.Text = "MC: " + game.User.Name;
                 }
                 else
                 {
@@ -75,7 +78,7 @@ namespace GameShowMC
 
             socket.On("added question", (data) =>
             {
-                lbNotifications.Items.Add("broadcast question success");
+                lbNotifications.Items.Add("Broadcast question !!");
                 // Do some thing
                 // var map = Utils.GetMapFromData(data);
                 // MessageBox.Show("Start question: " + map["question"].ToString());
@@ -104,6 +107,13 @@ namespace GameShowMC
                 var user = User.FromJson(map["user"].ToString());
                 var answer = Answer.FromJson(map["answer"].ToString());
                 lbNotifications.Items.Add(user.Name + ": choiced " + answer.Id);
+            });
+
+            socket.On("new message", (data) =>
+            {
+                var map = Utils.GetMapFromData(data);
+                var message = MyMessage.FromJson(map["message"].ToString());
+                lbNotifications.Items.Add(message.UserName + ": " + message.Content);
             });
 
             socket.On("tops", (data) =>
@@ -139,7 +149,6 @@ namespace GameShowMC
             btnNext.Enabled = true;
             btnNext.Text = "Send";
             currentIndex = 0;
-            sent = false;
             nextQuestions();
         }
 
@@ -149,14 +158,43 @@ namespace GameShowMC
             {
                 return;
             }
+            resetColorText();
             Question question = questions[currentIndex];
             rtbQuestion.Text = question.Content;
             txtA.Text = question.ListAnswers[0].Content;
             txtB.Text = question.ListAnswers[1].Content;
             txtC.Text = question.ListAnswers[2].Content;
             txtD.Text = question.ListAnswers[3].Content;
+            fillColor(question.CorrectAnswerId);
             lblQuestionNumber.Text = String.Format("Question {0}/{1}", currentIndex + 1, questions.Count);
             currentIndex++;
+        }
+
+        private void fillColor(string CorrectAnswerId)
+        {
+            switch(CorrectAnswerId)
+            {
+                case "a":
+                    txtA.ForeColor = Color.Red;
+                    break;
+                case "b":
+                    txtB.ForeColor = Color.Red;
+                    break;
+                case "c":
+                    txtC.ForeColor = Color.Red;
+                    break;
+                case "d":
+                    txtD.ForeColor = Color.Red;
+                    break;
+            }
+        }
+
+        private void resetColorText()
+        {
+            txtA.ForeColor = Color.Black;
+            txtB.ForeColor = Color.Black;
+            txtC.ForeColor = Color.Black;
+            txtD.ForeColor = Color.Black;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -184,7 +222,7 @@ namespace GameShowMC
 
         private void disconnectVideo()
         {
-            btnLiveStreaming.Text = "Live";
+            btnLiveStreaming.Text = "Streaming";
             live = false;
             timer1.Stop();
         }
@@ -212,24 +250,23 @@ namespace GameShowMC
             if (!connected)
             {
                 //socket = IO.Socket("http://ahihigameshow.herokuapp.com");
-                socket = IO.Socket("http://10.248.62.133:3000");
+                socket = IO.Socket("http://localhost:3000");
                 listenEvents();
 
-                if (user == null)
+                if (game == null)
                 {
                     enterName = new frmEnterName((yourName, amount) =>
                     {
-                        //MessageBox.Show(amount.ToString());
-                        //MessageBox.Show(yourName);
-                        user = new User();
-                        user.Name = yourName;
-                        user.Type = "mc";
-                        socket.Emit("add mc", user.ToJson());
+                        game = new Game();
+                        game.User.Name = yourName;
+                        game.Award = amount;
+                        game.User.Type = "mc";
+                        socket.Emit("add mc", game.ToJson());
                     });
                     enterName.ShowDialog();
                 } else
                 {
-                    socket.Emit("add mc", user.ToJson());
+                    socket.Emit("add mc", game.ToJson());
                 }
             }
             else
@@ -279,6 +316,20 @@ namespace GameShowMC
                 string selectedFileName = openFileDialog1.FileName;
                 readFile(selectedFileName);
             }
+        }
+
+        private void btnChat_Click(object sender, EventArgs e)
+        {
+            if (txtChat.Text.Trim().Length <= 0 || game == null)
+            {
+                return;
+            }
+            MyMessage message = new MyMessage();
+            message.Content = txtChat.Text.Trim();
+            message.UserName = game.User.Name;
+            socket.Emit("new message", message.ToJson());
+            txtChat.Text = "";
+            lbNotifications.Items.Add(message.UserName + ": " + message.Content);
         }
     }
 }
