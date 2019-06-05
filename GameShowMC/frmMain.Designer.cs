@@ -51,6 +51,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtChat = new System.Windows.Forms.TextBox();
             this.btnChat = new System.Windows.Forms.Button();
+            this.lblCountDowrn = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -262,11 +263,22 @@
             this.btnChat.UseVisualStyleBackColor = true;
             this.btnChat.Click += new System.EventHandler(this.btnChat_Click);
             // 
+            // lblCountDowrn
+            // 
+            this.lblCountDowrn.AutoSize = true;
+            this.lblCountDowrn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCountDowrn.Location = new System.Drawing.Point(90, 67);
+            this.lblCountDowrn.Name = "lblCountDowrn";
+            this.lblCountDowrn.Size = new System.Drawing.Size(43, 20);
+            this.lblCountDowrn.TabIndex = 27;
+            this.lblCountDowrn.Text = "Time";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 408);
+            this.Controls.Add(this.lblCountDowrn);
             this.Controls.Add(this.btnChat);
             this.Controls.Add(this.txtChat);
             this.Controls.Add(this.label6);
@@ -320,6 +332,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtChat;
         private System.Windows.Forms.Button btnChat;
+        private System.Windows.Forms.Label lblCountDowrn;
     }
 }
 

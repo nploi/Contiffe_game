@@ -18,16 +18,18 @@ namespace GameShow
 {
     public partial class frmMain : Form
     {
-        Socket socket;
-        ImageLive imageLive = new ImageLive();
+        private Socket socket;
+        private ImageLive imageLive = new ImageLive();
         private Thread timerCountDown;
         private NetworkAudioPlayer player;
-        bool connected = false;
-        MicrosoftAdpcmChatCodec codec = new MicrosoftAdpcmChatCodec();
-        User user;
+        private bool connected = false;
+        private  MicrosoftAdpcmChatCodec codec = new MicrosoftAdpcmChatCodec();
+        private User user;
         private frmEnterName enterName;
-        Answer answer = new Answer();
-        Game game;
+        private Answer answer = new Answer();
+        private Game game;
+        private int seconds = 10;
+
         public frmMain()
         {
             InitializeComponent();
@@ -80,6 +82,11 @@ namespace GameShow
                 //user.Type = "user";
                 //socket.Emit("add user", user.ToJson());
                 connected = true;
+            });
+
+            socket.On(Socket.EVENT_DISCONNECT, () =>
+            {
+                connect();
             });
 
             socket.On("login", (data) =>
@@ -193,16 +200,17 @@ namespace GameShow
                     }
                 });
             });
-        }
 
+            socket.On("congratulations", (data) =>
+            {
+                var map = Utils.GetMapFromData(data);
+                int i = 1;
+                int bonus = 0;
+                int.TryParse(map["bonus"].ToString(), out bonus);
 
-
-        private static Random random = new Random();
-        public static string RandomString(int length)
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
+                lbNotifications.Items.Add(String.Format("Admin: Congratulations {0}", user.Name));
+                lbNotifications.Items.Add(String.Format("Bonus {0} for you", bonus));
+            });
         }
 
         private void loadQuestions(Question question)
@@ -222,23 +230,7 @@ namespace GameShow
         {
             if (connected == false)
             {
-                socket = IO.Socket("http://localhost:3000");
-                //socket = IO.Socket("http://ahihigameshow.herokuapp.com");
-                listenEvents();
-                if (user == null)
-                {
-                    enterName = new frmEnterName((yourName) =>
-                    {
-                        user = new User();
-                        user.Name = yourName;
-                        user.Type = "user";
-                        socket.Emit("add user", user.ToJson());
-                    });
-                    enterName.ShowDialog();
-                } else
-                {
-                    socket.Emit("add user", user.ToJson());
-                }
+                connect();
             }
             else
             {
@@ -247,6 +239,28 @@ namespace GameShow
                 codec.Dispose();
                 socket.Disconnect();
                 connected = false;
+            }
+        }
+
+        private void connect()
+        {
+            socket = IO.Socket("http://localhost:3000");
+            //socket = IO.Socket("http://ahihigameshow.herokuapp.com");
+            listenEvents();
+            if (user == null)
+            {
+                enterName = new frmEnterName((yourName) =>
+                {
+                    user = new User();
+                    user.Name = yourName;
+                    user.Type = "user";
+                    socket.Emit("add user", user.ToJson());
+                });
+                enterName.ShowDialog();
+            }
+            else
+            {
+                socket.Emit("add user", user.ToJson());
             }
         }
 
@@ -356,7 +370,6 @@ namespace GameShow
                 + "D. " + question.ListAnswers[3].Content);
         }
 
-        int seconds = 10;
         void countDowner()
         {
             for (int i = seconds; i >= 0; i--)

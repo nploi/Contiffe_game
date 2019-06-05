@@ -46,7 +46,9 @@ io.on('connection', (socket) => {
       var gameTemp = JSON.parse(game)
       socket.user = gameTemp.User;
       socket.award = gameTemp.Award;
-      console.log(socket.award);
+      socket.require = gameTemp.Require;
+      socket.numberQuestion = gameTemp.NumberQuestion;
+      // console.log(socket.award);
       console.log("add mc: " + gameTemp.User.Name);
       clientMc = socket;
     } else {
@@ -140,7 +142,7 @@ io.on('connection', (socket) => {
       countDown--;
       if (countDown <= 0) {
         clearInterval(myVar);
-        if (clientMc != null) {
+        if (clientMc !== null) {
           socket.broadcast.emit("correct answer", {
             answer: questions[currentIdex].CorrectAnswerId
           });
@@ -166,14 +168,49 @@ io.on('connection', (socket) => {
             question: questions[currentIdex],
             tops: tops
           });
+          console.log(currentIdex)
+          console.log(clientMc.numberQuestion)
+
+          if (currentIdex == clientMc.numberQuestion - 1) {
+            console.log(currentIdex)
+            var awardRecipients = []
+
+            for (var key in clients) {
+              if (clients[key].user.NumberCorrect >= clientMc.require) {
+                awardRecipients.push(clients[key].user);
+                console.log(clients[key].user)
+              }
+            }
+
+            var bonus = null;
+
+            if (awardRecipients.length > 0) {
+              bonus = clientMc.award / awardRecipients.length;
+            }
+  
+            console.log(bonus)
+            console.log(awardRecipients)
+
+            clientMc.emit('congratulations', {
+              bonus: bonus,
+              awardRecipients: awardRecipients
+            });
+  
+            for (var i = 0; i< awardRecipients.length; i++) {
+              clients[awardRecipients[i].Name].emit('congratulations', {
+                bonus: bonus
+              });
+            }
+          }
         }
       }
-      console.log("timer: " + countDown);
+      // console.log("timer: " + countDown);
     }, 1000);
 
     socket.emit('added question', {
       question: question,
       index: currentIdex,
+      countDown: countDown
     });
 
     // when the client mc send 'question' to all clients

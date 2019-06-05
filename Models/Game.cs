@@ -9,11 +9,14 @@ namespace Models
     {
         public int Award { set; get; }
         public User User { set; get; }
-
+        public int Require { set; get; }
+        public int NumberQuestion { set; get; }
         public Game()
         {
             this.User = new User();
             this.Award = 0;
+            this.Require = 0;
+            this.NumberQuestion = 0;
         }
 
         public String ToJson()

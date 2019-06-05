@@ -14,17 +14,19 @@ namespace GameShowMC
 {
     public partial class frmMain : Form
     {
-        Socket socket;
-        List<Question> questions;
-        int currentIndex = 0;
-        IWebCam webCam = null;
+        private Socket socket;
+        private List<Question> questions;
+        private int currentIndex = 0;
+        private IWebCam webCam = null;
+        private Thread timerCountDown;
         private volatile bool connected;
         private volatile bool live;
-        MicrosoftAdpcmChatCodec codec = new MicrosoftAdpcmChatCodec();
+        private MicrosoftAdpcmChatCodec codec;
         private NetworkAudioSender audioSender;
-        Game game;
-
-        frmEnterName enterName;
+        private Game game;
+        private frmEnterName enterName;
+        private ImageLive imageLive = new ImageLive();
+        private int seconds = 10;
 
         public frmMain()
         {
@@ -55,6 +57,15 @@ namespace GameShowMC
                 connected = true;
             });
 
+            socket.On(Socket.EVENT_DISCONNECT, () =>
+            {
+                // Reconnect
+                disconnectLiveAudio();
+                disconnectVideo();
+                disconnect();
+                connect();
+            });
+
             socket.On("login", (data) =>
             {
                 var map = Utils.GetMapFromData(data);
@@ -80,7 +91,10 @@ namespace GameShowMC
             {
                 lbNotifications.Items.Add("Broadcast question !!");
                 // Do some thing
-                // var map = Utils.GetMapFromData(data);
+                var map = Utils.GetMapFromData(data);
+                int.TryParse(map["countDown"].ToString(), out seconds);
+                timerCountDown = new Thread(countDowner);
+                timerCountDown.Start();
                 // MessageBox.Show("Start question: " + map["question"].ToString());
                 // Question question = Question.FromJson(map["question"].ToString());
             });
@@ -128,11 +142,44 @@ namespace GameShowMC
                     i++;
                 });
 
-                nextQuestions();
+                if (currentIndex < game.NumberQuestion)
+                {
+                    nextQuestions();
+                }
+
                 btnNext.Enabled = true;
+            });
+
+            socket.On("congratulations", (data) =>
+            {
+                var map = Utils.GetMapFromData(data);
+                var tops = JsonConvert.DeserializeObject<List<User>>(map["awardRecipients"].ToString());
+                int i = 1;
+                double bonus = 0;
+                double.TryParse(map["bonus"].ToString(), out bonus);
+
+                lbNotifications.Items.Add("*** congratulations ***");
+                lbNotifications.Items.Add(String.Format("Bonus: {0} for", bonus));
+                tops.ForEach((value) => {
+                    var str = String.Format("Top {0}: {1} Correct {2}", i, value.Name, value.NumberCorrect);
+                    lbNotifications.Items.Add(str);
+                    i++;
+                });
+                btnNext.Enabled = false;
             });
         }
 
+        void countDowner()
+        {
+            for (int i = seconds; i >= 0; i--)
+            {
+                lblCountDowrn.Invoke((MethodInvoker)(()
+                    => lblCountDowrn.Text = i.ToString()));
+                Thread.Sleep(1000);
+            }
+            timerCountDown.Join();
+            seconds = 10;
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -207,6 +254,7 @@ namespace GameShowMC
         {
             if (webCam == null || live == false)
             {
+                codec = new MicrosoftAdpcmChatCodec();
                 webCam = new IWebCam(this.Handle);
                 live = true;
                 timer1.Start();
@@ -227,7 +275,6 @@ namespace GameShowMC
             timer1.Stop();
         }
 
-        ImageLive imageLive = new ImageLive();
         private void timer1_Tick(object sender, EventArgs e)
         {
             Image img = webCam.iWebCam_Image;
@@ -261,6 +308,8 @@ namespace GameShowMC
                         game.User.Name = yourName;
                         game.Award = amount;
                         game.User.Type = "mc";
+                        game.Require = 2;
+                        game.NumberQuestion = 3;
                         socket.Emit("add mc", game.ToJson());
                     });
                     enterName.ShowDialog();
@@ -297,8 +346,8 @@ namespace GameShowMC
         {
             if (connected)
             {
-                audioSender.Dispose();
-                codec.Dispose();
+                audioSender?.Dispose();
+                codec?.Dispose();
             }
         }
 
