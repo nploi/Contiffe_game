@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
@@ -325,7 +322,7 @@ namespace MyNetwork
             get { return m_2DToBmp(); }
         }
 
-        unsafe void m_BmpTo2D()
+        void m_BmpTo2D()
         {
             if (img.Width % 4 == 0)
                 img = (Bitmap)m_CropImage(img, new Rectangle(0, 0, img.Width - (img.Width % 4), img.Height));

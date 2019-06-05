@@ -26,8 +26,6 @@ var clients = {};
 io.on('connection', (socket) => {
   var addedUser = false;
 
-  console.log("Some one connected");
-
   // when the client emits 'new message', this listens and executes
   socket.on('new message', (data) => {
     // we tell the client to execute 'new message'
@@ -40,10 +38,15 @@ io.on('connection', (socket) => {
   // add mc
   socket.on('add mc', (user) => {
     var message = "success";
+    console.log("Some one connected");
+
+    if (addedUser) return;
+
     if (clientMc == null) {
+      addedUser = true;
       var userTemp = JSON.parse(user)
       socket.user = userTemp;
-      console.log("add mc:" + userTemp.Name);
+      console.log("add mc: " + userTemp.Name);
       clientMc = socket;
     } else {
       message = "MC is exists";
@@ -53,11 +56,17 @@ io.on('connection', (socket) => {
       message: message,
       numUsers: numUsers
     });
+    if (addedUser) {
+      socket.broadcast.emit("mc connected", {
+        user: user
+      });
+    }
   });
 
 
   // when the client emits 'add user', this listens and executes
   socket.on('add user', (user) => {
+    console.log("Some one connected");
     if (addedUser) return;
     var userTemp = JSON.parse(user)
     // we store the user in the socket session for this client
@@ -78,7 +87,6 @@ io.on('connection', (socket) => {
       console.log(numUsers + " connections");
     }
 
-    addedUser = true;
     // Notify for client
     socket.emit('login', {
       user: user,
@@ -87,6 +95,7 @@ io.on('connection', (socket) => {
     });
 
     if (checked) {
+      addedUser = true;
       if (currentIdex >= 0) {
         socket.emit('next question', {
           question: questions[currentIdex],
@@ -196,7 +205,7 @@ io.on('connection', (socket) => {
 
   // when the client emits 'typing', we broadcast it to others
   socket.on('live audio', (audio) => {
-    console.log(audio);
+    // console.log(audio);
     socket.broadcast.emit('live audio', {
       audio: audio
     });
@@ -211,8 +220,12 @@ io.on('connection', (socket) => {
 
   // when the user disconnects.. perform this
   socket.on('disconnect', () => {
-    if (addedUser) {
-      console.log("user" + socket.user.Name + ": disconnected");
+    if (socket.user == undefined) {
+      return;
+    }
+
+    if (addedUser && socket.user.Type != "mc") {
+      console.log("user " + socket.user.Name + ": disconnected");
       if (socket.user.Type != "mc") {
         --numUsers;
         // Remove client
@@ -224,13 +237,13 @@ io.on('connection', (socket) => {
         user: socket.user,
         numUsers: numUsers
       });
-    } else if (socket.user.Type == "mc") {
-      console.log("mc" + socket.user.Name + ": disconnected");
+    } else {
+      console.log("mc " + socket.user.Name + ": disconnected");
       currentIdex = -1;
       questions = [];
       clientMc = null;
 
-      socket.broadcast.emit('mc left', {
+      socket.broadcast.emit('mc disconnected', {
         user: socket.user,
         numUsers: numUsers
       });
