@@ -10,7 +10,7 @@ namespace Models
         public int Award { set; get; }
         public User User { set; get; }
 
-        public Game ()
+        public Game()
         {
             this.User = new User();
             this.Award = 0;
