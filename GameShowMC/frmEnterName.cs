@@ -12,9 +12,9 @@ namespace GameShowMC
 {
     public partial class frmEnterName : Form
     {
-        Action<string> OnRegister;
+        Action<string, int> OnRegister;
 
-        public frmEnterName(Action<string> OnRegister)
+        public frmEnterName(Action<string, int> OnRegister)
         {
             InitializeComponent();
             this.OnRegister = OnRegister;
@@ -24,13 +24,15 @@ namespace GameShowMC
         private void btnStart_Click_1(object sender, EventArgs e)
         {
             var yourName = txtName.Text;
-            if (yourName.Count() <= 0)
+            int amount;
+
+            if (yourName.Count() <= 0 || !int.TryParse(txtAmount.Text, out amount))
             {
-                MessageBox.Show("Enter your name !");
+                MessageBox.Show("Invalid input");
                 return;
             }
 
-            OnRegister(yourName);
+          OnRegister(yourName, amount);
         }
     }
 }

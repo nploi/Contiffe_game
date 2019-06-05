@@ -217,8 +217,10 @@ namespace GameShowMC
 
                 if (user == null)
                 {
-                    enterName = new frmEnterName((yourName) =>
+                    enterName = new frmEnterName((yourName, amount) =>
                     {
+                        //MessageBox.Show(amount.ToString());
+                        //MessageBox.Show(yourName);
                         user = new User();
                         user.Name = yourName;
                         user.Type = "mc";
