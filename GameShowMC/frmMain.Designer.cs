@@ -52,6 +52,7 @@
             this.txtChat = new System.Windows.Forms.TextBox();
             this.btnChat = new System.Windows.Forms.Button();
             this.lblCountDowrn = new System.Windows.Forms.Label();
+            this.btnLive = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,13 +64,14 @@
             this.lblName.ForeColor = System.Drawing.Color.White;
             this.lblName.Location = new System.Drawing.Point(0, 0);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(960, 43);
+            this.lblName.Size = new System.Drawing.Size(952, 43);
             this.lblName.TabIndex = 2;
             this.lblName.Text = "MC";
             this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnConnect
             // 
+            this.btnConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConnect.Location = new System.Drawing.Point(6, 12);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(75, 23);
@@ -80,7 +82,7 @@
             // 
             // rtbQuestion
             // 
-            this.rtbQuestion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rtbQuestion.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbQuestion.Location = new System.Drawing.Point(6, 219);
             this.rtbQuestion.Name = "rtbQuestion";
             this.rtbQuestion.Size = new System.Drawing.Size(237, 35);
@@ -89,10 +91,10 @@
             // 
             // txtA
             // 
-            this.txtA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtA.Location = new System.Drawing.Point(33, 260);
+            this.txtA.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtA.Location = new System.Drawing.Point(33, 266);
             this.txtA.Name = "txtA";
-            this.txtA.Size = new System.Drawing.Size(177, 20);
+            this.txtA.Size = new System.Drawing.Size(177, 13);
             this.txtA.TabIndex = 5;
             // 
             // label2
@@ -115,10 +117,10 @@
             // 
             // txtB
             // 
-            this.txtB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtB.Location = new System.Drawing.Point(33, 286);
+            this.txtB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtB.Location = new System.Drawing.Point(33, 292);
             this.txtB.Name = "txtB";
-            this.txtB.Size = new System.Drawing.Size(177, 20);
+            this.txtB.Size = new System.Drawing.Size(177, 13);
             this.txtB.TabIndex = 7;
             // 
             // label4
@@ -132,10 +134,10 @@
             // 
             // txtC
             // 
-            this.txtC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtC.Location = new System.Drawing.Point(33, 309);
+            this.txtC.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtC.Location = new System.Drawing.Point(33, 315);
             this.txtC.Name = "txtC";
-            this.txtC.Size = new System.Drawing.Size(177, 20);
+            this.txtC.Size = new System.Drawing.Size(177, 13);
             this.txtC.TabIndex = 9;
             // 
             // label5
@@ -149,14 +151,15 @@
             // 
             // txtD
             // 
-            this.txtD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtD.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtD.Location = new System.Drawing.Point(33, 336);
             this.txtD.Name = "txtD";
-            this.txtD.Size = new System.Drawing.Size(177, 20);
+            this.txtD.Size = new System.Drawing.Size(177, 13);
             this.txtD.TabIndex = 11;
             // 
             // btnNext
             // 
+            this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNext.Location = new System.Drawing.Point(81, 362);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(75, 23);
@@ -181,17 +184,18 @@
             // 
             this.lblNumber.AutoSize = true;
             this.lblNumber.BackColor = System.Drawing.Color.Transparent;
-            this.lblNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNumber.ForeColor = System.Drawing.Color.White;
-            this.lblNumber.Location = new System.Drawing.Point(429, 51);
+            this.lblNumber.Location = new System.Drawing.Point(322, 56);
             this.lblNumber.Name = "lblNumber";
-            this.lblNumber.Size = new System.Drawing.Size(100, 26);
+            this.lblNumber.Size = new System.Drawing.Size(66, 17);
             this.lblNumber.TabIndex = 18;
             this.lblNumber.Text = "0 players";
             // 
             // btnLiveStreaming
             // 
             this.btnLiveStreaming.Enabled = false;
+            this.btnLiveStreaming.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLiveStreaming.Location = new System.Drawing.Point(220, 12);
             this.btnLiveStreaming.Name = "btnLiveStreaming";
             this.btnLiveStreaming.Size = new System.Drawing.Size(85, 23);
@@ -219,6 +223,7 @@
             // btnLoadFile
             // 
             this.btnLoadFile.Enabled = false;
+            this.btnLoadFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLoadFile.Location = new System.Drawing.Point(106, 12);
             this.btnLoadFile.Name = "btnLoadFile";
             this.btnLoadFile.Size = new System.Drawing.Size(91, 23);
@@ -240,7 +245,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(711, 51);
+            this.label6.Location = new System.Drawing.Point(799, 51);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 13);
             this.label6.TabIndex = 24;
@@ -255,6 +260,7 @@
             // 
             // btnChat
             // 
+            this.btnChat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChat.Location = new System.Drawing.Point(802, 362);
             this.btnChat.Name = "btnChat";
             this.btnChat.Size = new System.Drawing.Size(75, 23);
@@ -273,11 +279,24 @@
             this.lblCountDowrn.TabIndex = 27;
             this.lblCountDowrn.Text = "Time";
             // 
+            // btnLive
+            // 
+            this.btnLive.BackColor = System.Drawing.Color.Gray;
+            this.btnLive.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLive.ForeColor = System.Drawing.Color.White;
+            this.btnLive.Location = new System.Drawing.Point(260, 51);
+            this.btnLive.Name = "btnLive";
+            this.btnLive.Size = new System.Drawing.Size(56, 26);
+            this.btnLive.TabIndex = 28;
+            this.btnLive.Text = "LIVE";
+            this.btnLive.UseVisualStyleBackColor = false;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(960, 408);
+            this.ClientSize = new System.Drawing.Size(952, 401);
+            this.Controls.Add(this.btnLive);
             this.Controls.Add(this.lblCountDowrn);
             this.Controls.Add(this.btnChat);
             this.Controls.Add(this.txtChat);
@@ -300,8 +319,10 @@
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.pictureBox1);
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmMain";
-            this.Text = "Form1";
+            this.Text = "CONFETI";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -333,6 +354,7 @@
         private System.Windows.Forms.TextBox txtChat;
         private System.Windows.Forms.Button btnChat;
         private System.Windows.Forms.Label lblCountDowrn;
+        private System.Windows.Forms.Button btnLive;
     }
 }
 

@@ -261,6 +261,12 @@ io.on('connection', (socket) => {
     });
   });
 
+  socket.on('stop streaming', () => {
+    socket.broadcast.emit('stop streaming', {
+      stop: true
+    });
+  });
+
   // when the client emits 'stop typing', we broadcast it to others
   socket.on('stop typing', () => {
     socket.broadcast.emit('stop typing', {

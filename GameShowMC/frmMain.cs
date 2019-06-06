@@ -260,9 +260,12 @@ namespace GameShowMC
                 timer1.Start();
                 btnLiveStreaming.Text = "Stop";
                 connectLiveAudio(0, codec);
+                btnLive.BackColor = Color.Red;
             }
             else
             {
+                socket.Emit("stop streaming", "");
+                btnLive.BackColor = Color.Gray;
                 disconnectLiveAudio();
                 disconnectVideo();
             }
