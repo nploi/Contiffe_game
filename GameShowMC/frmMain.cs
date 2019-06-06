@@ -63,7 +63,7 @@ namespace GameShowMC
                 disconnectLiveAudio();
                 disconnectVideo();
                 disconnect();
-                connect();
+                //connect();
             });
 
             socket.On("login", (data) =>

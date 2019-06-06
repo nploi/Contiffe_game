@@ -86,7 +86,7 @@ namespace GameShow
 
             socket.On(Socket.EVENT_DISCONNECT, () =>
             {
-                connect();
+                //connect();
             });
 
             socket.On("login", (data) =>
