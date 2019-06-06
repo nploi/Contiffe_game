@@ -182,7 +182,7 @@ io.on('connection', (socket) => {
               }
             }
 
-            var bonus = null;
+            var bonus = 0;
 
             if (awardRecipients.length > 0) {
               bonus = clientMc.award / awardRecipients.length;
