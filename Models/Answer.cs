@@ -11,7 +11,10 @@ namespace Models
     {
         public string Id { get; set; }
         public string Content{get;set;}
-
+        public Answer()
+        {
+            Id = "";
+        }
         public String ToJson()
         {
             return JsonConvert.SerializeObject(this);

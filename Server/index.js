@@ -25,47 +25,59 @@ var clients = {};
 
 io.on('connection', (socket) => {
   var addedUser = false;
-
-  console.log("Some one connected");
-
+  var amount = -1;
   // when the client emits 'new message', this listens and executes
-  socket.on('new message', (data) => {
+  socket.on('new message', (message) => {
     // we tell the client to execute 'new message'
     socket.broadcast.emit('new message', {
-      user: socket.user,
-      message: data
+      message: message
     });
   });
 
   // add mc
-  socket.on('add mc', (user) => {
+  socket.on('add mc', (game) => {
     var message = "success";
+    console.log("Some one connected");
+
+    if (addedUser) return;
+
     if (clientMc == null) {
-      var userTemp = JSON.parse(user)
-      socket.user = userTemp;
-      console.log("add mc:" + userTemp.Name);
+      addedUser = true;
+      var gameTemp = JSON.parse(game)
+      socket.user = gameTemp.User;
+      socket.award = gameTemp.Award;
+      socket.require = gameTemp.Require;
+      socket.numberQuestion = gameTemp.NumberQuestion;
+      // console.log(socket.award);
+      console.log("add mc: " + gameTemp.User.Name);
       clientMc = socket;
     } else {
       message = "MC is exists";
     }
     socket.emit('login', {
-      user: user,
+      game: gameTemp,
       message: message,
       numUsers: numUsers
     });
+    if (addedUser) {
+      socket.broadcast.emit("mc connected", {
+        game: gameTemp
+      });
+    }
   });
 
 
   // when the client emits 'add user', this listens and executes
   socket.on('add user', (user) => {
+    console.log("Some one connected");
     if (addedUser) return;
     var userTemp = JSON.parse(user)
     // we store the user in the socket session for this client
     socket.user = userTemp;
     var message = "success";
     var checked = true;
-    console.log(userTemp.Type);
-    console.log(userTemp);
+    // console.log(userTemp.Type);
+    // console.log(userTemp);
 
     if (clients[userTemp.Name] != undefined) {
       console.log("is exists");
@@ -78,7 +90,6 @@ io.on('connection', (socket) => {
       console.log(numUsers + " connections");
     }
 
-    addedUser = true;
     // Notify for client
     socket.emit('login', {
       user: user,
@@ -87,11 +98,25 @@ io.on('connection', (socket) => {
     });
 
     if (checked) {
+      addedUser = true;
       if (currentIdex >= 0) {
         socket.emit('next question', {
           question: questions[currentIdex],
           index: currentIdex,
           countDown: countDown
+        });
+      }
+
+      if (clientMc != undefined) {
+        // console.log({
+        //   User: clientMc.user,
+        //   Award: clientMc.award
+        // });
+        clientMc.broadcast.emit("mc connected", {
+          game: {
+            User: clientMc.user,
+            Award: clientMc.award
+          }
         });
       }
 
@@ -109,7 +134,7 @@ io.on('connection', (socket) => {
     currentIdex++;
     countDown = 10;
     question = JSON.parse(question)
-    console.log(question)
+    // console.log(question)
     questions.push(question);
 
     // Timer
@@ -117,11 +142,10 @@ io.on('connection', (socket) => {
       countDown--;
       if (countDown <= 0) {
         clearInterval(myVar);
-        if (clientMc != null) {
+        if (clientMc !== null) {
           socket.broadcast.emit("correct answer", {
             answer: questions[currentIdex].CorrectAnswerId
           });
-
 
           //var listTops = [];
           var tops = [];
@@ -134,7 +158,7 @@ io.on('connection', (socket) => {
               return y.NumberCorrect - x.NumberCorrect;
             });
           }
-          console.log(tops);
+          // console.log(tops);
           socket.emit("tops", {
             question: questions[currentIdex],
             tops: tops
@@ -144,14 +168,49 @@ io.on('connection', (socket) => {
             question: questions[currentIdex],
             tops: tops
           });
+          console.log(currentIdex)
+          console.log(clientMc.numberQuestion)
+
+          if (currentIdex == clientMc.numberQuestion - 1) {
+            console.log(currentIdex)
+            var awardRecipients = []
+
+            for (var key in clients) {
+              if (clients[key].user.NumberCorrect >= clientMc.require) {
+                awardRecipients.push(clients[key].user);
+                console.log(clients[key].user)
+              }
+            }
+
+            var bonus = null;
+
+            if (awardRecipients.length > 0) {
+              bonus = clientMc.award / awardRecipients.length;
+            }
+  
+            console.log(bonus)
+            console.log(awardRecipients)
+
+            clientMc.emit('congratulations', {
+              bonus: bonus,
+              awardRecipients: awardRecipients
+            });
+  
+            for (var i = 0; i< awardRecipients.length; i++) {
+              clients[awardRecipients[i].Name].emit('congratulations', {
+                bonus: bonus
+              });
+            }
+          }
         }
       }
-      console.log("timer: " + countDown);
+      // console.log("timer: " + countDown);
     }, 1000);
 
     socket.emit('added question', {
       question: question,
       index: currentIdex,
+      countDown: countDown
     });
 
     // when the client mc send 'question' to all clients
@@ -196,7 +255,7 @@ io.on('connection', (socket) => {
 
   // when the client emits 'typing', we broadcast it to others
   socket.on('live audio', (audio) => {
-    console.log(audio);
+    // console.log(audio);
     socket.broadcast.emit('live audio', {
       audio: audio
     });
@@ -211,8 +270,12 @@ io.on('connection', (socket) => {
 
   // when the user disconnects.. perform this
   socket.on('disconnect', () => {
-    if (addedUser) {
-      console.log("user" + socket.user.Name + ": disconnected");
+    if (socket.user == undefined) {
+      return;
+    }
+
+    if (addedUser && socket.user.Type != "mc") {
+      console.log("user " + socket.user.Name + ": disconnected");
       if (socket.user.Type != "mc") {
         --numUsers;
         // Remove client
@@ -224,13 +287,13 @@ io.on('connection', (socket) => {
         user: socket.user,
         numUsers: numUsers
       });
-    } else if (socket.user.Type == "mc") {
-      console.log("mc" + socket.user.Name + ": disconnected");
+    } else {
+      console.log("mc " + socket.user.Name + ": disconnected");
       currentIdex = -1;
       questions = [];
       clientMc = null;
 
-      socket.broadcast.emit('mc left', {
+      socket.broadcast.emit('mc disconnected', {
         user: socket.user,
         numUsers: numUsers
       });
