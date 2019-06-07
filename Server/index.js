@@ -182,7 +182,7 @@ io.on('connection', (socket) => {
               }
             }
 
-            var bonus = null;
+            var bonus = 0;
 
             if (awardRecipients.length > 0) {
               bonus = clientMc.award / awardRecipients.length;
@@ -258,6 +258,12 @@ io.on('connection', (socket) => {
     // console.log(audio);
     socket.broadcast.emit('live audio', {
       audio: audio
+    });
+  });
+
+  socket.on('stop streaming', () => {
+    socket.broadcast.emit('stop streaming', {
+      stop: true
     });
   });
 

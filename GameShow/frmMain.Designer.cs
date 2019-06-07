@@ -46,11 +46,13 @@
             this.txtChat = new System.Windows.Forms.TextBox();
             this.lblCorrect = new System.Windows.Forms.Label();
             this.lblAward = new System.Windows.Forms.Label();
+            this.btnLive = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pLive)).BeginInit();
             this.SuspendLayout();
             // 
             // btnConnect
             // 
+            this.btnConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConnect.Location = new System.Drawing.Point(6, 12);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(75, 23);
@@ -75,6 +77,7 @@
             // btnA
             // 
             this.btnA.BackColor = System.Drawing.Color.White;
+            this.btnA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnA.Location = new System.Drawing.Point(59, 322);
             this.btnA.Name = "btnA";
             this.btnA.Size = new System.Drawing.Size(193, 25);
@@ -86,6 +89,7 @@
             // btnB
             // 
             this.btnB.BackColor = System.Drawing.Color.White;
+            this.btnB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnB.Location = new System.Drawing.Point(272, 322);
             this.btnB.Name = "btnB";
             this.btnB.Size = new System.Drawing.Size(188, 25);
@@ -97,6 +101,7 @@
             // btnC
             // 
             this.btnC.BackColor = System.Drawing.Color.White;
+            this.btnC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnC.Location = new System.Drawing.Point(59, 357);
             this.btnC.Name = "btnC";
             this.btnC.Size = new System.Drawing.Size(193, 25);
@@ -108,6 +113,7 @@
             // btnD
             // 
             this.btnD.BackColor = System.Drawing.Color.White;
+            this.btnD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnD.Location = new System.Drawing.Point(272, 357);
             this.btnD.Name = "btnD";
             this.btnD.Size = new System.Drawing.Size(188, 25);
@@ -148,10 +154,11 @@
             // lblNumber
             // 
             this.lblNumber.AutoSize = true;
-            this.lblNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumber.Location = new System.Drawing.Point(530, 46);
+            this.lblNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNumber.ForeColor = System.Drawing.Color.White;
+            this.lblNumber.Location = new System.Drawing.Point(74, 59);
             this.lblNumber.Name = "lblNumber";
-            this.lblNumber.Size = new System.Drawing.Size(100, 26);
+            this.lblNumber.Size = new System.Drawing.Size(66, 17);
             this.lblNumber.TabIndex = 13;
             this.lblNumber.Text = "0 players";
             // 
@@ -182,6 +189,7 @@
             // 
             // btnChat
             // 
+            this.btnChat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChat.Location = new System.Drawing.Point(604, 369);
             this.btnChat.Name = "btnChat";
             this.btnChat.Size = new System.Drawing.Size(75, 23);
@@ -201,11 +209,11 @@
             // 
             this.lblCorrect.AutoSize = true;
             this.lblCorrect.BackColor = System.Drawing.Color.Transparent;
-            this.lblCorrect.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCorrect.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCorrect.ForeColor = System.Drawing.Color.White;
-            this.lblCorrect.Location = new System.Drawing.Point(28, 54);
+            this.lblCorrect.Location = new System.Drawing.Point(422, 88);
             this.lblCorrect.Name = "lblCorrect";
-            this.lblCorrect.Size = new System.Drawing.Size(38, 26);
+            this.lblCorrect.Size = new System.Drawing.Size(26, 18);
             this.lblCorrect.TabIndex = 19;
             this.lblCorrect.Text = "10";
             // 
@@ -213,19 +221,32 @@
             // 
             this.lblAward.AutoSize = true;
             this.lblAward.BackColor = System.Drawing.Color.Transparent;
-            this.lblAward.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAward.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAward.ForeColor = System.Drawing.Color.White;
             this.lblAward.Location = new System.Drawing.Point(422, 54);
             this.lblAward.Name = "lblAward";
-            this.lblAward.Size = new System.Drawing.Size(38, 26);
+            this.lblAward.Size = new System.Drawing.Size(26, 18);
             this.lblAward.TabIndex = 20;
             this.lblAward.Text = "10";
+            // 
+            // btnLive
+            // 
+            this.btnLive.BackColor = System.Drawing.Color.Gray;
+            this.btnLive.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLive.ForeColor = System.Drawing.Color.White;
+            this.btnLive.Location = new System.Drawing.Point(12, 54);
+            this.btnLive.Name = "btnLive";
+            this.btnLive.Size = new System.Drawing.Size(56, 26);
+            this.btnLive.TabIndex = 29;
+            this.btnLive.Text = "LIVE";
+            this.btnLive.UseVisualStyleBackColor = false;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(758, 404);
+            this.Controls.Add(this.btnLive);
             this.Controls.Add(this.lblAward);
             this.Controls.Add(this.lblCorrect);
             this.Controls.Add(this.txtChat);
@@ -269,6 +290,7 @@
         private System.Windows.Forms.TextBox txtChat;
         private System.Windows.Forms.Label lblCorrect;
         private System.Windows.Forms.Label lblAward;
+        private System.Windows.Forms.Button btnLive;
     }
 }
 

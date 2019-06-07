@@ -41,7 +41,6 @@ namespace GameShow
             Label.CheckForIllegalCrossThreadCalls = false;
             var pos = this.PointToScreen(lbCountDown.Location);
             pos = pLive.PointToClient(pos);
-            lblNumber.Text = "0 players";
             lbCountDown.Parent = pLive;
             lbCountDown.Location = pos;
             lbCountDown.BackColor = Color.Transparent;
@@ -66,6 +65,13 @@ namespace GameShow
             lblAward.BackColor = Color.Transparent;
             lblAward.Text = "";
 
+            pos = this.PointToScreen(lblNumber.Location);
+            pos = pLive.PointToClient(pos);
+            lblNumber.Parent = pLive;
+            lblNumber.Location = pos;
+            lblNumber.BackColor = Color.Transparent;
+            lblNumber.Text = "0 players";
+
             lblQuestion.MaximumSize = new Size(400, 0);
             lblQuestion.AutoSize = true;
             btnChat.Enabled = false;
@@ -87,6 +93,15 @@ namespace GameShow
             socket.On(Socket.EVENT_DISCONNECT, () =>
             {
                 //connect();
+            });
+            socket.On("stop streaming", (data) =>
+            {
+                var map = Utils.GetMapFromData(data);
+                var stop = Convert.ToBoolean(map["stop"]);
+                if (stop)
+                {
+                    btnLive.BackColor = Color.Gray;
+                }
             });
 
             socket.On("login", (data) =>
@@ -179,6 +194,7 @@ namespace GameShow
 
                 if (imageLive != null && imageLive.Img1D != null)
                 {
+                    btnLive.BackColor = Color.Red;
                     pLive.Refresh();
                     pLive.Image = IImage.ImageFromStream(imageLive.Img1D);
                 }

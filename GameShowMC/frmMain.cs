@@ -260,9 +260,12 @@ namespace GameShowMC
                 timer1.Start();
                 btnLiveStreaming.Text = "Stop";
                 connectLiveAudio(0, codec);
+                btnLive.BackColor = Color.Red;
             }
             else
             {
+                socket.Emit("stop streaming", "");
+                btnLive.BackColor = Color.Gray;
                 disconnectLiveAudio();
                 disconnectVideo();
             }
@@ -308,8 +311,8 @@ namespace GameShowMC
                         game.User.Name = yourName;
                         game.Award = amount;
                         game.User.Type = "mc";
-                        game.Require = 2;
-                        game.NumberQuestion = 3;
+                        game.Require = 10;
+                        game.NumberQuestion = 10;
                         socket.Emit("add mc", game.ToJson());
                     });
                     enterName.ShowDialog();

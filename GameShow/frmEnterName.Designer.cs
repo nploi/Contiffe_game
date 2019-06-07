@@ -28,35 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblEnterName = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.btnStart = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // lblEnterName
-            // 
-            this.lblEnterName.AutoSize = true;
-            this.lblEnterName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnterName.Location = new System.Drawing.Point(12, 19);
-            this.lblEnterName.Name = "lblEnterName";
-            this.lblEnterName.Size = new System.Drawing.Size(194, 24);
-            this.lblEnterName.TabIndex = 1;
-            this.lblEnterName.Text = "ENTER YOUR NAME";
-            // 
             // txtName
             // 
             this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtName.Location = new System.Drawing.Point(33, 56);
+            this.txtName.Location = new System.Drawing.Point(35, 27);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(148, 29);
+            this.txtName.Size = new System.Drawing.Size(172, 29);
             this.txtName.TabIndex = 0;
             this.txtName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(33, 109);
+            this.btnStart.Location = new System.Drawing.Point(35, 88);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(148, 32);
+            this.btnStart.Size = new System.Drawing.Size(173, 37);
             this.btnStart.TabIndex = 2;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -64,22 +53,21 @@
             // 
             // frmEnterName
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(215, 169);
+            this.ClientSize = new System.Drawing.Size(240, 151);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.txtName);
-            this.Controls.Add(this.lblEnterName);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmEnterName";
-            this.Text = "frmEnterName";
+            this.Text = "Enter your name";
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lblEnterName;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Button btnStart;
     }
