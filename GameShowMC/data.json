@@ -61,7 +61,7 @@
             },
             {
                 "Id": "d",
-                "Content": ";"
+                "Content": "/"
             }
         ],
         "Content": "What punctuation ends most lines of C code?",
@@ -137,29 +137,29 @@
         "ImageLink": null,
         "CorrectAnswerId": "d"
     },
-    {
-        "ListAnswers": [
-            {
-                "Id": "a",
-                "Content": "&"
-            },
-            {
-                "Id": "b",
-                "Content": "&&"
-            },
-            {
-                "Id": "c",
-                "Content": "|"
-            },
-            {
-                "Id": "d",
-                "Content": "|&"
-            }
-        ],
-        "Content": "Which of the following is the boolean operator for logical-and?",
-        "ImageLink": null,
-        "CorrectAnswerId": "b"
-    },
+  {
+    "ListAnswers": [
+      {
+        "Id": "a",
+        "Content": "int arr[3] = (1,2,3);"
+      },
+      {
+        "Id": "b",
+        "Content": "int arr(3) = {1,2,3};"
+      },
+      {
+        "Id": "c",
+        "Content": "int arr[3] = {1,2,3};"
+      },
+      {
+        "Id": "d",
+        "Content": "int arr(3) = (1,2,3);"
+      }
+    ],
+    "Content": "How do you initialize an array in C?",
+    "ImageLink": null,
+    "CorrectAnswerId": "c"
+  },
     {
         "ListAnswers": [
             {
@@ -227,6 +227,6 @@
         ],
         "Content": "What character ends all strings?",
         "ImageLink": null,
-        "CorrectAnswerId": ""
+        "CorrectAnswerId": "d"
     }
 ]

@@ -96,6 +96,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -124,6 +125,9 @@
       <Project>{d090faba-1937-4c9b-af02-fbebdcc7fd85}</Project>
       <Name>MyImage</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\e1-tro-choi-confetti-vietnam-la-gi-confetti-viet-nam-tro-choi-truc-tuyen-tuong-tac-cua-facebook.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

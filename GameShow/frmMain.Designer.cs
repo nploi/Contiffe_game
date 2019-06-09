@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.btnConnect = new System.Windows.Forms.Button();
             this.lblName = new System.Windows.Forms.Label();
             this.btnA = new System.Windows.Forms.Button();
@@ -69,7 +70,7 @@
             this.lblName.ForeColor = System.Drawing.Color.White;
             this.lblName.Location = new System.Drawing.Point(0, 0);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(758, 43);
+            this.lblName.Size = new System.Drawing.Size(886, 43);
             this.lblName.TabIndex = 1;
             this.lblName.Text = "Player";
             this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -137,7 +138,7 @@
             // lbNotifications
             // 
             this.lbNotifications.FormattingEnabled = true;
-            this.lbNotifications.Location = new System.Drawing.Point(535, 104);
+            this.lbNotifications.Location = new System.Drawing.Point(665, 88);
             this.lbNotifications.Name = "lbNotifications";
             this.lbNotifications.Size = new System.Drawing.Size(209, 225);
             this.lbNotifications.TabIndex = 11;
@@ -145,7 +146,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(610, 88);
+            this.label2.Location = new System.Drawing.Point(740, 72);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 12;
@@ -164,7 +165,7 @@
             // 
             // pLive
             // 
-            this.pLive.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.pLive.BackColor = System.Drawing.Color.Transparent;
             this.pLive.Location = new System.Drawing.Point(6, 46);
             this.pLive.Name = "pLive";
             this.pLive.Size = new System.Drawing.Size(513, 346);
@@ -190,7 +191,7 @@
             // btnChat
             // 
             this.btnChat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChat.Location = new System.Drawing.Point(604, 369);
+            this.btnChat.Location = new System.Drawing.Point(734, 353);
             this.btnChat.Name = "btnChat";
             this.btnChat.Size = new System.Drawing.Size(75, 23);
             this.btnChat.TabIndex = 17;
@@ -200,7 +201,7 @@
             // 
             // txtChat
             // 
-            this.txtChat.Location = new System.Drawing.Point(535, 335);
+            this.txtChat.Location = new System.Drawing.Point(665, 319);
             this.txtChat.Name = "txtChat";
             this.txtChat.Size = new System.Drawing.Size(209, 20);
             this.txtChat.TabIndex = 18;
@@ -245,7 +246,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(758, 404);
+            this.BackgroundImage = global::GameShow.Properties.Resources.e1_tro_choi_confetti_vietnam_la_gi_confetti_viet_nam_tro_choi_truc_tuyen_tuong_tac_cua_facebook;
+            this.ClientSize = new System.Drawing.Size(886, 404);
             this.Controls.Add(this.btnLive);
             this.Controls.Add(this.lblAward);
             this.Controls.Add(this.lblCorrect);
@@ -263,8 +265,9 @@
             this.Controls.Add(this.lbCountDown);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.pLive);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
-            this.Text = "Game Show";
+            this.Text = "CONFETTI GAMESHOW";
             ((System.ComponentModel.ISupportInitialize)(this.pLive)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
