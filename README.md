@@ -14,11 +14,7 @@
 
 ### Hướng dẫn
 - Client: [Nuget install](https://www.nuget.org/packages/SocketIoClientDotNet/) for c# client
-    ```
-    Install-Package SocketIoClientDotNet
-    Install-Package Newtonsoft.Json -Version 12.0.2
-    ```
-
+    + Bấm chuột phải vào Solution chọn `Restore Nutget Packages`
 - Server: Được viết bằng nodejs và dùng socket io.
 
     [install node.js](https://nodejs.org/en/)
@@ -27,3 +23,5 @@
     cd Server
     npm install
     ```
+
+- Tiếp theo build ở chế độ debug hoặc release, và chơi
