@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 using System.Speech.Synthesis;
 using System.Threading;
 using System.Windows.Forms;
 using Models;
-using Audio.MyAudio;
 using Newtonsoft.Json;
 using Quobject.SocketIoClientDotNet.Client;
 using MyNetwork;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Drawing;
+using Audio.MyAudio;
 
 namespace GameShow
 {
@@ -23,7 +21,7 @@ namespace GameShow
         private Thread timerCountDown;
         private NetworkAudioPlayer player;
         private bool connected = false;
-        private  MicrosoftAdpcmChatCodec codec = new MicrosoftAdpcmChatCodec();
+        private MicrosoftAdpcmChatCodec codec = new MicrosoftAdpcmChatCodec();
         private User user;
         private frmEnterName enterName;
         private Answer answer = new Answer();
@@ -50,13 +48,21 @@ namespace GameShow
             lblQuestion.Parent = pLive;
             lblQuestion.Location = pos;
             lblQuestion.BackColor = Color.Transparent;
+            lblQuestion.MaximumSize = new Size(370, 0);
+            lblQuestion.AutoSize = true;
+
+            pos = this.PointToScreen(lblNumberQuestion.Location);
+            pos = pLive.PointToClient(pos);
+            lblNumberQuestion.Parent = pLive;
+            lblNumberQuestion.Location = pos;
+            lblNumberQuestion.BackColor = Color.Transparent;
 
             pos = this.PointToScreen(lblCorrect.Location);
             pos = pLive.PointToClient(pos);
             lblCorrect.Parent = pLive;
             lblCorrect.Location = pos;
             lblCorrect.BackColor = Color.Transparent;
-            lblCorrect.Text = "Correct: 0";
+            //lblCorrect.Text = "Correct: 0";
 
             pos = this.PointToScreen(lblAward.Location);
             pos = pLive.PointToClient(pos);
@@ -72,8 +78,7 @@ namespace GameShow
             lblNumber.BackColor = Color.Transparent;
             lblNumber.Text = "0 players";
 
-            lblQuestion.MaximumSize = new Size(400, 0);
-            lblQuestion.AutoSize = true;
+
             btnChat.Enabled = false;
 
             hideQuestion();
@@ -94,6 +99,7 @@ namespace GameShow
             {
                 //connect();
             });
+
             socket.On("stop streaming", (data) =>
             {
                 var map = Utils.GetMapFromData(data);
@@ -147,6 +153,10 @@ namespace GameShow
                // speakQuestion(question);
                 loadQuestions(question);
                 int.TryParse(map["countDown"].ToString(), out seconds);
+                int numberQuestion;
+                int.TryParse(map["index"].ToString(), out numberQuestion);
+                numberQuestion++;
+                lblNumberQuestion.Text = "Question " + numberQuestion.ToString() + " ";
                 timerCountDown = new Thread(countDowner);
                 timerCountDown.Start();
                 showQuestion();
@@ -220,7 +230,6 @@ namespace GameShow
             socket.On("congratulations", (data) =>
             {
                 var map = Utils.GetMapFromData(data);
-                int i = 1;
                 int bonus = 0;
                 int.TryParse(map["bonus"].ToString(), out bonus);
 
@@ -263,6 +272,7 @@ namespace GameShow
             socket = IO.Socket("http://localhost:3000");
             //socket = IO.Socket("http://ahihigameshow.herokuapp.com");
             listenEvents();
+
             if (user == null)
             {
                 enterName = new frmEnterName((yourName) =>

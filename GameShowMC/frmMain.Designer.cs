@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.lblName = new System.Windows.Forms.Label();
             this.btnConnect = new System.Windows.Forms.Button();
             this.rtbQuestion = new System.Windows.Forms.RichTextBox();
@@ -83,16 +84,16 @@
             // rtbQuestion
             // 
             this.rtbQuestion.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtbQuestion.Location = new System.Drawing.Point(6, 219);
+            this.rtbQuestion.Location = new System.Drawing.Point(6, 209);
             this.rtbQuestion.Name = "rtbQuestion";
-            this.rtbQuestion.Size = new System.Drawing.Size(237, 35);
+            this.rtbQuestion.Size = new System.Drawing.Size(237, 45);
             this.rtbQuestion.TabIndex = 4;
             this.rtbQuestion.Text = "";
             // 
             // txtA
             // 
             this.txtA.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtA.Location = new System.Drawing.Point(33, 266);
+            this.txtA.Location = new System.Drawing.Point(45, 266);
             this.txtA.Name = "txtA";
             this.txtA.Size = new System.Drawing.Size(177, 13);
             this.txtA.TabIndex = 5;
@@ -118,7 +119,7 @@
             // txtB
             // 
             this.txtB.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtB.Location = new System.Drawing.Point(33, 292);
+            this.txtB.Location = new System.Drawing.Point(45, 292);
             this.txtB.Name = "txtB";
             this.txtB.Size = new System.Drawing.Size(177, 13);
             this.txtB.TabIndex = 7;
@@ -135,7 +136,7 @@
             // txtC
             // 
             this.txtC.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtC.Location = new System.Drawing.Point(33, 315);
+            this.txtC.Location = new System.Drawing.Point(45, 315);
             this.txtC.Name = "txtC";
             this.txtC.Size = new System.Drawing.Size(177, 13);
             this.txtC.TabIndex = 9;
@@ -152,7 +153,7 @@
             // txtD
             // 
             this.txtD.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtD.Location = new System.Drawing.Point(33, 336);
+            this.txtD.Location = new System.Drawing.Point(45, 342);
             this.txtD.Name = "txtD";
             this.txtD.Size = new System.Drawing.Size(177, 13);
             this.txtD.TabIndex = 11;
@@ -160,7 +161,7 @@
             // btnNext
             // 
             this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNext.Location = new System.Drawing.Point(81, 362);
+            this.btnNext.Location = new System.Drawing.Point(81, 366);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(75, 23);
             this.btnNext.TabIndex = 16;
@@ -175,9 +176,9 @@
             this.lbNotifications.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbNotifications.ForeColor = System.Drawing.Color.Black;
             this.lbNotifications.FormattingEnabled = true;
-            this.lbNotifications.Location = new System.Drawing.Point(714, 67);
+            this.lbNotifications.Location = new System.Drawing.Point(732, 67);
             this.lbNotifications.Name = "lbNotifications";
-            this.lbNotifications.Size = new System.Drawing.Size(234, 262);
+            this.lbNotifications.Size = new System.Drawing.Size(216, 262);
             this.lbNotifications.TabIndex = 17;
             // 
             // lblNumber
@@ -206,17 +207,18 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 150;
+            this.timer1.Interval = 200;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.ErrorImage = null;
             this.pictureBox1.InitialImage = null;
             this.pictureBox1.Location = new System.Drawing.Point(249, 46);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(456, 339);
+            this.pictureBox1.Size = new System.Drawing.Size(477, 339);
             this.pictureBox1.TabIndex = 21;
             this.pictureBox1.TabStop = false;
             // 
@@ -235,7 +237,7 @@
             // lblQuestionNumber
             // 
             this.lblQuestionNumber.AutoSize = true;
-            this.lblQuestionNumber.Location = new System.Drawing.Point(3, 199);
+            this.lblQuestionNumber.Location = new System.Drawing.Point(3, 193);
             this.lblQuestionNumber.Name = "lblQuestionNumber";
             this.lblQuestionNumber.Size = new System.Drawing.Size(49, 13);
             this.lblQuestionNumber.TabIndex = 23;
@@ -253,9 +255,9 @@
             // 
             // txtChat
             // 
-            this.txtChat.Location = new System.Drawing.Point(714, 336);
+            this.txtChat.Location = new System.Drawing.Point(732, 336);
             this.txtChat.Name = "txtChat";
-            this.txtChat.Size = new System.Drawing.Size(234, 20);
+            this.txtChat.Size = new System.Drawing.Size(216, 20);
             this.txtChat.TabIndex = 25;
             // 
             // btnChat
@@ -273,7 +275,7 @@
             // 
             this.lblCountDowrn.AutoSize = true;
             this.lblCountDowrn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCountDowrn.Location = new System.Drawing.Point(102, 169);
+            this.lblCountDowrn.Location = new System.Drawing.Point(86, 160);
             this.lblCountDowrn.Name = "lblCountDowrn";
             this.lblCountDowrn.Size = new System.Drawing.Size(43, 20);
             this.lblCountDowrn.TabIndex = 27;
@@ -320,7 +322,6 @@
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.pictureBox1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmMain";
             this.Text = "CONFETTI GAMESHOW";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

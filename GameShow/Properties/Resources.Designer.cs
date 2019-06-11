@@ -59,16 +59,5 @@ namespace GameShow.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap e1_tro_choi_confetti_vietnam_la_gi_confetti_viet_nam_tro_choi_truc_tuyen_tuong_tac_cua_facebook {
-            get {
-                object obj = ResourceManager.GetObject("e1-tro-choi-confetti-vietnam-la-gi-confetti-viet-nam-tro-choi-truc-tuyen-tuong-ta" +
-                        "c-cua-facebook", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

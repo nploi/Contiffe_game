@@ -4,11 +4,11 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using Models;
-using Audio.MyAudio;
 using MyNetwork;
 using Newtonsoft.Json;
 using Quobject.SocketIoClientDotNet.Client;
 using System.Threading;
+using Audio.MyAudio;
 
 namespace GameShowMC
 {
@@ -284,7 +284,7 @@ namespace GameShowMC
             if (img != null && live)
             {
                 pictureBox1.Image = img;
-                img = IImage.ScaleByPercent(img, 50);
+                img = IImage.ScaleByPercent(img, 40);
                 imageLive.Img1D = IImage.StreamFromImage(img);
                 socket.Emit("live video", imageLive.ToJson());
             }

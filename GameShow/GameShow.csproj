@@ -113,8 +113,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Auido\Audio.csproj">
-      <Project>{726b5570-bc4a-41b8-b379-0d8f8891997b}</Project>
+    <ProjectReference Include="..\Audio\Audio.csproj">
+      <Project>{726B5570-BC4A-41B8-B379-0D8F8891997B}</Project>
       <Name>Audio</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">

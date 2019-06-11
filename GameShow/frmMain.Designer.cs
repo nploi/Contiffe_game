@@ -48,6 +48,7 @@
             this.lblCorrect = new System.Windows.Forms.Label();
             this.lblAward = new System.Windows.Forms.Label();
             this.btnLive = new System.Windows.Forms.Button();
+            this.lblNumberQuestion = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pLive)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,7 +71,7 @@
             this.lblName.ForeColor = System.Drawing.Color.White;
             this.lblName.Location = new System.Drawing.Point(0, 0);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(886, 43);
+            this.lblName.Size = new System.Drawing.Size(771, 43);
             this.lblName.TabIndex = 1;
             this.lblName.Text = "Player";
             this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -79,7 +80,7 @@
             // 
             this.btnA.BackColor = System.Drawing.Color.White;
             this.btnA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnA.Location = new System.Drawing.Point(59, 322);
+            this.btnA.Location = new System.Drawing.Point(77, 322);
             this.btnA.Name = "btnA";
             this.btnA.Size = new System.Drawing.Size(193, 25);
             this.btnA.TabIndex = 3;
@@ -91,7 +92,7 @@
             // 
             this.btnB.BackColor = System.Drawing.Color.White;
             this.btnB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnB.Location = new System.Drawing.Point(272, 322);
+            this.btnB.Location = new System.Drawing.Point(290, 322);
             this.btnB.Name = "btnB";
             this.btnB.Size = new System.Drawing.Size(188, 25);
             this.btnB.TabIndex = 4;
@@ -103,7 +104,7 @@
             // 
             this.btnC.BackColor = System.Drawing.Color.White;
             this.btnC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnC.Location = new System.Drawing.Point(59, 357);
+            this.btnC.Location = new System.Drawing.Point(77, 357);
             this.btnC.Name = "btnC";
             this.btnC.Size = new System.Drawing.Size(193, 25);
             this.btnC.TabIndex = 5;
@@ -115,7 +116,7 @@
             // 
             this.btnD.BackColor = System.Drawing.Color.White;
             this.btnD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnD.Location = new System.Drawing.Point(272, 357);
+            this.btnD.Location = new System.Drawing.Point(290, 357);
             this.btnD.Name = "btnD";
             this.btnD.Size = new System.Drawing.Size(188, 25);
             this.btnD.TabIndex = 6;
@@ -138,15 +139,15 @@
             // lbNotifications
             // 
             this.lbNotifications.FormattingEnabled = true;
-            this.lbNotifications.Location = new System.Drawing.Point(665, 88);
+            this.lbNotifications.Location = new System.Drawing.Point(549, 65);
             this.lbNotifications.Name = "lbNotifications";
-            this.lbNotifications.Size = new System.Drawing.Size(209, 225);
+            this.lbNotifications.Size = new System.Drawing.Size(209, 264);
             this.lbNotifications.TabIndex = 11;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(740, 72);
+            this.label2.Location = new System.Drawing.Point(624, 49);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 12;
@@ -166,6 +167,7 @@
             // pLive
             // 
             this.pLive.BackColor = System.Drawing.Color.Transparent;
+            this.pLive.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pLive.BackgroundImage")));
             this.pLive.Location = new System.Drawing.Point(6, 46);
             this.pLive.Name = "pLive";
             this.pLive.Size = new System.Drawing.Size(513, 346);
@@ -177,11 +179,11 @@
             // 
             this.lblQuestion.AutoSize = true;
             this.lblQuestion.BackColor = System.Drawing.Color.Transparent;
-            this.lblQuestion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQuestion.Font = new System.Drawing.Font("Microsoft Tai Le", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblQuestion.ForeColor = System.Drawing.Color.Gold;
-            this.lblQuestion.Location = new System.Drawing.Point(55, 270);
+            this.lblQuestion.Location = new System.Drawing.Point(86, 272);
             this.lblQuestion.Name = "lblQuestion";
-            this.lblQuestion.Size = new System.Drawing.Size(0, 20);
+            this.lblQuestion.Size = new System.Drawing.Size(0, 19);
             this.lblQuestion.TabIndex = 16;
             // 
             // timer1
@@ -191,7 +193,7 @@
             // btnChat
             // 
             this.btnChat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChat.Location = new System.Drawing.Point(734, 353);
+            this.btnChat.Location = new System.Drawing.Point(618, 371);
             this.btnChat.Name = "btnChat";
             this.btnChat.Size = new System.Drawing.Size(75, 23);
             this.btnChat.TabIndex = 17;
@@ -201,7 +203,7 @@
             // 
             // txtChat
             // 
-            this.txtChat.Location = new System.Drawing.Point(665, 319);
+            this.txtChat.Location = new System.Drawing.Point(549, 337);
             this.txtChat.Name = "txtChat";
             this.txtChat.Size = new System.Drawing.Size(209, 20);
             this.txtChat.TabIndex = 18;
@@ -214,9 +216,8 @@
             this.lblCorrect.ForeColor = System.Drawing.Color.White;
             this.lblCorrect.Location = new System.Drawing.Point(422, 88);
             this.lblCorrect.Name = "lblCorrect";
-            this.lblCorrect.Size = new System.Drawing.Size(26, 18);
+            this.lblCorrect.Size = new System.Drawing.Size(0, 18);
             this.lblCorrect.TabIndex = 19;
-            this.lblCorrect.Text = "10";
             // 
             // lblAward
             // 
@@ -226,9 +227,8 @@
             this.lblAward.ForeColor = System.Drawing.Color.White;
             this.lblAward.Location = new System.Drawing.Point(422, 54);
             this.lblAward.Name = "lblAward";
-            this.lblAward.Size = new System.Drawing.Size(26, 18);
+            this.lblAward.Size = new System.Drawing.Size(0, 18);
             this.lblAward.TabIndex = 20;
-            this.lblAward.Text = "10";
             // 
             // btnLive
             // 
@@ -242,12 +242,22 @@
             this.btnLive.Text = "LIVE";
             this.btnLive.UseVisualStyleBackColor = false;
             // 
+            // lblNumberQuestion
+            // 
+            this.lblNumberQuestion.AutoSize = true;
+            this.lblNumberQuestion.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNumberQuestion.ForeColor = System.Drawing.Color.Gold;
+            this.lblNumberQuestion.Location = new System.Drawing.Point(9, 272);
+            this.lblNumberQuestion.Name = "lblNumberQuestion";
+            this.lblNumberQuestion.Size = new System.Drawing.Size(0, 18);
+            this.lblNumberQuestion.TabIndex = 30;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::GameShow.Properties.Resources.e1_tro_choi_confetti_vietnam_la_gi_confetti_viet_nam_tro_choi_truc_tuyen_tuong_tac_cua_facebook;
-            this.ClientSize = new System.Drawing.Size(886, 404);
+            this.ClientSize = new System.Drawing.Size(771, 404);
+            this.Controls.Add(this.lblNumberQuestion);
             this.Controls.Add(this.btnLive);
             this.Controls.Add(this.lblAward);
             this.Controls.Add(this.lblCorrect);
@@ -294,6 +304,7 @@
         private System.Windows.Forms.Label lblCorrect;
         private System.Windows.Forms.Label lblAward;
         private System.Windows.Forms.Button btnLive;
+        private System.Windows.Forms.Label lblNumberQuestion;
     }
 }
 
