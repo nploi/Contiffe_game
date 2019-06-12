@@ -227,7 +227,7 @@ namespace GameShow
                 int i = 1;
                 tops.ForEach((value) =>
                 {
-                    var str = String.Format("Top {0}: {1} Correct {2}", i, value.Name, value.NumberCorrect);
+                    var str = String.Format("Top {0}: {1} Correct {2}", i++, value.Name, value.NumberCorrect);
                     lbNotifications.Items.Add(str);
                     if (value.Name == user.Name)
                     {
