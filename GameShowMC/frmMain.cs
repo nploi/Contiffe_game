@@ -27,6 +27,7 @@ namespace GameShowMC
         private frmEnterName enterName;
         private ImageLive imageLive = new ImageLive();
         private int seconds = 10;
+        private String uri;
 
         public frmMain()
         {
@@ -48,6 +49,22 @@ namespace GameShowMC
 
             btnChat.Enabled = false;
             btnNext.Enabled = false;
+
+
+            enterName = new frmEnterName((uri, yourName, award) =>
+            {
+                game = new Game();
+                game.User.Name = yourName;
+                game.Award = award;
+                game.User.Type = "mc";
+                game.Require = 10;
+                game.NumberQuestion = 10;
+                this.uri = uri;
+                socket = IO.Socket(uri);
+                listenEvents();
+                socket.Emit("add mc", game.ToJson());
+            });
+            enterName.StartPosition = FormStartPosition.CenterParent;
         }
 
         private void listenEvents()
@@ -136,7 +153,8 @@ namespace GameShowMC
                 var tops = JsonConvert.DeserializeObject<List<User>>(map["tops"].ToString());
                 var question = Question.FromJson(map["question"].ToString());
                 int i = 1;
-                tops.ForEach((value) => {
+                tops.ForEach((value) =>
+                {
                     var str = String.Format("Top {0}: {1} Correct {2}", i, value.Name, value.NumberCorrect);
                     lbNotifications.Items.Add(str);
                     i++;
@@ -160,7 +178,8 @@ namespace GameShowMC
 
                 lbNotifications.Items.Add("*** congratulations ***");
                 lbNotifications.Items.Add(String.Format("Bonus: {0} for", bonus));
-                tops.ForEach((value) => {
+                tops.ForEach((value) =>
+                {
                     var str = String.Format("Top {0}: {1} Correct {2}", i, value.Name, value.NumberCorrect);
                     lbNotifications.Items.Add(str);
                     i++;
@@ -219,7 +238,7 @@ namespace GameShowMC
 
         private void fillColor(string CorrectAnswerId)
         {
-            switch(CorrectAnswerId)
+            switch (CorrectAnswerId)
             {
                 case "a":
                     txtA.ForeColor = Color.Red;
@@ -299,24 +318,17 @@ namespace GameShowMC
         {
             if (!connected)
             {
-                //socket = IO.Socket("http://ahihigameshow.herokuapp.com");
-                socket = IO.Socket("http://localhost:3000");
-                listenEvents();
+                if (uri != null)
+                {
+                    socket = IO.Socket(uri);
+                    listenEvents();
+                }
 
                 if (game == null)
                 {
-                    enterName = new frmEnterName((yourName, amount) =>
-                    {
-                        game = new Game();
-                        game.User.Name = yourName;
-                        game.Award = amount;
-                        game.User.Type = "mc";
-                        game.Require = 10;
-                        game.NumberQuestion = 10;
-                        socket.Emit("add mc", game.ToJson());
-                    });
                     enterName.ShowDialog();
-                } else
+                }
+                else
                 {
                     socket.Emit("add mc", game.ToJson());
                 }

@@ -12,9 +12,9 @@ namespace GameShow
 {
     public partial class frmEnterName : Form
     {
-        Action<string> OnRegister;
+        Action<string, string> OnRegister;
 
-        public frmEnterName(Action<string> OnRegister)
+        public frmEnterName(Action<string, string> OnRegister)
         {
             InitializeComponent();
             this.OnRegister = OnRegister;
@@ -23,14 +23,20 @@ namespace GameShow
 
         private void btnStart_Click_1(object sender, EventArgs e)
         {
-            var yourName = txtName.Text;
+            var yourName = tbName.Text;
+            var uri = tbURI.Text;
             if (yourName.Count() <= 0)
             {
-                MessageBox.Show("Enter your name !");
+                MessageBox.Show("Invalid input !");
                 return;
             }
 
-            OnRegister(yourName);
+            if (uri.Count() <= 0)
+            {
+                uri = "http://localhost:3000";
+            }
+            
+            OnRegister(uri.ToLower(), yourName);
         }
     }
 }

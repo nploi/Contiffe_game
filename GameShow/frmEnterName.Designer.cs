@@ -28,47 +28,96 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtName = new System.Windows.Forms.TextBox();
+            this.tbURI = new System.Windows.Forms.TextBox();
             this.btnStart = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbName = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // txtName
+            // tbURI
             // 
-            this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtName.Location = new System.Drawing.Point(35, 27);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(172, 29);
-            this.txtName.TabIndex = 0;
-            this.txtName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbURI.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbURI.Location = new System.Drawing.Point(60, 22);
+            this.tbURI.Name = "tbURI";
+            this.tbURI.Size = new System.Drawing.Size(193, 29);
+            this.tbURI.TabIndex = 0;
+            this.tbURI.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(35, 88);
+            this.btnStart.Location = new System.Drawing.Point(16, 129);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(173, 37);
+            this.btnStart.Size = new System.Drawing.Size(241, 37);
             this.btnStart.TabIndex = 2;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click_1);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 31);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(28, 15);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "URI";
+            // 
+            // tbName
+            // 
+            this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbName.Location = new System.Drawing.Point(60, 80);
+            this.tbName.Name = "tbName";
+            this.tbName.Size = new System.Drawing.Size(193, 29);
+            this.tbName.TabIndex = 5;
+            this.tbName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 89);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 15);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Name";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(60, 52);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(140, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "default: http://localhost:3000";
+            // 
             // frmEnterName
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(240, 151);
+            this.ClientSize = new System.Drawing.Size(265, 181);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.tbName);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.txtName);
+            this.Controls.Add(this.tbURI);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmEnterName";
-            this.Text = "Enter your name";
+            this.Text = "Connect";
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.TextBox tbURI;
         private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbName;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
     }
 }

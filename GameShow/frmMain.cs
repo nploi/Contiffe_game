@@ -27,6 +27,7 @@ namespace GameShow
         private Answer answer = new Answer();
         private Game game;
         private int seconds = 10;
+        private String uri;
 
         public frmMain()
         {
@@ -78,6 +79,18 @@ namespace GameShow
             lblNumber.BackColor = Color.Transparent;
             lblNumber.Text = "0 players";
 
+            enterName = new frmEnterName((uri, yourName) =>
+            {
+                user = new User();
+                user.Name = yourName;
+                user.Type = "user";
+                this.uri = uri;
+                socket = IO.Socket(uri);
+                listenEvents();
+                socket.Emit("add user", user.ToJson());
+            });
+
+            enterName.StartPosition = FormStartPosition.CenterParent;
 
             btnChat.Enabled = false;
 
@@ -88,16 +101,12 @@ namespace GameShow
         {
             socket.On(Socket.EVENT_CONNECT, () =>
             {
-                //var user = new User();
-                //user.Name = RandomString(10);
-                //user.Type = "user";
-                //socket.Emit("add user", user.ToJson());
                 connected = true;
             });
 
             socket.On(Socket.EVENT_DISCONNECT, () =>
             {
-                //connect();
+                disconnect();
             });
 
             socket.On("stop streaming", (data) =>
@@ -150,7 +159,7 @@ namespace GameShow
             {
                 var map = Utils.GetMapFromData(data);
                 Question question = Question.FromJson(map["question"].ToString());
-               // speakQuestion(question);
+                // speakQuestion(question);
                 loadQuestions(question);
                 int.TryParse(map["countDown"].ToString(), out seconds);
                 int numberQuestion;
@@ -216,7 +225,8 @@ namespace GameShow
                 var tops = JsonConvert.DeserializeObject<List<User>>(map["tops"].ToString());
                 var question = Question.FromJson(map["question"].ToString());
                 int i = 1;
-                tops.ForEach((value) => {
+                tops.ForEach((value) =>
+                {
                     var str = String.Format("Top {0}: {1} Correct {2}", i, value.Name, value.NumberCorrect);
                     lbNotifications.Items.Add(str);
                     if (value.Name == user.Name)
@@ -259,35 +269,34 @@ namespace GameShow
             }
             else
             {
-                btnConnect.Text = "Connect";
-                player.Dispose();
-                codec.Dispose();
-                socket.Disconnect();
-                connected = false;
+                disconnect();
             }
         }
 
         private void connect()
         {
-            socket = IO.Socket("http://localhost:3000");
-            //socket = IO.Socket("http://ahihigameshow.herokuapp.com");
-            listenEvents();
-
+            if (uri != null)
+            {
+                socket = IO.Socket(uri);
+                listenEvents();
+            }
             if (user == null)
             {
-                enterName = new frmEnterName((yourName) =>
-                {
-                    user = new User();
-                    user.Name = yourName;
-                    user.Type = "user";
-                    socket.Emit("add user", user.ToJson());
-                });
                 enterName.ShowDialog();
             }
             else
             {
                 socket.Emit("add user", user.ToJson());
             }
+        }
+
+        private void disconnect()
+        {
+            btnConnect.Text = "Connect";
+            player?.Dispose();
+            codec?.Dispose();
+            socket?.Disconnect();
+            connected = false;
         }
 
 

@@ -12,9 +12,9 @@ namespace GameShowMC
 {
     public partial class frmEnterName : Form
     {
-        Action<string, int> OnRegister;
+        Action<string, string, int> OnRegister;
 
-        public frmEnterName(Action<string, int> OnRegister)
+        public frmEnterName(Action<string, string, int> OnRegister)
         {
             InitializeComponent();
             this.OnRegister = OnRegister;
@@ -31,8 +31,13 @@ namespace GameShowMC
                 MessageBox.Show("Invalid input");
                 return;
             }
+            String uri = tbURI.Text;
+            if (uri.Length <= 0)
+            {
+                uri = "http://localhost:3000";
+            }
 
-          OnRegister(yourName, amount);
+            OnRegister(uri, yourName, amount);
         }
     }
 }
