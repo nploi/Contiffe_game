@@ -33,14 +33,14 @@
             this.lblName = new System.Windows.Forms.Label();
             this.btnConnect = new System.Windows.Forms.Button();
             this.rtbQuestion = new System.Windows.Forms.RichTextBox();
-            this.txtA = new System.Windows.Forms.TextBox();
+            this.tbA = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtB = new System.Windows.Forms.TextBox();
+            this.tbB = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtC = new System.Windows.Forms.TextBox();
+            this.tbC = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtD = new System.Windows.Forms.TextBox();
+            this.tbD = new System.Windows.Forms.TextBox();
             this.btnNext = new System.Windows.Forms.Button();
             this.lbNotifications = new System.Windows.Forms.ListBox();
             this.lblNumber = new System.Windows.Forms.Label();
@@ -50,7 +50,7 @@
             this.btnLoadFile = new System.Windows.Forms.Button();
             this.lblQuestionNumber = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtChat = new System.Windows.Forms.TextBox();
+            this.tbChat = new System.Windows.Forms.TextBox();
             this.btnChat = new System.Windows.Forms.Button();
             this.lblCountDowrn = new System.Windows.Forms.Label();
             this.btnLive = new System.Windows.Forms.Button();
@@ -83,20 +83,20 @@
             // 
             // rtbQuestion
             // 
-            this.rtbQuestion.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtbQuestion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.rtbQuestion.Location = new System.Drawing.Point(7, 241);
             this.rtbQuestion.Name = "rtbQuestion";
             this.rtbQuestion.Size = new System.Drawing.Size(276, 52);
             this.rtbQuestion.TabIndex = 4;
             this.rtbQuestion.Text = "";
             // 
-            // txtA
+            // tbA
             // 
-            this.txtA.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtA.Location = new System.Drawing.Point(52, 307);
-            this.txtA.Name = "txtA";
-            this.txtA.Size = new System.Drawing.Size(206, 14);
-            this.txtA.TabIndex = 5;
+            this.tbA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbA.Location = new System.Drawing.Point(52, 307);
+            this.tbA.Name = "tbA";
+            this.tbA.Size = new System.Drawing.Size(206, 21);
+            this.tbA.TabIndex = 5;
             // 
             // label2
             // 
@@ -116,13 +116,13 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "B";
             // 
-            // txtB
+            // tbB
             // 
-            this.txtB.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtB.Location = new System.Drawing.Point(52, 337);
-            this.txtB.Name = "txtB";
-            this.txtB.Size = new System.Drawing.Size(206, 14);
-            this.txtB.TabIndex = 7;
+            this.tbB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbB.Location = new System.Drawing.Point(52, 337);
+            this.tbB.Name = "tbB";
+            this.tbB.Size = new System.Drawing.Size(206, 21);
+            this.tbB.TabIndex = 7;
             // 
             // label4
             // 
@@ -133,13 +133,13 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "C";
             // 
-            // txtC
+            // tbC
             // 
-            this.txtC.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtC.Location = new System.Drawing.Point(52, 363);
-            this.txtC.Name = "txtC";
-            this.txtC.Size = new System.Drawing.Size(206, 14);
-            this.txtC.TabIndex = 9;
+            this.tbC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbC.Location = new System.Drawing.Point(52, 363);
+            this.tbC.Name = "tbC";
+            this.tbC.Size = new System.Drawing.Size(206, 21);
+            this.tbC.TabIndex = 9;
             // 
             // label5
             // 
@@ -150,18 +150,18 @@
             this.label5.TabIndex = 12;
             this.label5.Text = "D";
             // 
-            // txtD
+            // tbD
             // 
-            this.txtD.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtD.Location = new System.Drawing.Point(52, 395);
-            this.txtD.Name = "txtD";
-            this.txtD.Size = new System.Drawing.Size(206, 14);
-            this.txtD.TabIndex = 11;
+            this.tbD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbD.Location = new System.Drawing.Point(52, 395);
+            this.tbD.Name = "tbD";
+            this.tbD.Size = new System.Drawing.Size(206, 21);
+            this.tbD.TabIndex = 11;
             // 
             // btnNext
             // 
             this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNext.Location = new System.Drawing.Point(94, 422);
+            this.btnNext.Location = new System.Drawing.Point(104, 422);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(87, 27);
             this.btnNext.TabIndex = 16;
@@ -253,12 +253,12 @@
             this.label6.TabIndex = 24;
             this.label6.Text = "Notifications";
             // 
-            // txtChat
+            // tbChat
             // 
-            this.txtChat.Location = new System.Drawing.Point(854, 388);
-            this.txtChat.Name = "txtChat";
-            this.txtChat.Size = new System.Drawing.Size(251, 21);
-            this.txtChat.TabIndex = 25;
+            this.tbChat.Location = new System.Drawing.Point(854, 388);
+            this.tbChat.Name = "tbChat";
+            this.tbChat.Size = new System.Drawing.Size(251, 21);
+            this.tbChat.TabIndex = 25;
             // 
             // btnChat
             // 
@@ -301,7 +301,7 @@
             this.Controls.Add(this.btnLive);
             this.Controls.Add(this.lblCountDowrn);
             this.Controls.Add(this.btnChat);
-            this.Controls.Add(this.txtChat);
+            this.Controls.Add(this.tbChat);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.lblQuestionNumber);
             this.Controls.Add(this.btnLoadFile);
@@ -310,13 +310,13 @@
             this.Controls.Add(this.lbNotifications);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtD);
+            this.Controls.Add(this.tbD);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtC);
+            this.Controls.Add(this.tbC);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtB);
+            this.Controls.Add(this.tbB);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtA);
+            this.Controls.Add(this.tbA);
             this.Controls.Add(this.rtbQuestion);
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.lblName);
@@ -336,14 +336,14 @@
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.RichTextBox rtbQuestion;
-        private System.Windows.Forms.TextBox txtA;
+        private System.Windows.Forms.TextBox tbA;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtB;
+        private System.Windows.Forms.TextBox tbB;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtC;
+        private System.Windows.Forms.TextBox tbC;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtD;
+        private System.Windows.Forms.TextBox tbD;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.ListBox lbNotifications;
         private System.Windows.Forms.Label lblNumber;
@@ -353,7 +353,7 @@
         private System.Windows.Forms.Button btnLoadFile;
         private System.Windows.Forms.Label lblQuestionNumber;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtChat;
+        private System.Windows.Forms.TextBox tbChat;
         private System.Windows.Forms.Button btnChat;
         private System.Windows.Forms.Label lblCountDowrn;
         private System.Windows.Forms.Button btnLive;

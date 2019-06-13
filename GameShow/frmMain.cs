@@ -243,8 +243,9 @@ namespace GameShow
                 int bonus = 0;
                 int.TryParse(map["bonus"].ToString(), out bonus);
 
-                lbNotifications.Items.Add(String.Format("Admin: Congratulations {0}", user.Name));
-                lbNotifications.Items.Add(String.Format("Bonus {0} for you", bonus));
+                frmCongrats frmCongrats = new frmCongrats(user.Name, user.NumberCorrect, bonus);
+                frmCongrats.StartPosition = FormStartPosition.CenterParent;
+                frmCongrats.ShowDialog();
             });
         }
 
@@ -462,15 +463,15 @@ namespace GameShow
 
         private void btnChat_Click(object sender, EventArgs e)
         {
-            if (txtChat.Text.Trim().Length <= 0 || user == null)
+            if (tbChat.Text.Trim().Length <= 0 || user == null)
             {
                 return;
             }
             MyMessage message = new MyMessage();
-            message.Content = txtChat.Text.Trim();
+            message.Content = tbChat.Text.Trim();
             message.UserName = user.Name;
             socket.Emit("new message", message.ToJson());
-            txtChat.Text = "";
+            tbChat.Text = "";
             lbNotifications.Items.Add(message.UserName + ": " + message.Content);
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+
 using System.Windows.Forms;
 using Models;
 using MyNetwork;
@@ -9,7 +10,6 @@ using Newtonsoft.Json;
 using Quobject.SocketIoClientDotNet.Client;
 using System.Threading;
 using Audio.MyAudio;
-
 namespace GameShowMC
 {
     public partial class frmMain : Form
@@ -50,20 +50,20 @@ namespace GameShowMC
             btnChat.Enabled = false;
             btnNext.Enabled = false;
 
-
             enterName = new frmEnterName((uri, yourName, award) =>
             {
                 game = new Game();
                 game.User.Name = yourName;
                 game.Award = award;
                 game.User.Type = "mc";
-                game.Require = 10;
-                game.NumberQuestion = 10;
+                game.Require = 2;
+                game.NumberQuestion = 2;
                 this.uri = uri;
                 socket = IO.Socket(uri);
                 listenEvents();
                 socket.Emit("add mc", game.ToJson());
             });
+
             enterName.StartPosition = FormStartPosition.CenterParent;
         }
 
@@ -227,10 +227,10 @@ namespace GameShowMC
             resetColorText();
             Question question = questions[currentIndex];
             rtbQuestion.Text = question.Content;
-            txtA.Text = question.ListAnswers[0].Content;
-            txtB.Text = question.ListAnswers[1].Content;
-            txtC.Text = question.ListAnswers[2].Content;
-            txtD.Text = question.ListAnswers[3].Content;
+            tbA.Text = question.ListAnswers[0].Content;
+            tbB.Text = question.ListAnswers[1].Content;
+            tbC.Text = question.ListAnswers[2].Content;
+            tbD.Text = question.ListAnswers[3].Content;
             fillColor(question.CorrectAnswerId);
             lblQuestionNumber.Text = String.Format("Question {0}/{1}", currentIndex + 1, questions.Count);
             currentIndex++;
@@ -241,26 +241,26 @@ namespace GameShowMC
             switch (CorrectAnswerId)
             {
                 case "a":
-                    txtA.ForeColor = Color.Red;
+                    tbA.ForeColor = Color.Red;
                     break;
                 case "b":
-                    txtB.ForeColor = Color.Red;
+                    tbB.ForeColor = Color.Red;
                     break;
                 case "c":
-                    txtC.ForeColor = Color.Red;
+                    tbC.ForeColor = Color.Red;
                     break;
                 case "d":
-                    txtD.ForeColor = Color.Red;
+                    tbD.ForeColor = Color.Red;
                     break;
             }
         }
 
         private void resetColorText()
         {
-            txtA.ForeColor = Color.Black;
-            txtB.ForeColor = Color.Black;
-            txtC.ForeColor = Color.Black;
-            txtD.ForeColor = Color.Black;
+            tbA.ForeColor = Color.Black;
+            tbB.ForeColor = Color.Black;
+            tbC.ForeColor = Color.Black;
+            tbD.ForeColor = Color.Black;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -384,16 +384,16 @@ namespace GameShowMC
 
         private void btnChat_Click(object sender, EventArgs e)
         {
-            if (txtChat.Text.Trim().Length <= 0 || game == null)
+            if (tbChat.Text.Trim().Length <= 0 || game == null)
             {
                 return;
             }
             MyMessage message = new MyMessage();
-            message.Content = txtChat.Text.Trim();
+            message.Content = tbChat.Text.Trim();
             message.UserName = game.User.Name;
             socket.Emit("new message", message.ToJson());
-            txtChat.Text = "";
+            tbChat.Text = "";
             lbNotifications.Items.Add(message.UserName + ": " + message.Content);
-        }
+        }       
     }
 }

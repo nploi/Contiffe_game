@@ -44,7 +44,7 @@
             this.lblQuestion = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnChat = new System.Windows.Forms.Button();
-            this.txtChat = new System.Windows.Forms.TextBox();
+            this.tbChat = new System.Windows.Forms.TextBox();
             this.lblCorrect = new System.Windows.Forms.Label();
             this.lblAward = new System.Windows.Forms.Label();
             this.btnLive = new System.Windows.Forms.Button();
@@ -202,12 +202,12 @@
             this.btnChat.UseVisualStyleBackColor = true;
             this.btnChat.Click += new System.EventHandler(this.btnChat_Click);
             // 
-            // txtChat
+            // tbChat
             // 
-            this.txtChat.Location = new System.Drawing.Point(640, 389);
-            this.txtChat.Name = "txtChat";
-            this.txtChat.Size = new System.Drawing.Size(243, 21);
-            this.txtChat.TabIndex = 18;
+            this.tbChat.Location = new System.Drawing.Point(640, 389);
+            this.tbChat.Name = "tbChat";
+            this.tbChat.Size = new System.Drawing.Size(243, 21);
+            this.tbChat.TabIndex = 18;
             // 
             // lblCorrect
             // 
@@ -262,7 +262,7 @@
             this.Controls.Add(this.btnLive);
             this.Controls.Add(this.lblAward);
             this.Controls.Add(this.lblCorrect);
-            this.Controls.Add(this.txtChat);
+            this.Controls.Add(this.tbChat);
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.btnChat);
             this.Controls.Add(this.lblQuestion);
@@ -302,7 +302,7 @@
         private System.Windows.Forms.Label lblQuestion;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnChat;
-        private System.Windows.Forms.TextBox txtChat;
+        private System.Windows.Forms.TextBox tbChat;
         private System.Windows.Forms.Label lblCorrect;
         private System.Windows.Forms.Label lblAward;
         private System.Windows.Forms.Button btnLive;

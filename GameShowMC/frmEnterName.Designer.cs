@@ -45,7 +45,7 @@
             this.txtName.Margin = new System.Windows.Forms.Padding(4);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(208, 29);
-            this.txtName.TabIndex = 0;
+            this.txtName.TabIndex = 1;
             this.txtName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnStart
@@ -56,7 +56,7 @@
             this.btnStart.Margin = new System.Windows.Forms.Padding(4);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(276, 35);
-            this.btnStart.TabIndex = 2;
+            this.btnStart.TabIndex = 3;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click_1);
@@ -116,7 +116,7 @@
             this.tbURI.Location = new System.Drawing.Point(95, 25);
             this.tbURI.Name = "tbURI";
             this.tbURI.Size = new System.Drawing.Size(208, 29);
-            this.tbURI.TabIndex = 10;
+            this.tbURI.TabIndex = 0;
             this.tbURI.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // frmEnterName

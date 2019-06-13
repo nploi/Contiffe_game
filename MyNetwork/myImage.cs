@@ -8,7 +8,6 @@ using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
-
 namespace MyNetwork
 {
     public class IWebCam
