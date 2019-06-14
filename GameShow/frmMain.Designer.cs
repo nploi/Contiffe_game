@@ -49,6 +49,7 @@
             this.lblAward = new System.Windows.Forms.Label();
             this.btnLive = new System.Windows.Forms.Button();
             this.lblNumberQuestion = new System.Windows.Forms.Label();
+            this.lbNumberCorrectWrong = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pLive)).BeginInit();
             this.SuspendLayout();
             // 
@@ -184,7 +185,7 @@
             this.lblQuestion.ForeColor = System.Drawing.Color.Gold;
             this.lblQuestion.Location = new System.Drawing.Point(100, 314);
             this.lblQuestion.Name = "lblQuestion";
-            this.lblQuestion.Size = new System.Drawing.Size(0, 19);
+            this.lblQuestion.Size = new System.Drawing.Size(34, 19);
             this.lblQuestion.TabIndex = 16;
             // 
             // timer1
@@ -253,11 +254,23 @@
             this.lblNumberQuestion.Size = new System.Drawing.Size(0, 18);
             this.lblNumberQuestion.TabIndex = 30;
             // 
+            // lbNumberCorrectWrong
+            // 
+            this.lbNumberCorrectWrong.AutoSize = true;
+            this.lbNumberCorrectWrong.BackColor = System.Drawing.Color.Transparent;
+            this.lbNumberCorrectWrong.Font = new System.Drawing.Font("Microsoft Tai Le", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbNumberCorrectWrong.ForeColor = System.Drawing.Color.Gold;
+            this.lbNumberCorrectWrong.Location = new System.Drawing.Point(12, 117);
+            this.lbNumberCorrectWrong.Name = "lbNumberCorrectWrong";
+            this.lbNumberCorrectWrong.Size = new System.Drawing.Size(34, 19);
+            this.lbNumberCorrectWrong.TabIndex = 31;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(899, 466);
+            this.Controls.Add(this.lbNumberCorrectWrong);
             this.Controls.Add(this.lblNumberQuestion);
             this.Controls.Add(this.btnLive);
             this.Controls.Add(this.lblAward);
@@ -307,6 +320,7 @@
         private System.Windows.Forms.Label lblAward;
         private System.Windows.Forms.Button btnLive;
         private System.Windows.Forms.Label lblNumberQuestion;
+        private System.Windows.Forms.Label lbNumberCorrectWrong;
     }
 }
 

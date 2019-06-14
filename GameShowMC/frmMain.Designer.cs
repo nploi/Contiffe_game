@@ -197,6 +197,7 @@
             // 
             // btnLiveStreaming
             // 
+            this.btnLiveStreaming.Cursor = System.Windows.Forms.Cursors.Default;
             this.btnLiveStreaming.Enabled = false;
             this.btnLiveStreaming.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLiveStreaming.Location = new System.Drawing.Point(257, 14);
@@ -307,7 +308,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1111, 463);
+            this.ClientSize = new System.Drawing.Size(1111, 469);
             this.Controls.Add(this.lbAward);
             this.Controls.Add(this.btnLive);
             this.Controls.Add(this.lblCountDowrn);

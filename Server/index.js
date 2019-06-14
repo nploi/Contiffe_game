@@ -21,6 +21,7 @@ var questions = [];
 var currentIdex = -1;
 var countDown = 10;
 var clients = {};
+var numberCorrect = 0;
 
 
 io.on('connection', (socket) => {
@@ -133,6 +134,7 @@ io.on('connection', (socket) => {
     // Add question
     currentIdex++;
     countDown = 10;
+    numberCorrect = 0;
     question = JSON.parse(question)
     // console.log(question)
     questions.push(question);
@@ -147,7 +149,6 @@ io.on('connection', (socket) => {
             answer: questions[currentIdex].CorrectAnswerId
           });
 
-          //var listTops = [];
           var tops = [];
           if (clients != null) {
             for (var key in clients) {
@@ -158,18 +159,23 @@ io.on('connection', (socket) => {
               return y.NumberCorrect - x.NumberCorrect;
             });
           }
+
           // console.log(tops);
           socket.emit("tops", {
             question: questions[currentIdex],
-            tops: tops
+            tops: tops,
+            numberCorrect: numberCorrect,
+            numberWrong: (numUsers - numberCorrect)
           });
 
           socket.broadcast.emit("tops", {
             question: questions[currentIdex],
-            tops: tops
+            tops: tops,
+            numberCorrect: numberCorrect,
+            numberWrong: (numUsers - numberCorrect)
           });
-          console.log(currentIdex)
-          console.log(clientMc.numberQuestion)
+          // console.log(currentIdex)
+          // console.log(clientMc.numberQuestion)
 
           if (currentIdex == clientMc.numberQuestion - 1) {
             console.log(currentIdex)
@@ -187,7 +193,7 @@ io.on('connection', (socket) => {
             if (awardRecipients.length > 0) {
               bonus = clientMc.award / awardRecipients.length;
             }
-  
+
             console.log(bonus)
             console.log(awardRecipients)
 
@@ -195,8 +201,8 @@ io.on('connection', (socket) => {
               bonus: bonus,
               awardRecipients: awardRecipients
             });
-  
-            for (var i = 0; i< awardRecipients.length; i++) {
+
+            for (var i = 0; i < awardRecipients.length; i++) {
               clients[awardRecipients[i].Name].emit('congratulations', {
                 bonus: bonus
               });
@@ -230,6 +236,7 @@ io.on('connection', (socket) => {
     if (answer.Id === questions[currentIdex].CorrectAnswerId) {
       socket.user.NumberCorrect++;
       clients[socket.user.Name] = socket;
+      numberCorrect++;
       // console.log(clients[socket.user.Name].user);
     }
 

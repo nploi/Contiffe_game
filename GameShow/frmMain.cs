@@ -52,6 +52,13 @@ namespace GameShow
             lblQuestion.MaximumSize = new Size(370, 0);
             lblQuestion.AutoSize = true;
 
+            pos = this.PointToScreen(lbNumberCorrectWrong.Location);
+            pos = pLive.PointToClient(pos);
+            lbNumberCorrectWrong.Parent = pLive;
+            lbNumberCorrectWrong.Location = pos;
+            lbNumberCorrectWrong.BackColor = Color.Transparent;
+            lbNumberCorrectWrong.AutoSize = true;
+
             pos = this.PointToScreen(lblNumberQuestion.Location);
             pos = pLive.PointToClient(pos);
             lblNumberQuestion.Parent = pLive;
@@ -143,7 +150,7 @@ namespace GameShow
             {
                 var map = Utils.GetMapFromData(data);
                 game = Game.FromJson(map["game"].ToString());
-                lbNotifications.Items.Add(String.Format("MC {0} joined", game.User.Name));
+                lbNotifications.Items.Add(String.Format("😁 MC {0} joined", game.User.Name));
                 lblAward.Text = String.Format("$ {0}", game.Award);
             });
 
@@ -151,11 +158,12 @@ namespace GameShow
             {
                 var map = Utils.GetMapFromData(data);
                 var mc = User.FromJson(map["user"].ToString());
-                lbNotifications.Items.Add(String.Format("MC {0} left", mc.Name));
+                lbNotifications.Items.Add(String.Format("😂 MC {0} left", mc.Name));
             });
 
             socket.On("next question", (data) =>
             {
+                lbNumberCorrectWrong.Text = "";
                 var map = Utils.GetMapFromData(data);
                 Question question = Question.FromJson(map["question"].ToString());
                 // speakQuestion(question);
@@ -192,9 +200,16 @@ namespace GameShow
             {
                 var map = Utils.GetMapFromData(data);
                 var correctAnswer = map["answer"].ToString();
-                lbNotifications.Items.Add(correctAnswer + " is correct !!");
                 disableButtons();
                 showCorrectAnswer(correctAnswer);
+                if (correctAnswer == answer.Id)
+                {
+                    lblQuestion.Text = lblQuestion.Text + "\n👌 Yes! Right answer";
+                }
+                else
+                {
+                    lblQuestion.Text = lblQuestion.Text + "\n😥 Nope! Wrong answer";
+                }
             });
 
 
@@ -224,6 +239,12 @@ namespace GameShow
                 var tops = JsonConvert.DeserializeObject<List<User>>(map["tops"].ToString());
                 var question = Question.FromJson(map["question"].ToString());
                 int i = 1;
+                int numCorrectAll = 1;
+                int numWrongAll = 1;
+                int.TryParse(map["numberCorrect"].ToString(), out numCorrectAll);
+                int.TryParse(map["numberWrong"].ToString(), out numWrongAll);
+                lbNumberCorrectWrong.Text = String.Format("\nNumber correct: {0}\nNumber wrong: {1}", numCorrectAll, numWrongAll);
+
                 tops.ForEach((value) =>
                 {
                     var str = String.Format("Top {0}: {1} Correct {2}", i++, value.Name, value.NumberCorrect);
@@ -299,11 +320,6 @@ namespace GameShow
             connected = false;
         }
 
-
-        //private void Form1_Load(object sender, EventArgs e)
-        //{
-        //    pictureBox1.ImageLocation = "http://www.gravatar.com/avatar/6810d91caff032b202c50701dd3af745?d=identicon&r=PG";
-        //}
 
         private void hideQuestion()
         {
