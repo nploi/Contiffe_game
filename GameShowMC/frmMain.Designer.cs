@@ -54,6 +54,7 @@
             this.btnChat = new System.Windows.Forms.Button();
             this.lblCountDowrn = new System.Windows.Forms.Label();
             this.btnLive = new System.Windows.Forms.Button();
+            this.lbAward = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,16 +85,17 @@
             // rtbQuestion
             // 
             this.rtbQuestion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.rtbQuestion.Location = new System.Drawing.Point(7, 241);
+            this.rtbQuestion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbQuestion.Location = new System.Drawing.Point(33, 214);
             this.rtbQuestion.Name = "rtbQuestion";
-            this.rtbQuestion.Size = new System.Drawing.Size(276, 52);
+            this.rtbQuestion.Size = new System.Drawing.Size(206, 80);
             this.rtbQuestion.TabIndex = 4;
             this.rtbQuestion.Text = "";
             // 
             // tbA
             // 
             this.tbA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbA.Location = new System.Drawing.Point(52, 307);
+            this.tbA.Location = new System.Drawing.Point(33, 308);
             this.tbA.Name = "tbA";
             this.tbA.Size = new System.Drawing.Size(206, 21);
             this.tbA.TabIndex = 5;
@@ -101,7 +103,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 307);
+            this.label2.Location = new System.Drawing.Point(4, 308);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(14, 15);
             this.label2.TabIndex = 6;
@@ -110,7 +112,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 337);
+            this.label3.Location = new System.Drawing.Point(4, 338);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(15, 15);
             this.label3.TabIndex = 8;
@@ -119,7 +121,7 @@
             // tbB
             // 
             this.tbB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbB.Location = new System.Drawing.Point(52, 337);
+            this.tbB.Location = new System.Drawing.Point(33, 338);
             this.tbB.Name = "tbB";
             this.tbB.Size = new System.Drawing.Size(206, 21);
             this.tbB.TabIndex = 7;
@@ -127,7 +129,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 363);
+            this.label4.Location = new System.Drawing.Point(4, 364);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(15, 15);
             this.label4.TabIndex = 10;
@@ -136,7 +138,7 @@
             // tbC
             // 
             this.tbC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbC.Location = new System.Drawing.Point(52, 363);
+            this.tbC.Location = new System.Drawing.Point(33, 364);
             this.tbC.Name = "tbC";
             this.tbC.Size = new System.Drawing.Size(206, 21);
             this.tbC.TabIndex = 9;
@@ -144,7 +146,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 395);
+            this.label5.Location = new System.Drawing.Point(4, 396);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(16, 15);
             this.label5.TabIndex = 12;
@@ -153,7 +155,7 @@
             // tbD
             // 
             this.tbD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbD.Location = new System.Drawing.Point(52, 395);
+            this.tbD.Location = new System.Drawing.Point(33, 396);
             this.tbD.Name = "tbD";
             this.tbD.Size = new System.Drawing.Size(206, 21);
             this.tbD.TabIndex = 11;
@@ -161,7 +163,7 @@
             // btnNext
             // 
             this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNext.Location = new System.Drawing.Point(104, 422);
+            this.btnNext.Location = new System.Drawing.Point(85, 423);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(87, 27);
             this.btnNext.TabIndex = 16;
@@ -216,9 +218,9 @@
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.ErrorImage = null;
             this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(290, 53);
+            this.pictureBox1.Location = new System.Drawing.Point(264, 53);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(556, 391);
+            this.pictureBox1.Size = new System.Drawing.Size(584, 407);
             this.pictureBox1.TabIndex = 21;
             this.pictureBox1.TabStop = false;
             // 
@@ -237,7 +239,7 @@
             // lblQuestionNumber
             // 
             this.lblQuestionNumber.AutoSize = true;
-            this.lblQuestionNumber.Location = new System.Drawing.Point(3, 223);
+            this.lblQuestionNumber.Location = new System.Drawing.Point(100, 196);
             this.lblQuestionNumber.Name = "lblQuestionNumber";
             this.lblQuestionNumber.Size = new System.Drawing.Size(56, 15);
             this.lblQuestionNumber.TabIndex = 23;
@@ -275,11 +277,10 @@
             // 
             this.lblCountDowrn.AutoSize = true;
             this.lblCountDowrn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCountDowrn.Location = new System.Drawing.Point(100, 185);
+            this.lblCountDowrn.Location = new System.Drawing.Point(115, 159);
             this.lblCountDowrn.Name = "lblCountDowrn";
-            this.lblCountDowrn.Size = new System.Drawing.Size(43, 20);
+            this.lblCountDowrn.Size = new System.Drawing.Size(0, 20);
             this.lblCountDowrn.TabIndex = 27;
-            this.lblCountDowrn.Text = "Time";
             // 
             // btnLive
             // 
@@ -293,11 +294,21 @@
             this.btnLive.Text = "LIVE";
             this.btnLive.UseVisualStyleBackColor = false;
             // 
+            // lbAward
+            // 
+            this.lbAward.AutoSize = true;
+            this.lbAward.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbAward.Location = new System.Drawing.Point(36, 59);
+            this.lbAward.Name = "lbAward";
+            this.lbAward.Size = new System.Drawing.Size(0, 22);
+            this.lbAward.TabIndex = 29;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1111, 463);
+            this.Controls.Add(this.lbAward);
             this.Controls.Add(this.btnLive);
             this.Controls.Add(this.lblCountDowrn);
             this.Controls.Add(this.btnChat);
@@ -357,6 +368,7 @@
         private System.Windows.Forms.Button btnChat;
         private System.Windows.Forms.Label lblCountDowrn;
         private System.Windows.Forms.Button btnLive;
+        private System.Windows.Forms.Label lbAward;
     }
 }
 

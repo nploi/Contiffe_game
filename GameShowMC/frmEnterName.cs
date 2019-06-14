@@ -12,14 +12,15 @@ namespace GameShowMC
 {
     public partial class frmEnterName : Form
     {
-        Action<string, string, int> OnRegister;
+        private Action<string, string, int> OnRegister;
+        private String Uri = "http://localhost:3000";
 
         public frmEnterName(Action<string, string, int> OnRegister)
         {
             InitializeComponent();
             this.OnRegister = OnRegister;
+            tbURI.Text = Uri;
         }
-
 
         private void btnStart_Click_1(object sender, EventArgs e)
         {
@@ -32,10 +33,6 @@ namespace GameShowMC
                 return;
             }
             String uri = tbURI.Text;
-            if (uri.Length <= 0)
-            {
-                uri = "http://localhost:3000";
-            }
 
             OnRegister(uri, yourName, amount);
         }

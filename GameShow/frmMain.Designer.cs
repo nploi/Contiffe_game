@@ -169,9 +169,9 @@
             // 
             this.pLive.BackColor = System.Drawing.Color.Transparent;
             this.pLive.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pLive.BackgroundImage")));
-            this.pLive.Location = new System.Drawing.Point(7, 53);
+            this.pLive.Location = new System.Drawing.Point(6, 57);
             this.pLive.Name = "pLive";
-            this.pLive.Size = new System.Drawing.Size(598, 399);
+            this.pLive.Size = new System.Drawing.Size(627, 402);
             this.pLive.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pLive.TabIndex = 15;
             this.pLive.TabStop = false;

@@ -200,6 +200,7 @@ namespace MyNetwork
             return tempImg;
         }
     }
+
     public struct IPixel
     {
         public byte R, G, B;

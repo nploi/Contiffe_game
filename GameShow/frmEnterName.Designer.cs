@@ -33,7 +33,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tbURI
@@ -47,7 +46,7 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(16, 129);
+            this.btnStart.Location = new System.Drawing.Point(16, 121);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(241, 37);
             this.btnStart.TabIndex = 2;
@@ -67,7 +66,7 @@
             // tbName
             // 
             this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbName.Location = new System.Drawing.Point(60, 80);
+            this.tbName.Location = new System.Drawing.Point(60, 68);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(193, 29);
             this.tbName.TabIndex = 5;
@@ -76,28 +75,17 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 89);
+            this.label3.Location = new System.Drawing.Point(13, 77);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 15);
             this.label3.TabIndex = 8;
             this.label3.Text = "Name";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(60, 52);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(140, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "default: http://localhost:3000";
-            // 
             // frmEnterName
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(265, 181);
-            this.Controls.Add(this.label2);
+            this.ClientSize = new System.Drawing.Size(265, 166);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.label1);
@@ -118,6 +106,5 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
     }
 }

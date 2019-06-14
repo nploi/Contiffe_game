@@ -63,7 +63,6 @@ namespace GameShow
             lblCorrect.Parent = pLive;
             lblCorrect.Location = pos;
             lblCorrect.BackColor = Color.Transparent;
-            //lblCorrect.Text = "Correct: 0";
 
             pos = this.PointToScreen(lblAward.Location);
             pos = pLive.PointToClient(pos);
@@ -145,7 +144,7 @@ namespace GameShow
                 var map = Utils.GetMapFromData(data);
                 game = Game.FromJson(map["game"].ToString());
                 lbNotifications.Items.Add(String.Format("MC {0} joined", game.User.Name));
-                lblAward.Text = String.Format("{0} $", game.Award);
+                lblAward.Text = String.Format("$ {0}", game.Award);
             });
 
             socket.On("mc disconnected", (data) =>

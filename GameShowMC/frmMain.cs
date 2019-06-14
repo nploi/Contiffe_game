@@ -58,6 +58,7 @@ namespace GameShowMC
                 game.User.Type = "mc";
                 game.Require = 2;
                 game.NumberQuestion = 2;
+                lbAward.Text = "$ " + award.ToString();
                 this.uri = uri;
                 socket = IO.Socket(uri);
                 listenEvents();
@@ -94,7 +95,7 @@ namespace GameShowMC
                     btnLiveStreaming.Enabled = true;
                     btnLoadFile.Enabled = true;
                     enterName.Close();
-                    lbNotifications.Items.Add("You are MC, =))");
+                    lbNotifications.Items.Add("You are MC :))");
                     btnChat.Enabled = true;
                     lblName.Text = "MC: " + game.User.Name;
                 }
@@ -107,13 +108,10 @@ namespace GameShowMC
             socket.On("added question", (data) =>
             {
                 lbNotifications.Items.Add("Broadcast question !!");
-                // Do some thing
                 var map = Utils.GetMapFromData(data);
                 int.TryParse(map["countDown"].ToString(), out seconds);
                 timerCountDown = new Thread(countDowner);
                 timerCountDown.Start();
-                // MessageBox.Show("Start question: " + map["question"].ToString());
-                // Question question = Question.FromJson(map["question"].ToString());
             });
 
             socket.On("user joined", (data) =>

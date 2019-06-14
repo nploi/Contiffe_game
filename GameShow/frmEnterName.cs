@@ -13,11 +13,13 @@ namespace GameShow
     public partial class frmEnterName : Form
     {
         Action<string, string> OnRegister;
+        private String Uri = "http://localhost:3000";
 
         public frmEnterName(Action<string, string> OnRegister)
         {
             InitializeComponent();
             this.OnRegister = OnRegister;
+            tbURI.Text = Uri;
         }
 
 
@@ -29,11 +31,6 @@ namespace GameShow
             {
                 MessageBox.Show("Invalid input !");
                 return;
-            }
-
-            if (uri.Count() <= 0)
-            {
-                uri = "http://localhost:3000";
             }
             
             OnRegister(uri.ToLower(), yourName);
