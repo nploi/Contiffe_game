@@ -166,7 +166,7 @@ namespace GameShow
                 lbNumberCorrectWrong.Text = "";
                 var map = Utils.GetMapFromData(data);
                 Question question = Question.FromJson(map["question"].ToString());
-                // speakQuestion(question);
+                speakQuestion(question);
                 loadQuestions(question);
                 int.TryParse(map["countDown"].ToString(), out seconds);
                 int numberQuestion;
