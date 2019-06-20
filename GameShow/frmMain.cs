@@ -48,9 +48,10 @@ namespace GameShow
             pos = pLive.PointToClient(pos);
             lblQuestion.Parent = pLive;
             lblQuestion.Location = pos;
-            lblQuestion.BackColor = Color.Transparent;
+            //lblQuestion.BackColor = Color.Transparent;
             lblQuestion.MaximumSize = new Size(370, 0);
             lblQuestion.AutoSize = true;
+            lblQuestion.BackColor = Color.White;
 
             pos = this.PointToScreen(lbNumberCorrectWrong.Location);
             pos = pLive.PointToClient(pos);
