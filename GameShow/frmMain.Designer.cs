@@ -180,12 +180,12 @@
             // lblQuestion
             // 
             this.lblQuestion.AutoSize = true;
-            this.lblQuestion.BackColor = System.Drawing.Color.Transparent;
+            this.lblQuestion.BackColor = System.Drawing.Color.White;
             this.lblQuestion.Font = new System.Drawing.Font("Microsoft Tai Le", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQuestion.ForeColor = System.Drawing.Color.Gold;
+            this.lblQuestion.ForeColor = System.Drawing.Color.Black;
             this.lblQuestion.Location = new System.Drawing.Point(100, 314);
             this.lblQuestion.Name = "lblQuestion";
-            this.lblQuestion.Size = new System.Drawing.Size(34, 19);
+            this.lblQuestion.Size = new System.Drawing.Size(0, 19);
             this.lblQuestion.TabIndex = 16;
             // 
             // timer1
@@ -248,7 +248,7 @@
             // 
             this.lblNumberQuestion.AutoSize = true;
             this.lblNumberQuestion.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumberQuestion.ForeColor = System.Drawing.Color.Gold;
+            this.lblNumberQuestion.ForeColor = System.Drawing.Color.White;
             this.lblNumberQuestion.Location = new System.Drawing.Point(10, 314);
             this.lblNumberQuestion.Name = "lblNumberQuestion";
             this.lblNumberQuestion.Size = new System.Drawing.Size(0, 18);
@@ -259,10 +259,10 @@
             this.lbNumberCorrectWrong.AutoSize = true;
             this.lbNumberCorrectWrong.BackColor = System.Drawing.Color.Transparent;
             this.lbNumberCorrectWrong.Font = new System.Drawing.Font("Microsoft Tai Le", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbNumberCorrectWrong.ForeColor = System.Drawing.Color.Gold;
+            this.lbNumberCorrectWrong.ForeColor = System.Drawing.Color.White;
             this.lbNumberCorrectWrong.Location = new System.Drawing.Point(12, 117);
             this.lbNumberCorrectWrong.Name = "lbNumberCorrectWrong";
-            this.lbNumberCorrectWrong.Size = new System.Drawing.Size(34, 19);
+            this.lbNumberCorrectWrong.Size = new System.Drawing.Size(0, 19);
             this.lbNumberCorrectWrong.TabIndex = 31;
             // 
             // frmMain
