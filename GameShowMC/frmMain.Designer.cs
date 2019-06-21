@@ -189,7 +189,7 @@
             this.lblNumber.BackColor = System.Drawing.Color.Transparent;
             this.lblNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNumber.ForeColor = System.Drawing.Color.White;
-            this.lblNumber.Location = new System.Drawing.Point(376, 65);
+            this.lblNumber.Location = new System.Drawing.Point(346, 65);
             this.lblNumber.Name = "lblNumber";
             this.lblNumber.Size = new System.Drawing.Size(66, 17);
             this.lblNumber.TabIndex = 18;
@@ -288,7 +288,7 @@
             this.btnLive.BackColor = System.Drawing.Color.Gray;
             this.btnLive.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLive.ForeColor = System.Drawing.Color.White;
-            this.btnLive.Location = new System.Drawing.Point(303, 59);
+            this.btnLive.Location = new System.Drawing.Point(273, 59);
             this.btnLive.Name = "btnLive";
             this.btnLive.Size = new System.Drawing.Size(65, 30);
             this.btnLive.TabIndex = 28;

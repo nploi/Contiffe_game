@@ -133,9 +133,8 @@
             this.lbCountDown.ForeColor = System.Drawing.Color.White;
             this.lbCountDown.Location = new System.Drawing.Point(283, 62);
             this.lbCountDown.Name = "lbCountDown";
-            this.lbCountDown.Size = new System.Drawing.Size(53, 37);
+            this.lbCountDown.Size = new System.Drawing.Size(0, 37);
             this.lbCountDown.TabIndex = 10;
-            this.lbCountDown.Text = "10";
             // 
             // lbNotifications
             // 
@@ -151,9 +150,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(728, 57);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 15);
+            this.label2.Size = new System.Drawing.Size(74, 15);
             this.label2.TabIndex = 12;
-            this.label2.Text = "Notification";
+            this.label2.Text = "Notifications";
             // 
             // lblNumber
             // 

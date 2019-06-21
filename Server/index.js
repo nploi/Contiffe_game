@@ -52,6 +52,11 @@ io.on('connection', (socket) => {
       // console.log(socket.award);
       console.log("add mc: " + gameTemp.User.Name);
       clientMc = socket;
+      if (clients != null) {
+        for (var key in clients) {
+          clients[key].user.numberCorrect = 0;
+        }
+      }
     } else {
       message = "MC is exists";
     }

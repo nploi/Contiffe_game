@@ -167,7 +167,7 @@ namespace GameShow
                 lbNumberCorrectWrong.Text = "";
                 var map = Utils.GetMapFromData(data);
                 Question question = Question.FromJson(map["question"].ToString());
-                speakQuestion(question);
+                // speakQuestion(question);
                 loadQuestions(question);
                 int.TryParse(map["countDown"].ToString(), out seconds);
                 int numberQuestion;
@@ -261,8 +261,8 @@ namespace GameShow
             socket.On("congratulations", (data) =>
             {
                 var map = Utils.GetMapFromData(data);
-                int bonus = 0;
-                int.TryParse(map["bonus"].ToString(), out bonus);
+                double bonus = 0;
+                double.TryParse(map["bonus"].ToString(), out bonus);
 
                 frmCongrats frmCongrats = new frmCongrats(user.Name, user.NumberCorrect, bonus);
                 frmCongrats.StartPosition = FormStartPosition.CenterParent;
@@ -431,6 +431,7 @@ namespace GameShow
                 Thread.Sleep(1000);
             }
             timerCountDown.Join();
+            lbCountDown.Text = "";
             seconds = 10;
         }
 

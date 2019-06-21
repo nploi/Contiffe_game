@@ -12,7 +12,7 @@ namespace GameShow
 {
     public partial class frmCongrats : Form
     {
-        public frmCongrats(String name, int numberCorrect, int bonus)
+        public frmCongrats(String name, int numberCorrect, double bonus)
         {
             InitializeComponent();
 
