@@ -26,7 +26,6 @@ var numberCorrect = 0;
 
 io.on('connection', (socket) => {
   var addedUser = false;
-  var amount = -1;
   // when the client emits 'new message', this listens and executes
   socket.on('new message', (message) => {
     // we tell the client to execute 'new message'
@@ -52,11 +51,6 @@ io.on('connection', (socket) => {
       // console.log(socket.award);
       console.log("add mc: " + gameTemp.User.Name);
       clientMc = socket;
-      if (clients != null) {
-        for (var key in clients) {
-          clients[key].user.numberCorrect = 0;
-        }
-      }
     } else {
       message = "MC is exists";
     }
@@ -69,9 +63,24 @@ io.on('connection', (socket) => {
       socket.broadcast.emit("mc connected", {
         game: gameTemp
       });
+      if (clients != null) {
+        for (var key in clients) {
+          clients[key].user.NumberCorrect = 0;
+        }
+      }
     }
   });
 
+  socket.on('new game', (game) => {
+    currentIdex = -1;
+    questions = []
+    if (clients != null) {
+      for (var key in clients) {
+        clients[key].user.NumberCorrect = 0;
+      }
+    }
+    socket.broadcast.emit("new game", game);
+  });
 
   // when the client emits 'add user', this listens and executes
   socket.on('add user', (user) => {
@@ -166,30 +175,28 @@ io.on('connection', (socket) => {
           }
 
           // console.log(tops);
-          socket.emit("tops", {
-            question: questions[currentIdex],
-            tops: tops,
-            numberCorrect: numberCorrect,
-            numberWrong: (numUsers - numberCorrect)
-          });
 
-          socket.broadcast.emit("tops", {
+          var topsData = {
             question: questions[currentIdex],
             tops: tops,
             numberCorrect: numberCorrect,
             numberWrong: (numUsers - numberCorrect)
-          });
+          }
+          
+          socket.emit("tops", topsData);
+          socket.broadcast.emit("tops", topsData);
           // console.log(currentIdex)
           // console.log(clientMc.numberQuestion)
 
           if (currentIdex == clientMc.numberQuestion - 1) {
             console.log(currentIdex)
             var awardRecipients = []
+            var continuePlayers = []
 
             for (var key in clients) {
               if (clients[key].user.NumberCorrect >= clientMc.require) {
                 awardRecipients.push(clients[key].user);
-                console.log(clients[key].user)
+                // console.log(clients[key].user)
               }
             }
 
@@ -212,37 +219,51 @@ io.on('connection', (socket) => {
                 bonus: bonus
               });
             }
+          } else {
+            var continuePlayers = []
+
+            for (var key in clients) {
+              if (clients[key].user.NumberCorrect === currentIdex + 1) {
+                continuePlayers.push(clients[key].user);
+              }
+            }
+
+            var continuePlayersData = {
+              continue: continuePlayers.length,
+              stop: numUsers - continuePlayers.length
+            }
+  
+            clientMc.emit('continue players', continuePlayersData);
+            clientMc.broadcast.emit('continue players', continuePlayersData);
           }
         }
       }
       // console.log("timer: " + countDown);
     }, 1000);
 
-    socket.emit('added question', {
+    var newQuestion = {
       question: question,
       index: currentIdex,
       countDown: countDown
-    });
+    }
+
+    socket.emit('added question', newQuestion);
 
     // when the client mc send 'question' to all clients
-    socket.broadcast.emit('next question', {
-      question: question,
-      index: currentIdex,
-      countDown: countDown
-    });
+    socket.broadcast.emit('next question', newQuestion);
 
   });
 
   // when the client emits 'answer', we emit it to mc
   socket.on('answer', (answer) => {
     answer = JSON.parse(answer)
-    // console.log(answer);
+    console.log(answer);
 
     if (answer.Id === questions[currentIdex].CorrectAnswerId) {
       socket.user.NumberCorrect++;
       clients[socket.user.Name] = socket;
       numberCorrect++;
-      // console.log(clients[socket.user.Name].user);
+      console.log(clients[socket.user.Name].user);
     }
 
     clientMc.emit('user answer', {
@@ -319,3 +340,4 @@ io.on('connection', (socket) => {
 
   });
 });
+

@@ -56,8 +56,8 @@ namespace GameShowMC
                 game.User.Name = yourName;
                 game.Award = award;
                 game.User.Type = "mc";
-                game.Require = 2;
-                game.NumberQuestion = 2;
+                game.Require = 10;
+                game.NumberQuestion = 10;
                 lbAward.Text = "$ " + award.ToString();
                 this.uri = uri;
                 socket = IO.Socket(uri);
@@ -110,8 +110,21 @@ namespace GameShowMC
                 lbNotifications.Items.Add("Broadcast question !!");
                 var map = Utils.GetMapFromData(data);
                 int.TryParse(map["countDown"].ToString(), out seconds);
+                btnNext.Enabled = false;
+                btnLoadFile.Enabled = false;
                 timerCountDown = new Thread(countDowner);
                 timerCountDown.Start();
+            });
+
+            socket.On("continue players", (data) =>
+            {
+                var map = Utils.GetMapFromData(data);
+                int continuePlayers;
+                int stopsPlayers;
+                int.TryParse(map["continue"].ToString(), out continuePlayers);
+                int.TryParse(map["stop"].ToString(), out stopsPlayers);
+                lbNotifications.Items.Add(String.Format("Number of players continued: {0}", continuePlayers));
+                lbNotifications.Items.Add(String.Format("Number of players stopped: {0}", stopsPlayers));
             });
 
             socket.On("user joined", (data) =>
@@ -162,7 +175,7 @@ namespace GameShowMC
                 {
                     nextQuestions();
                 }
-
+                btnLoadFile.Enabled = true;
                 btnNext.Enabled = true;
             });
 
@@ -207,12 +220,18 @@ namespace GameShowMC
         {
             // Read a text file line by line.  
             string data = File.ReadAllText(path);
+            if (data == null)
+            {
+                MessageBox.Show("Has an error, try again!");
+                return;
+            }
             // Parse data
             questions = JsonConvert.DeserializeObject<List<Question>>(data.ToString());
             MessageBox.Show(questions.Count.ToString());
             btnNext.Enabled = true;
             btnNext.Text = "Send";
             currentIndex = 0;
+            socket.Emit("new game", game.ToJson());
             nextQuestions();
         }
 
@@ -263,7 +282,6 @@ namespace GameShowMC
 
         private void button3_Click(object sender, EventArgs e)
         {
-            btnNext.Enabled = false;
             socket.Emit("new question", questions[currentIndex - 1].ToJson());
         }
 

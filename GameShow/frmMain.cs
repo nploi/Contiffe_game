@@ -181,6 +181,28 @@ namespace GameShow
                 enableButtons();
             });
 
+            socket.On("continue players", (data) =>
+            {
+                var map = Utils.GetMapFromData(data);
+                int continuePlayers;
+                int stopsPlayers;
+                int.TryParse(map["continue"].ToString(), out continuePlayers);
+                int.TryParse(map["stop"].ToString(), out stopsPlayers);
+                lbNotifications.Items.Add(String.Format("Number of players continued: {0}", continuePlayers));
+                lbNotifications.Items.Add(String.Format("Number of players stopped: {0}", stopsPlayers));
+            });
+
+            socket.On("new game", (data) =>
+            {
+                lbCountDown.Text = "";
+                lblCorrect.Text = "";
+                lblNumberQuestion.Text = "";
+                lblQuestion.Text = "";
+                lbNumberCorrectWrong.Text = "";
+                user.NumberCorrect = 0;
+                hideQuestion();
+            });
+
             socket.On("user joined", (data) =>
             {
                 var map = Utils.GetMapFromData(data);
@@ -233,6 +255,7 @@ namespace GameShow
                     pLive.Image = IImage.ImageFromStream(imageLive.Img1D);
                 }
             });
+            
 
             socket.On("tops", (data) =>
             {

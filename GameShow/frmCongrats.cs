@@ -18,7 +18,7 @@ namespace GameShow
 
             lbName.Text = String.Format("Name: {0}", name);
             lbNumberCorrect.Text = String.Format("Correct: {0}", numberCorrect);
-            lbBonus.Text = String.Format("Bonus: {0}", bonus);
+            lbBonus.Text = String.Format("Bonus: ${0}", bonus);
         }
 
         private void btnOK_Click(object sender, EventArgs e)
