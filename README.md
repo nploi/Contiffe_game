@@ -25,3 +25,4 @@
     ```
 
 - Tiếp theo build ở chế độ debug hoặc release, và chơi
+- [Demo](https://www.youtube.com/watch?v=iH1hn1MAo4M)
