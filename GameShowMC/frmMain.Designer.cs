@@ -66,7 +66,7 @@
             this.lblName.ForeColor = System.Drawing.Color.White;
             this.lblName.Location = new System.Drawing.Point(0, 0);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(1111, 50);
+            this.lblName.Size = new System.Drawing.Size(952, 43);
             this.lblName.TabIndex = 2;
             this.lblName.Text = "MC";
             this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -74,9 +74,9 @@
             // btnConnect
             // 
             this.btnConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConnect.Location = new System.Drawing.Point(7, 14);
+            this.btnConnect.Location = new System.Drawing.Point(6, 12);
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(87, 27);
+            this.btnConnect.Size = new System.Drawing.Size(75, 23);
             this.btnConnect.TabIndex = 3;
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
@@ -86,86 +86,86 @@
             // 
             this.rtbQuestion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.rtbQuestion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbQuestion.Location = new System.Drawing.Point(33, 214);
+            this.rtbQuestion.Location = new System.Drawing.Point(28, 185);
             this.rtbQuestion.Name = "rtbQuestion";
-            this.rtbQuestion.Size = new System.Drawing.Size(206, 80);
+            this.rtbQuestion.Size = new System.Drawing.Size(177, 70);
             this.rtbQuestion.TabIndex = 4;
             this.rtbQuestion.Text = "";
             // 
             // tbA
             // 
             this.tbA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbA.Location = new System.Drawing.Point(33, 308);
+            this.tbA.Location = new System.Drawing.Point(28, 267);
             this.tbA.Name = "tbA";
-            this.tbA.Size = new System.Drawing.Size(206, 21);
+            this.tbA.Size = new System.Drawing.Size(177, 20);
             this.tbA.TabIndex = 5;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 308);
+            this.label2.Location = new System.Drawing.Point(3, 267);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(14, 15);
+            this.label2.Size = new System.Drawing.Size(14, 13);
             this.label2.TabIndex = 6;
             this.label2.Text = "A";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(4, 338);
+            this.label3.Location = new System.Drawing.Point(3, 293);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(15, 15);
+            this.label3.Size = new System.Drawing.Size(14, 13);
             this.label3.TabIndex = 8;
             this.label3.Text = "B";
             // 
             // tbB
             // 
             this.tbB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbB.Location = new System.Drawing.Point(33, 338);
+            this.tbB.Location = new System.Drawing.Point(28, 293);
             this.tbB.Name = "tbB";
-            this.tbB.Size = new System.Drawing.Size(206, 21);
+            this.tbB.Size = new System.Drawing.Size(177, 20);
             this.tbB.TabIndex = 7;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(4, 364);
+            this.label4.Location = new System.Drawing.Point(3, 315);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(15, 15);
+            this.label4.Size = new System.Drawing.Size(14, 13);
             this.label4.TabIndex = 10;
             this.label4.Text = "C";
             // 
             // tbC
             // 
             this.tbC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbC.Location = new System.Drawing.Point(33, 364);
+            this.tbC.Location = new System.Drawing.Point(28, 315);
             this.tbC.Name = "tbC";
-            this.tbC.Size = new System.Drawing.Size(206, 21);
+            this.tbC.Size = new System.Drawing.Size(177, 20);
             this.tbC.TabIndex = 9;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 396);
+            this.label5.Location = new System.Drawing.Point(3, 343);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(16, 15);
+            this.label5.Size = new System.Drawing.Size(15, 13);
             this.label5.TabIndex = 12;
             this.label5.Text = "D";
             // 
             // tbD
             // 
             this.tbD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbD.Location = new System.Drawing.Point(33, 396);
+            this.tbD.Location = new System.Drawing.Point(28, 343);
             this.tbD.Name = "tbD";
-            this.tbD.Size = new System.Drawing.Size(206, 21);
+            this.tbD.Size = new System.Drawing.Size(177, 20);
             this.tbD.TabIndex = 11;
             // 
             // btnNext
             // 
             this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNext.Location = new System.Drawing.Point(85, 423);
+            this.btnNext.Location = new System.Drawing.Point(73, 367);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(87, 27);
+            this.btnNext.Size = new System.Drawing.Size(75, 23);
             this.btnNext.TabIndex = 16;
             this.btnNext.Text = "Send";
             this.btnNext.UseVisualStyleBackColor = true;
@@ -178,9 +178,9 @@
             this.lbNotifications.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbNotifications.ForeColor = System.Drawing.Color.Black;
             this.lbNotifications.FormattingEnabled = true;
-            this.lbNotifications.Location = new System.Drawing.Point(854, 77);
+            this.lbNotifications.Location = new System.Drawing.Point(732, 67);
             this.lbNotifications.Name = "lbNotifications";
-            this.lbNotifications.Size = new System.Drawing.Size(252, 301);
+            this.lbNotifications.Size = new System.Drawing.Size(216, 249);
             this.lbNotifications.TabIndex = 17;
             // 
             // lblNumber
@@ -189,7 +189,7 @@
             this.lblNumber.BackColor = System.Drawing.Color.Transparent;
             this.lblNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNumber.ForeColor = System.Drawing.Color.White;
-            this.lblNumber.Location = new System.Drawing.Point(346, 65);
+            this.lblNumber.Location = new System.Drawing.Point(297, 56);
             this.lblNumber.Name = "lblNumber";
             this.lblNumber.Size = new System.Drawing.Size(66, 17);
             this.lblNumber.TabIndex = 18;
@@ -200,9 +200,9 @@
             this.btnLiveStreaming.Cursor = System.Windows.Forms.Cursors.Default;
             this.btnLiveStreaming.Enabled = false;
             this.btnLiveStreaming.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLiveStreaming.Location = new System.Drawing.Point(257, 14);
+            this.btnLiveStreaming.Location = new System.Drawing.Point(220, 12);
             this.btnLiveStreaming.Name = "btnLiveStreaming";
-            this.btnLiveStreaming.Size = new System.Drawing.Size(99, 27);
+            this.btnLiveStreaming.Size = new System.Drawing.Size(85, 23);
             this.btnLiveStreaming.TabIndex = 20;
             this.btnLiveStreaming.Text = "Streaming";
             this.btnLiveStreaming.UseVisualStyleBackColor = true;
@@ -219,9 +219,9 @@
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.ErrorImage = null;
             this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(264, 53);
+            this.pictureBox1.Location = new System.Drawing.Point(226, 46);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(584, 407);
+            this.pictureBox1.Size = new System.Drawing.Size(501, 353);
             this.pictureBox1.TabIndex = 21;
             this.pictureBox1.TabStop = false;
             // 
@@ -229,9 +229,9 @@
             // 
             this.btnLoadFile.Enabled = false;
             this.btnLoadFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoadFile.Location = new System.Drawing.Point(124, 14);
+            this.btnLoadFile.Location = new System.Drawing.Point(106, 12);
             this.btnLoadFile.Name = "btnLoadFile";
-            this.btnLoadFile.Size = new System.Drawing.Size(106, 27);
+            this.btnLoadFile.Size = new System.Drawing.Size(91, 23);
             this.btnLoadFile.TabIndex = 22;
             this.btnLoadFile.Text = "Load question";
             this.btnLoadFile.UseVisualStyleBackColor = true;
@@ -240,9 +240,9 @@
             // lblQuestionNumber
             // 
             this.lblQuestionNumber.AutoSize = true;
-            this.lblQuestionNumber.Location = new System.Drawing.Point(100, 196);
+            this.lblQuestionNumber.Location = new System.Drawing.Point(86, 170);
             this.lblQuestionNumber.Name = "lblQuestionNumber";
-            this.lblQuestionNumber.Size = new System.Drawing.Size(56, 15);
+            this.lblQuestionNumber.Size = new System.Drawing.Size(49, 13);
             this.lblQuestionNumber.TabIndex = 23;
             this.lblQuestionNumber.Text = "Question";
             // 
@@ -250,25 +250,25 @@
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(932, 59);
+            this.label6.Location = new System.Drawing.Point(799, 51);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(74, 15);
+            this.label6.Size = new System.Drawing.Size(65, 13);
             this.label6.TabIndex = 24;
             this.label6.Text = "Notifications";
             // 
             // tbChat
             // 
-            this.tbChat.Location = new System.Drawing.Point(854, 388);
+            this.tbChat.Location = new System.Drawing.Point(732, 336);
             this.tbChat.Name = "tbChat";
-            this.tbChat.Size = new System.Drawing.Size(251, 21);
+            this.tbChat.Size = new System.Drawing.Size(216, 20);
             this.tbChat.TabIndex = 25;
             // 
             // btnChat
             // 
             this.btnChat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChat.Location = new System.Drawing.Point(936, 418);
+            this.btnChat.Location = new System.Drawing.Point(802, 362);
             this.btnChat.Name = "btnChat";
-            this.btnChat.Size = new System.Drawing.Size(87, 27);
+            this.btnChat.Size = new System.Drawing.Size(75, 23);
             this.btnChat.TabIndex = 26;
             this.btnChat.Text = "Send";
             this.btnChat.UseVisualStyleBackColor = true;
@@ -278,7 +278,7 @@
             // 
             this.lblCountDowrn.AutoSize = true;
             this.lblCountDowrn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCountDowrn.Location = new System.Drawing.Point(115, 159);
+            this.lblCountDowrn.Location = new System.Drawing.Point(99, 138);
             this.lblCountDowrn.Name = "lblCountDowrn";
             this.lblCountDowrn.Size = new System.Drawing.Size(0, 20);
             this.lblCountDowrn.TabIndex = 27;
@@ -288,9 +288,9 @@
             this.btnLive.BackColor = System.Drawing.Color.Gray;
             this.btnLive.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLive.ForeColor = System.Drawing.Color.White;
-            this.btnLive.Location = new System.Drawing.Point(273, 59);
+            this.btnLive.Location = new System.Drawing.Point(234, 51);
             this.btnLive.Name = "btnLive";
-            this.btnLive.Size = new System.Drawing.Size(65, 30);
+            this.btnLive.Size = new System.Drawing.Size(56, 26);
             this.btnLive.TabIndex = 28;
             this.btnLive.Text = "LIVE";
             this.btnLive.UseVisualStyleBackColor = false;
@@ -299,16 +299,16 @@
             // 
             this.lbAward.AutoSize = true;
             this.lbAward.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbAward.Location = new System.Drawing.Point(36, 59);
+            this.lbAward.Location = new System.Drawing.Point(31, 51);
             this.lbAward.Name = "lbAward";
             this.lbAward.Size = new System.Drawing.Size(0, 22);
             this.lbAward.TabIndex = 29;
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1111, 469);
+            this.ClientSize = new System.Drawing.Size(952, 406);
             this.Controls.Add(this.lbAward);
             this.Controls.Add(this.btnLive);
             this.Controls.Add(this.lblCountDowrn);
@@ -334,7 +334,7 @@
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.pictureBox1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmMain";
             this.Text = "CONFETTI GAMESHOW";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
